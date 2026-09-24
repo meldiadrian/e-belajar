@@ -84,8 +84,8 @@
 
                 <div>
                     <label for="avatar" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Perbarui Foto Profil</label>
-                    <input type="file" name="avatar" id="avatar" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
-                    <p class="text-[11px] text-slate-400 mt-1">Format gambar: JPG, PNG, maks 2MB.</p>
+                    <input type="file" name="avatar" id="avatar" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
+                    <p class="text-[11px] text-slate-400 mt-1">Format gambar: JPG, JPEG, PNG, WEBP, maks 2MB.</p>
                     @error('avatar')
                         <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                     @enderror

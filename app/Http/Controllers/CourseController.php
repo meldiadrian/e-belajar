@@ -129,7 +129,7 @@ class CourseController extends Controller
             'status' => ['required', 'in:draft,published,archived'],
             'duration' => ['nullable', 'integer', 'min:0'],
             'certificate_enabled' => ['boolean'],
-            'thumbnail' => ['nullable', 'image', 'max:2048'],
+            'thumbnail' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'tags' => ['nullable', 'array'],
         ]);
 
@@ -191,7 +191,7 @@ class CourseController extends Controller
             'status' => ['sometimes', 'in:draft,published,archived'],
             'duration' => ['nullable', 'integer', 'min:0'],
             'certificate_enabled' => ['boolean'],
-            'thumbnail' => ['nullable', 'image', 'max:2048'],
+            'thumbnail' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'tags' => ['nullable', 'array'],
         ]);
 

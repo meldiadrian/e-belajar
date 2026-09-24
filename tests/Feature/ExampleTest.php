@@ -17,5 +17,15 @@ class ExampleTest extends TestCase
         $response = $this->get('/');
 
         $response->assertStatus(200);
+        $response->assertHeader('X-Frame-Options', 'SAMEORIGIN');
+        $this->assertStringContainsString("frame-ancestors 'self'", $response->headers->get('Content-Security-Policy'));
+    }
+
+    public function test_api_responses_also_contain_security_headers(): void
+    {
+        $response = $this->getJson('/api/health');
+
+        $response->assertHeader('X-Frame-Options', 'SAMEORIGIN');
+        $this->assertStringContainsString("frame-ancestors 'self'", $response->headers->get('Content-Security-Policy'));
     }
 }

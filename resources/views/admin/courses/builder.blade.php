@@ -349,7 +349,7 @@
                 <div id="fieldDocumentFile" class="hidden">
                     <label class="block text-xs font-bold text-slate-700 mb-1">Unggah Dokumen (PDF, PPT, DOC, maks
                         50MB)</label>
-                    <input type="file" name="document_file" class="w-full text-xs text-slate-500">
+                    <input type="file" name="document_file" accept=".pdf,.doc,.docx,.ppt,.pptx,.zip,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/zip" class="w-full text-xs text-slate-500">
                 </div>
 
                 <div>
@@ -415,7 +415,7 @@
 
                 <div id="fieldEditDocumentFile" class="hidden">
                     <label class="block text-xs font-bold text-slate-700 mb-1">Unggah Dokumen Baru (Opsional, PDF, PPT, DOC, maks 50MB)</label>
-                    <input type="file" name="document_file" class="w-full text-xs text-slate-500">
+                    <input type="file" name="document_file" accept=".pdf,.doc,.docx,.ppt,.pptx,.zip,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/zip" class="w-full text-xs text-slate-500">
                 </div>
 
                 <div>
