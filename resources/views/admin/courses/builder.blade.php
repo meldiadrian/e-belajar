@@ -43,7 +43,7 @@
             <!-- Left: Modules & Lessons Hierarchy (Curriculum Tree) -->
             <div class="lg:col-span-8 space-y-6">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-base font-black text-slate-900">Struktur Kurikulum Kursus</h3>
+                    <h3 class="text-base font-black text-slate-900">Struktur Kurikulum Pembelajaran</h3>
                     <button onclick="document.getElementById('modalAddModule').classList.remove('hidden')"
                         class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold shadow-xs">
                         + Tambah Modul Baru
@@ -175,14 +175,18 @@
 
             <!-- Right: Quizzes & Assessments Builder -->
             <div class="lg:col-span-4 space-y-6">
-                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-4">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">Asesmen Kuis Kursus</h3>
-                        <button onclick="document.getElementById('modalAddQuiz').classList.remove('hidden')"
-                            class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-xs font-bold shadow-xs">
-                            + Buat Kuis
-                        </button>
-                    </div>
+                <div class="bg-white p-4 rounded-3xl border border-slate-200 shadow-xs space-y-3">
+    <div class="flex justify-between items-center">
+        <h3 class="text-[11px] font-black text-slate-900 uppercase tracking-wider">
+            Asesmen Kuis Pembelajaran
+        </h3>
+
+        <button onclick="document.getElementById('modalAddQuiz').classList.remove('hidden')"
+            class="px-2 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-[11px] font-bold shadow-xs">
+            + Buat Kuis
+        </button>
+    </div>
+
 
                     <div class="space-y-4">
                         @forelse($course->quizzes as $quiz)

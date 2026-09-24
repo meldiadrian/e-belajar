@@ -83,7 +83,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
-                    <span>Kelola Kursus & Builder</span>
+                    <span>Kelola Pembelajaran & Builder</span>
                 </a>
 
                 <a href="{{ route('admin.faqs.index') }}"
@@ -130,7 +130,7 @@
                 </svg>
                 <span>Lihat Portal Publik</span>
             </a>
-            <div class="px-3 py-2 bg-slate-800/60 rounded-xl flex items-center justify-between">
+            <!-- <div class="px-3 py-2 bg-slate-800/60 rounded-xl flex items-center justify-between">
                 <div class="truncate">
                     <div class="text-xs font-bold text-white truncate">{{ Auth::user()->name }}</div>
                     <div class="text-[10px] text-emerald-400 truncate">{{ Auth::user()->email }}</div>
@@ -144,7 +144,7 @@
                         </svg>
                     </button>
                 </form>
-            </div>
+            </div> -->
         </div>
     </aside>
 
@@ -164,8 +164,32 @@
                     class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold {{ Auth::user()->isSuperAdmin() ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800' }}">
                     Role: {{ strtoupper(Auth::user()->role) }}
                 </span>
-                <a href="{{ route('courses.index') }}" target="_blank"
-                    class="text-xs font-medium text-emerald-700 hover:underline">Pratinjau Kursus &rarr;</a>
+                <!-- <a href="{{ route('courses.index') }}" target="_blank"
+                    class="text-xs font-medium text-emerald-700 hover:underline">Pratinjau Kursus &rarr;</a> -->
+                <div class="px-3 py-2 bg-slate-900 rounded-xl flex items-center justify-between">
+                    <div class="truncate">
+                        <div class="text-xs font-bold text-white truncate">{{ Auth::user()->name }}</div>
+                        <div class="text-[10px] text-emerald-400 truncate">{{ Auth::user()->email }}</div>
+                    </div>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+
+                        <button type="submit" title="Keluar dari akun" class="group inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5
+               text-xs font-semibold text-slate-500
+               transition-all duration-200
+               hover:bg-red-50 hover:text-red-600">
+
+                            <svg class="h-4 w-4 transition-colors duration-200" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+
+                            <span>Keluar</span>
+                        </button>
+                    </form>
+                </div>
+
             </div>
         </header>
 
@@ -175,7 +199,9 @@
                 <div class="p-4 mb-4 text-red-800 rounded-xl bg-red-50 border border-red-200 shadow-xs">
                     <div class="flex items-center gap-2 font-bold text-sm mb-1 text-red-900">
                         <svg class="w-5 h-5 text-red-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            <path fill-rule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                clip-rule="evenodd"></path>
                         </svg>
                         <span>Terjadi kesalahan validasi:</span>
                     </div>

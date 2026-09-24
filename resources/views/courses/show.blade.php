@@ -75,7 +75,7 @@
                         <form action="{{ route('courses.enroll', $course->id) }}" method="POST">
                             @csrf
                             <button type="submit" class="w-full py-3.5 text-center text-sm font-bold text-white bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-800 hover:to-teal-800 rounded-xl shadow-lg transition-all">
-                                Daftar Kursus Sekarang
+                                Daftar Sekarang
                             </button>
                         </form>
                     @endif
@@ -93,7 +93,7 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
         <div class="lg:col-span-8 space-y-6">
-            <h2 class="text-xl font-extrabold text-slate-900">Silabus & Materi Kursus</h2>
+            <h2 class="text-xl font-extrabold text-slate-900">Silabus & Materi Pembelajaran</h2>
 
             <div class="space-y-4">
                 @forelse($course->modules as $index => $module)
@@ -181,8 +181,8 @@
                         <span class="font-bold text-slate-800">70% Minimum</span>
                     </div> -->
                     <div class="flex justify-between py-1.5">
-                        <span class="text-slate-400">Legalitas Sertifikat</span>
-                        <span class="font-bold text-emerald-700">Terdaftar & Sah</span>
+                        <!-- <span class="text-slate-400">Legalitas Sertifikat</span>
+                        <span class="font-bold text-emerald-700">Terdaftar & Sah</span> -->
                     </div>
                 </div>
             </div>
