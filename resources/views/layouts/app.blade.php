@@ -107,7 +107,7 @@
                         @if(Auth::user()->isUser())
                             <a href="{{ route('my.courses') }}"
                                 class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100">
-                                <span>Kursus Saya</span>
+                                <span>Pembelajaran Saya</span>
                             </a>
                         @endif
 
@@ -216,8 +216,7 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ route('courses.index') }}"
                                 class="hover:text-emerald-400 transition-colors">Lihat Katalog</a></li>
-                        <li><a href="{{ route('certificates.verify', 'SAMPLE') }}"
-                                class="hover:text-emerald-400 transition-colors">Verifikasi Sertifikat</a></li>
+
                         <li><a href="{{ route('faqs.index') }}"
                                 class="hover:text-emerald-400 transition-colors">Pertanyaan Umum</a></li>
                         <li><a href="{{ route('login') }}" class="hover:text-emerald-400 transition-colors">Portal

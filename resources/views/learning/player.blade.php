@@ -361,14 +361,32 @@
 
                 @if($courseQuiz)
                     <div class="pt-2 border-t border-slate-200">
-                        <div class="p-3.5 rounded-2xl border {{ $courseQuizPassed ? 'border-emerald-200 bg-emerald-50/50' : 'border-amber-200 bg-amber-50/50' }} flex items-center justify-between">
+                        <div id="sidebarQuizCard" class="p-3.5 rounded-2xl border {{ $courseQuizPassed ? 'border-emerald-200 bg-emerald-50/50' : ($waitForVideo ? 'border-slate-200 bg-slate-50/50' : 'border-amber-200 bg-amber-50/50') }} flex items-center justify-between transition-all duration-300">
                             <div class="truncate pr-2">
-                                <span class="text-[10px] font-bold uppercase tracking-wider {{ $courseQuizPassed ? 'text-emerald-700' : 'text-amber-800' }}">Kuis Evaluasi</span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider {{ $courseQuizPassed ? 'text-emerald-700' : ($waitForVideo ? 'text-slate-500' : 'text-amber-800') }}" id="sidebarQuizLabel">Kuis Evaluasi</span>
                                 <div class="text-xs font-bold text-slate-900 truncate">{{ $courseQuiz->title }}</div>
                             </div>
-                            <a href="{{ route('quiz.show', $courseQuiz->id) }}" class="px-2.5 py-1.5 rounded-lg text-xs font-bold shrink-0 {{ $courseQuizPassed ? 'bg-emerald-700 text-white hover:bg-emerald-800' : 'bg-amber-500 text-slate-950 hover:bg-amber-400' }}">
-                                {{ $courseQuizPassed ? 'Lihat Hasil' : 'Mulai Kuis' }}
-                            </a>
+                            @if($courseQuizPassed)
+                                <a href="{{ route('quiz.show', $courseQuiz->id) }}" class="px-2.5 py-1.5 rounded-lg text-xs font-bold shrink-0 bg-emerald-700 text-white hover:bg-emerald-800 transition-colors">
+                                    Lihat Hasil
+                                </a>
+                            @elseif($waitForVideo)
+                                <a id="sidebarStartQuizBtn"
+                                    href="javascript:void(0)"
+                                    data-href="{{ route('quiz.show', $courseQuiz->id) }}"
+                                    data-locked="true"
+                                    onclick="if(this.getAttribute('data-locked') === 'true') { showVideoWarning('Selesaikan video pembelajaran terlebih dahulu untuk memulai kuis evaluasi.'); return false; }"
+                                    title="Selesaikan video pembelajaran terlebih dahulu untuk membuka kuis"
+                                    class="px-2.5 py-1.5 rounded-lg text-xs font-bold shrink-0 bg-slate-200 text-slate-400 cursor-not-allowed transition-all">
+                                    Mulai Kuis
+                                </a>
+                            @else
+                                <a id="sidebarStartQuizBtn"
+                                    href="{{ route('quiz.show', $courseQuiz->id) }}"
+                                    class="px-2.5 py-1.5 rounded-lg text-xs font-bold shrink-0 bg-amber-500 text-slate-950 hover:bg-amber-400 transition-colors">
+                                    Mulai Kuis
+                                </a>
+                            @endif
                         </div>
                     </div>
                 @endif
@@ -416,6 +434,29 @@
         if (form) {
             form.classList.remove('hidden');
             form.classList.add('inline-flex');
+        }
+
+        const quizBtn = document.getElementById('sidebarStartQuizBtn');
+        if (quizBtn && quizBtn.getAttribute('data-locked') === 'true') {
+            quizBtn.setAttribute('data-locked', 'false');
+            if (quizBtn.dataset.href) {
+                quizBtn.href = quizBtn.dataset.href;
+            }
+            quizBtn.removeAttribute('title');
+            quizBtn.classList.remove('bg-slate-200', 'text-slate-400', 'cursor-not-allowed');
+            quizBtn.classList.add('bg-amber-500', 'text-slate-950', 'hover:bg-amber-400', 'shadow-xs');
+        }
+
+        const quizCard = document.getElementById('sidebarQuizCard');
+        if (quizCard) {
+            quizCard.classList.remove('border-slate-200', 'bg-slate-50/50');
+            quizCard.classList.add('border-amber-200', 'bg-amber-50/50');
+        }
+
+        const quizLabel = document.getElementById('sidebarQuizLabel');
+        if (quizLabel) {
+            quizLabel.classList.remove('text-slate-500');
+            quizLabel.classList.add('text-amber-800');
         }
     }
 

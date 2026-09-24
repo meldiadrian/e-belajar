@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
+use App\Models\Category;
 use App\Models\Certificate;
 use App\Models\Course;
 use App\Models\CourseProgress;
@@ -95,8 +96,42 @@ class DashboardController extends Controller
             'total_certificates' => Certificate::where('user_id', $user->id)->count(),
         ];
 
+        // Catalog Courses for user dashboard
+        $coursesQuery = Course::where('status', 'published')
+            ->with(['category', 'creator', 'tags'])
+            ->withCount(['lessons', 'enrollments']);
+
+        if (request()->filled('search')) {
+            $search = request('search');
+            $coursesQuery->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        if (request()->filled('category')) {
+            $coursesQuery->whereHas('category', function ($q) {
+                $q->where('slug', request('category'))
+                    ->orWhere('id', request('category'));
+            });
+        }
+
+        $sort = request()->get('sort', 'newest');
+        if ($sort === 'popular') {
+            $coursesQuery->orderByDesc('enrollments_count');
+        } elseif ($sort === 'title') {
+            $coursesQuery->orderBy('title', 'asc');
+        } else {
+            $coursesQuery->latest();
+        }
+
+        $courses = $coursesQuery->paginate(6)->withQueryString();
+        $categories = Category::where('is_active', true)->withCount('courses')->get();
+
         return view('dashboard.user', compact(
             'enrollments',
+            'courses',
+            'categories',
             'lastLessonProgress',
             'lastQuizAttempt',
             'certificates',

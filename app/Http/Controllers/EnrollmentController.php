@@ -26,12 +26,12 @@ class EnrollmentController extends Controller
         if ($existing) {
             if ($request->wantsJson()) {
                 return response()->json([
-                    'message' => 'Anda sudah terdaftar pada kursus ini.',
+                    'message' => 'Anda sudah terdaftar pada pembelajaran ini.',
                     'enrollment' => $existing,
                 ], 422);
             }
             return redirect()->route('learning.course', $course->slug ?? $course->id)
-                ->with('info', 'Anda sudah terdaftar di kursus ini.');
+                ->with('info', 'Anda sudah terdaftar di pembelajaran ini.');
         }
 
         // Create enrollment
@@ -62,14 +62,14 @@ class EnrollmentController extends Controller
         ActivityLogService::log(
             action: 'enrollment_created',
             entity: $enrollment,
-            description: "Peserta {$user->name} mendaftar pada kursus: {$course->title}",
+            description: "Peserta {$user->name} mendaftar pada pembelajaran: {$course->title}",
             user: $user
         );
 
         NotificationService::send(
             user: $user,
-            title: 'Pendaftaran Kursus Berhasil',
-            message: "Selamat belajar di kursus '{$course->title}'!",
+            title: 'Pendaftaran Pembelajaran Berhasil',
+            message: "Selamat belajar'{$course->title}'!",
             type: 'success',
             data: ['course_id' => $course->id]
         );
@@ -100,10 +100,12 @@ class EnrollmentController extends Controller
         $user = Auth::user();
 
         $enrollments = Enrollment::where('user_id', $user->id)
-            ->with(['course' => function ($q) {
-                $q->with(['category', 'creator'])
-                  ->withCount('lessons');
-            }])
+            ->with([
+                'course' => function ($q) {
+                    $q->with(['category', 'creator'])
+                        ->withCount('lessons');
+                }
+            ])
             ->latest('enrolled_at')
             ->paginate(9);
 
