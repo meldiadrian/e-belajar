@@ -114,27 +114,53 @@
                         <!-- User Profile Menu -->
                         <div class="flex items-center gap-3 pl-2 border-l border-slate-200">
                             <a href="{{ route('profile.edit', Auth::id()) }}" title="Edit Profil Saya"
-                                class="text-right hidden sm:block hover:opacity-80 transition-opacity">
-                                <div class="text-xs font-bold text-slate-800 flex items-center gap-1">
-                                    <span>{{ Auth::user()->name }}</span>
-                                    <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                    </svg>
-                                </div>
-                                <div class="text-[10px] font-medium text-emerald-700 uppercase">
-                                    {{ Auth::user()->institution ?? Auth::user()->role }}
+                                class="flex items-center gap-2.5 group hover:opacity-90 transition-all">
+                                <!-- <div class="text-right hidden sm:block"> -->
+                                <!-- <div
+                                                class="text-xs font-bold text-slate-800 flex items-center justify-end gap-1 group-hover:text-emerald-700 transition-colors">
+                                                <span>{{ Auth::user()->name }}</span>
+                                                <svg class="w-3 h-3 text-slate-400 group-hover:text-emerald-600 transition-colors"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[10px] font-medium text-emerald-700 uppercase">
+                                                {{ Auth::user()->institution ?? Auth::user()->role }}
+                                            </div> -->
+                                <!-- </div> -->
+
+                                <!-- Foto Profil / Avatar -->
+                                <div class="relative shrink-0">
+                                    @if(Auth::user()->avatar)
+                                        <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}"
+                                            class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover ring-2 ring-emerald-600/20 group-hover:ring-emerald-500 shadow-xs transition-all">
+                                    @else
+                                        <div
+                                            class="w-8 h-8 sm:w-9 sm:h-9 rounded-full gradient-bengkalis text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-600/20 group-hover:ring-emerald-500 shadow-xs transition-all">
+                                            {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
+                                        </div>
+                                    @endif
+                                    <span
+                                        class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"
+                                        title="Online"></span>
                                 </div>
                             </a>
-                            <form action="{{ route('logout') }}" method="POST" class="inline">
+                            <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button type="submit" title="Keluar"
-                                    class="p-2 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                                <button type="submit" title="Keluar dari akun" class="group inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5
+                                                           text-xs font-semibold text-slate-500
+                                                           transition-all duration-200
+                                                           hover:bg-red-50 hover:text-red-600">
+
+                                    <svg class="h-4 w-4 transition-colors duration-200" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                     </svg>
+
+                                    <span>Keluar</span>
                                 </button>
                             </form>
                         </div>
