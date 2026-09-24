@@ -30,12 +30,6 @@ class FaqSeeder extends Seeder
                 'order' => 3,
                 'is_active' => true,
             ],
-            [
-                'name' => 'Sertifikat',
-                'description' => 'Penerbitan, pengunduhan, dan verifikasi sertifikat kelulusan digital.',
-                'order' => 4,
-                'is_active' => true,
-            ],
         ];
 
         $categoryMap = [];
@@ -70,22 +64,6 @@ class FaqSeeder extends Seeder
                 'category' => 'Umum',
                 'faq_category_id' => $categoryMap['Umum'] ?? null,
                 'order' => 3,
-                'is_published' => true,
-            ],
-            [
-                'question' => 'Bagaimana cara mendapatkan sertifikat kelulusan?',
-                'answer' => 'Sertifikat digital resmi akan otomatis diterbitkan apabila Anda telah menyelesaikan seluruh modul pembelajaran hingga progress 100% dan berhasil lulus kuis penilaian dengan nilai di atas batas kelulusan (passing score).',
-                'category' => 'Sertifikat',
-                'faq_category_id' => $categoryMap['Sertifikat'] ?? null,
-                'order' => 4,
-                'is_published' => true,
-            ],
-            [
-                'question' => 'Bagaimana cara memverifikasi keaslian sertifikat?',
-                'answer' => 'Setiap sertifikat dilengkapi dengan kode verifikasi unik serta tautan verifikasi. Siapa pun dapat memverifikasi keabsahan dokumen melalui menu Verifikasi Sertifikat pada header portal.',
-                'category' => 'Sertifikat',
-                'faq_category_id' => $categoryMap['Sertifikat'] ?? null,
-                'order' => 5,
                 'is_published' => true,
             ],
             [
