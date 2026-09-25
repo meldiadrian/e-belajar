@@ -125,4 +125,69 @@ class AuthenticationTest extends TestCase
 
         $this->assertAuthenticatedAs($user);
     }
+
+    public function test_brute_force_more_than_ten_attempts_directs_to_404_page(): void
+    {
+        User::factory()->create([
+            'email' => 'victim@bengkalis.go.id',
+            'password' => Hash::make('secret123'),
+        ]);
+
+        // Lakukan 10 kali percobaan gagal pertama
+        for ($i = 1; $i <= 10; $i++) {
+            $response = $this->post('/login', [
+                'email' => 'victim@bengkalis.go.id',
+                'password' => 'wrong-pass-' . $i,
+            ]);
+
+            $response->assertSessionHasErrors('email');
+            $response->assertStatus(302);
+        }
+
+        // Percobaan ke-11 (lebih dari 10 kali): harus diarahkan ke 404
+        $blockedResponse = $this->post('/login', [
+            'email' => 'victim@bengkalis.go.id',
+            'password' => 'wrong-pass-11',
+        ]);
+
+        $blockedResponse->assertStatus(404);
+        $blockedResponse->assertSee('Halaman Tidak Ditemukan');
+        $blockedResponse->assertSee('HTTP 404');
+        $blockedResponse->assertSee('Kembali ke Beranda');
+
+        // Setelah terblokir, akses GET ke login juga mengembalikan 404
+        $loginPageResponse = $this->get('/login');
+        $loginPageResponse->assertStatus(404);
+        $loginPageResponse->assertSee('Halaman Tidak Ditemukan');
+    }
+
+    public function test_successful_login_clears_failed_attempt_counter(): void
+    {
+        $user = User::factory()->create([
+            'email' => 'valid@bengkalis.go.id',
+            'password' => Hash::make('secret123'),
+        ]);
+
+        // Coba gagal 3 kali
+        for ($i = 1; $i <= 3; $i++) {
+            $this->post('/login', [
+                'email' => 'valid@bengkalis.go.id',
+                'password' => 'wrong-pass',
+            ])->assertSessionHasErrors('email');
+        }
+
+        // Login berhasil pada percobaan berikutnya
+        $successResponse = $this->post('/login', [
+            'email' => 'valid@bengkalis.go.id',
+            'password' => 'secret123',
+        ]);
+
+        $successResponse->assertRedirect('/dashboard');
+        $this->assertAuthenticatedAs($user);
+
+        // Setelah logout, akses GET /login tetap normal (tidak 404)
+        $this->post('/logout');
+        $this->get('/login')->assertStatus(200);
+    }
 }
+

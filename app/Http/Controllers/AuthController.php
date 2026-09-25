@@ -7,12 +7,21 @@ use App\Services\ActivityLogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
     public function showLogin()
     {
+        $ip = request()->ip();
+        if (RateLimiter::tooManyAttempts('login_ip:'.$ip, 10)) {
+            abort(404);
+        }
+
         if (Auth::check()) {
             return redirect()->route('dashboard');
         }
@@ -105,6 +114,22 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $ip = $request->ip();
+        $email = Str::lower(trim((string) $request->input('email', '')));
+        $ipKey = 'login_ip:'.$ip;
+        $userKey = 'login_user:'.$email.'|'.$ip;
+
+        // Pembatasan brute force: jika melebihi 10 kali percobaan gagal, arahkan ke page 404
+        if (RateLimiter::tooManyAttempts($ipKey, 10) || ($email !== '' && RateLimiter::tooManyAttempts($userKey, 10))) {
+            Log::warning('Security Alert: Upaya brute force login diblokir (404).', [
+                'ip' => $ip,
+                'email' => $email,
+                'user_agent' => $request->header('User-Agent'),
+            ]);
+
+            abort(404);
+        }
+
         $rules = [
             'email' => ['required', 'email'],
             'password' => ['required', 'string'],
@@ -123,9 +148,18 @@ class AuthController extends Controller
             ];
         }
 
-        $credentials = $request->validate($rules, [
-            'captcha.required' => 'Kode captcha wajib diisi.',
-        ]);
+        try {
+            $credentials = $request->validate($rules, [
+                'captcha.required' => 'Kode captcha wajib diisi.',
+            ]);
+        } catch (ValidationException $e) {
+            RateLimiter::hit($ipKey, 900);
+            if ($email !== '') {
+                RateLimiter::hit($userKey, 900);
+            }
+
+            throw $e;
+        }
 
         $authCredentials = [
             'email' => $credentials['email'],
@@ -133,6 +167,11 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($authCredentials, $request->boolean('remember'))) {
+            RateLimiter::clear($ipKey);
+            if ($email !== '') {
+                RateLimiter::clear($userKey);
+            }
+
             $request->session()->forget('login_captcha');
             $request->session()->regenerate();
             $user = Auth::user();
@@ -163,6 +202,12 @@ class AuthController extends Controller
 
             // Redirect based on role
             return redirect()->intended(route('dashboard'));
+        }
+
+        // Catat kegagalan login untuk pencegahan brute force
+        RateLimiter::hit($ipKey, 900);
+        if ($email !== '') {
+            RateLimiter::hit($userKey, 900);
         }
 
         if ($request->wantsJson()) {

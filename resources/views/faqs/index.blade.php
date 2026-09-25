@@ -142,23 +142,7 @@
                 @endforelse
             </div>
 
-            <!-- Help Desk Footer Callout -->
-            <div
-                class="p-8 rounded-3xl bg-gradient-to-r from-emerald-800 to-teal-900 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
-                <div class="space-y-2 text-center md:text-left">
-                    <h3 class="text-xl font-bold">Masih Membutuhkan Informasi Tambahan?</h3>
-                    <p class="text-xs sm:text-sm text-emerald-100 max-w-xl">
-                        Jika pertanyaan Anda belum terjawab di sini, silakan hubungi tim pengelola melalui kontak resmi
-                        Diskominfotik Kabupaten Bengkalis.
-                    </p>
-                </div>
-                <div class="flex flex-wrap gap-3 shrink-0">
-                    <a href="mailto:diskominfo@bengkalis.go.id"
-                        class="px-5 py-3 rounded-xl bg-white text-emerald-950 font-bold text-xs hover:bg-emerald-50 transition-colors shadow-sm">
-                        Kirim Email Bantuan
-                    </a>
-                </div>
-            </div>
+
 
         </div>
     </div>
