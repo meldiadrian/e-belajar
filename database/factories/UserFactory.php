@@ -26,6 +26,10 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'nip' => fake()->unique()->numerify('198#########001'),
+            'nik' => fake()->numerify('1403############'),
+            'tempat_lahir' => fake()->city(),
+            'agama' => fake()->randomElement(['Islam', 'Kristen Protestan', 'Katolik', 'Hindu', 'Buddha']),
             'role' => 'user',
             'phone' => fake()->phoneNumber(),
             'institution' => 'Pemerintah Kabupaten Bengkalis',

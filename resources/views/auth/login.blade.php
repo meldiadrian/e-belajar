@@ -24,11 +24,10 @@
                 @csrf
 
                 <div>
-                    <label for="email" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Alamat
-                        Email</label>
-                    <input type="email" name="email" id="email" value="{{ old('email') }}" required autofocus placeholder="nama@email.com"
+                    <label for="nip" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Nomor Induk Pegawai (NIP)</label>
+                    <input type="text" name="nip" id="nip" value="{{ old('nip') }}" required autofocus placeholder="Masukkan NIP Anda"
                         class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 focus:outline-hidden transition-colors">
-                    @error('email')
+                    @error('nip')
                         <span class="text-[10px] text-red-600 mt-1 block">{{ $message }}</span>
                     @enderror
                 </div>
@@ -92,8 +91,11 @@
     </div>
 
     <script>
-        function fillCreds(email, pass) {
-            document.getElementById('email').value = email;
+        function fillCreds(nip, pass) {
+            const nipInput = document.getElementById('nip');
+            if (nipInput) {
+                nipInput.value = nip;
+            }
             document.getElementById('password').value = pass;
             const captchaInput = document.getElementById('captcha');
             if (captchaInput) {

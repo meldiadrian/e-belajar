@@ -214,4 +214,42 @@ class UserProfileTest extends TestCase
         ]);
         $putResponse->assertStatus(403);
     }
+
+    public function test_user_can_update_nip_nik_tempat_lahir_and_agama_in_profile(): void
+    {
+        $user = User::factory()->create([
+            'role' => 'user',
+            'nip' => '199001012015011001',
+            'nik' => '1403010101900001',
+            'tempat_lahir' => 'Bengkalis',
+            'agama' => 'Islam',
+        ]);
+
+        $response = $this->actingAs($user)->get("/profile/{$user->id}");
+        $response->assertStatus(200);
+        $response->assertSee('199001012015011001');
+        $response->assertSee('1403010101900001');
+        $response->assertSee('Bengkalis');
+        $response->assertSee('Islam');
+
+        $updateResponse = $this->actingAs($user)->put("/profile/{$user->id}", [
+            'name' => 'Aparatur Bengkalis',
+            'email' => $user->email,
+            'nip' => '199505052020011005',
+            'nik' => '1403020202950002',
+            'tempat_lahir' => 'Duri',
+            'agama' => 'Islam',
+            'institution' => 'Bappeda Bengkalis',
+            'phone' => '081234567899',
+        ]);
+
+        $updateResponse->assertSessionHas('success');
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'nip' => '199505052020011005',
+            'nik' => '1403020202950002',
+            'tempat_lahir' => 'Duri',
+            'agama' => 'Islam',
+        ]);
+    }
 }

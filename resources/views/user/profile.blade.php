@@ -36,7 +36,12 @@
                         {{ $user->isSuperAdmin() ? 'Super Admin' : ($user->isAdmin() ? 'Admin Kursus' : 'Peserta') }}
                     </span>
                 </div>
-                <p class="text-xs text-slate-300 font-mono">{{ $user->email }}</p>
+                <p class="text-xs text-slate-300 font-mono">
+                    @if($user->nip)
+                        <span class="text-emerald-300 font-bold">NIP: {{ $user->nip }}</span> &bull;
+                    @endif
+                    {{ $user->email }}
+                </p>
                 <p class="text-xs text-emerald-300 mt-1 font-semibold">{{ $user->institution ?? ($user->isAdmin() ? 'Pemerintah Kabupaten Bengkalis' : 'Masyarakat Umum / Aparatur') }}</p>
             </div>
         </div>
@@ -51,7 +56,7 @@
                     <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    <span>Informasi Pribadi</span>
+                    <span>Informasi Pribadi & Kepegawaian</span>
                 </h3>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -67,6 +72,50 @@
                         <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Alamat Email *</label>
                         <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
                         @error('email')
+                            <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="nip" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                            NIP (Nomor Induk Pegawai)
+                            <span class="text-[10px] text-emerald-600 lowercase font-normal">(digunakan untuk login)</span>
+                        </label>
+                        <input type="text" name="nip" id="nip" value="{{ old('nip', $user->nip) }}" placeholder="Contoh: 198501012010011001" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                        @error('nip')
+                            <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="nik" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">NIK (Nomor Induk Kependudukan)</label>
+                        <input type="text" name="nik" id="nik" value="{{ old('nik', $user->nik) }}" placeholder="Contoh: 1403xxxxxxxxxxxx" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                        @error('nik')
+                            <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="tempat_lahir" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Tempat Lahir</label>
+                        <input type="text" name="tempat_lahir" id="tempat_lahir" value="{{ old('tempat_lahir', $user->tempat_lahir) }}" placeholder="Contoh: Bengkalis" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                        @error('tempat_lahir')
+                            <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="agama" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Agama</label>
+                        <select name="agama" id="agama" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm bg-white focus:border-emerald-600 focus:outline-hidden">
+                            <option value="">-- Pilih Agama --</option>
+                            @foreach(['Islam', 'Kristen Protestan', 'Katolik', 'Hindu', 'Buddha', 'Khonghucu', 'Lainnya'] as $agm)
+                                <option value="{{ $agm }}" {{ old('agama', $user->agama) === $agm ? 'selected' : '' }}>{{ $agm }}</option>
+                            @endforeach
+                        </select>
+                        @error('agama')
                             <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                         @enderror
                     </div>

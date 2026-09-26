@@ -115,15 +115,16 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $ip = $request->ip();
-        $email = Str::lower(trim((string) $request->input('email', '')));
+        // Login dibatasi wajib menggunakan NIP, email tidak bisa lagi digunakan
+        $nipInput = trim((string) $request->input('nip', ''));
         $ipKey = 'login_ip:'.$ip;
-        $userKey = 'login_user:'.$email.'|'.$ip;
+        $userKey = 'login_user:'.$nipInput.'|'.$ip;
 
         // Pembatasan brute force: jika melebihi 10 kali percobaan gagal, arahkan ke page 404
-        if (RateLimiter::tooManyAttempts($ipKey, 10) || ($email !== '' && RateLimiter::tooManyAttempts($userKey, 10))) {
+        if (RateLimiter::tooManyAttempts($ipKey, 10) || ($nipInput !== '' && RateLimiter::tooManyAttempts($userKey, 10))) {
             Log::warning('Security Alert: Upaya brute force login diblokir (404).', [
                 'ip' => $ip,
-                'email' => $email,
+                'identifier' => $nipInput,
                 'user_agent' => $request->header('User-Agent'),
             ]);
 
@@ -131,11 +132,11 @@ class AuthController extends Controller
         }
 
         $rules = [
-            'email' => ['required', 'email'],
+            'nip' => ['required', 'string'],
             'password' => ['required', 'string'],
         ];
 
-        if (!app()->environment('testing') || $request->has('captcha')) {
+        if ((!app()->runningUnitTests() && !app()->environment('testing')) || $request->has('captcha')) {
             $rules['captcha'] = [
                 'required',
                 'string',
@@ -150,11 +151,12 @@ class AuthController extends Controller
 
         try {
             $credentials = $request->validate($rules, [
+                'nip.required' => 'Nomor Induk Pegawai (NIP) wajib diisi.',
                 'captcha.required' => 'Kode captcha wajib diisi.',
             ]);
         } catch (ValidationException $e) {
             RateLimiter::hit($ipKey, 900);
-            if ($email !== '') {
+            if ($nipInput !== '') {
                 RateLimiter::hit($userKey, 900);
             }
 
@@ -162,13 +164,13 @@ class AuthController extends Controller
         }
 
         $authCredentials = [
-            'email' => $credentials['email'],
+            'nip' => $credentials['nip'],
             'password' => $credentials['password'],
         ];
 
         if (Auth::attempt($authCredentials, $request->boolean('remember'))) {
             RateLimiter::clear($ipKey);
-            if ($email !== '') {
+            if ($nipInput !== '') {
                 RateLimiter::clear($userKey);
             }
 
@@ -181,7 +183,7 @@ class AuthController extends Controller
                 if ($request->wantsJson()) {
                     return response()->json(['message' => 'Akun Anda dinonaktifkan oleh administrator.'], 403);
                 }
-                return back()->withErrors(['email' => 'Akun Anda dinonaktifkan oleh administrator.']);
+                return back()->withErrors(['nip' => 'Akun Anda dinonaktifkan oleh administrator.']);
             }
 
             $user->update(['last_login_at' => now()]);
@@ -206,16 +208,16 @@ class AuthController extends Controller
 
         // Catat kegagalan login untuk pencegahan brute force
         RateLimiter::hit($ipKey, 900);
-        if ($email !== '') {
+        if ($nipInput !== '') {
             RateLimiter::hit($userKey, 900);
         }
 
         if ($request->wantsJson()) {
-            return response()->json(['message' => 'Kombinasi email dan password salah.'], 422);
+            return response()->json(['message' => 'Kombinasi NIP dan kata sandi tidak sesuai.'], 422);
         }
 
-        return back()->withInput($request->only('email'))->withErrors([
-            'email' => 'Kredensial yang diberikan tidak cocok dengan data kami.',
+        return back()->withInput($request->only('nip'))->withErrors([
+            'nip' => 'NIP atau kata sandi yang Anda masukkan tidak sesuai.',
         ]);
     }
 
@@ -224,14 +226,30 @@ class AuthController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'nip' => ['nullable', 'string', 'max:30', 'unique:users'],
+            'nik' => ['nullable', 'string', 'max:30'],
+            'tempat_lahir' => ['nullable', 'string', 'max:100'],
+            'agama' => ['nullable', 'string', 'max:50'],
             'password' => ['required', 'confirmed', Password::min(6)],
             'phone' => ['nullable', 'string', 'max:30'],
             'institution' => ['nullable', 'string', 'max:255'],
+        ], [
+            'name.required' => 'Nama lengkap wajib diisi.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.unique' => 'Alamat email sudah terdaftar.',
+            'nip.unique' => 'NIP sudah terdaftar untuk pengguna lain.',
+            'password.required' => 'Kata sandi wajib diisi.',
+            'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
+            'password.min' => 'Kata sandi minimal 6 karakter.',
         ]);
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
+            'nip' => !empty($validated['nip']) ? trim($validated['nip']) : null,
+            'nik' => !empty($validated['nik']) ? trim($validated['nik']) : null,
+            'tempat_lahir' => !empty($validated['tempat_lahir']) ? trim($validated['tempat_lahir']) : null,
+            'agama' => !empty($validated['agama']) ? trim($validated['agama']) : null,
             'password' => Hash::make($validated['password']),
             'role' => 'user',
             'phone' => $validated['phone'] ?? null,

@@ -33,12 +33,58 @@
             </div>
 
             <div>
-                <label for="email" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Alamat Email</label>
+                <label for="email" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Alamat Email *</label>
                 <input type="email" name="email" id="email" value="{{ old('email') }}" required placeholder="nama@email.com"
                     class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 focus:outline-hidden transition-colors">
                 @error('email')
                     <span class="text-[10px] text-red-600 mt-1 block">{{ $message }}</span>
                 @enderror
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                    <label for="nip" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                        NIP
+                        <span class="text-[9px] text-emerald-600 lowercase font-normal">(untuk login)</span>
+                    </label>
+                    <input type="text" name="nip" id="nip" value="{{ old('nip') }}" placeholder="Contoh: 198501012010011001"
+                        class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 focus:outline-hidden transition-colors">
+                    @error('nip')
+                        <span class="text-[10px] text-red-600 mt-1 block">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div>
+                    <label for="nik" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">NIK</label>
+                    <input type="text" name="nik" id="nik" value="{{ old('nik') }}" placeholder="Contoh: 1403xxxxxxxxxxxx"
+                        class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 focus:outline-hidden transition-colors">
+                    @error('nik')
+                        <span class="text-[10px] text-red-600 mt-1 block">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                    <label for="tempat_lahir" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Tempat Lahir</label>
+                    <input type="text" name="tempat_lahir" id="tempat_lahir" value="{{ old('tempat_lahir') }}" placeholder="Contoh: Bengkalis"
+                        class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 focus:outline-hidden transition-colors">
+                    @error('tempat_lahir')
+                        <span class="text-[10px] text-red-600 mt-1 block">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div>
+                    <label for="agama" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Agama</label>
+                    <select name="agama" id="agama"
+                        class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm bg-white focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 focus:outline-hidden transition-colors">
+                        <option value="">-- Pilih Agama --</option>
+                        @foreach(['Islam', 'Kristen Protestan', 'Katolik', 'Hindu', 'Buddha', 'Khonghucu', 'Lainnya'] as $agm)
+                            <option value="{{ $agm }}" {{ old('agama') === $agm ? 'selected' : '' }}>{{ $agm }}</option>
+                        @endforeach
+                    </select>
+                    @error('agama')
+                        <span class="text-[10px] text-red-600 mt-1 block">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">

@@ -68,6 +68,10 @@ class ProfileController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'nip' => ['nullable', 'string', 'max:30', Rule::unique('users')->ignore($user->id)],
+            'nik' => ['nullable', 'string', 'max:30'],
+            'tempat_lahir' => ['nullable', 'string', 'max:100'],
+            'agama' => ['nullable', 'string', 'max:50'],
             'phone' => ['nullable', 'string', 'max:30'],
             'institution' => ['nullable', 'string', 'max:255'],
             'avatar' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
@@ -77,6 +81,7 @@ class ProfileController extends Controller
             'email.required' => 'Alamat email wajib diisi.',
             'email.email' => 'Format email tidak valid.',
             'email.unique' => 'Alamat email sudah digunakan oleh akun lain.',
+            'nip.unique' => 'NIP ini sudah terdaftar untuk pengguna lain.',
             'avatar.image' => 'Berkas avatar harus berupa gambar.',
             'avatar.mimes' => 'Format avatar yang diizinkan: JPG, JPEG, PNG, WEBP.',
             'avatar.max' => 'Ukuran avatar maksimal 2MB.',
@@ -84,11 +89,15 @@ class ProfileController extends Controller
             'password.min' => 'Kata sandi baru minimal 6 karakter.',
         ]);
 
-        $oldValues = $user->only(['name', 'email', 'phone', 'institution', 'avatar']);
+        $oldValues = $user->only(['name', 'email', 'nip', 'nik', 'tempat_lahir', 'agama', 'phone', 'institution', 'avatar']);
 
         $updateData = [
             'name' => $validated['name'],
             'email' => $validated['email'],
+            'nip' => !empty($validated['nip']) ? trim($validated['nip']) : null,
+            'nik' => !empty($validated['nik']) ? trim($validated['nik']) : null,
+            'tempat_lahir' => !empty($validated['tempat_lahir']) ? trim($validated['tempat_lahir']) : null,
+            'agama' => !empty($validated['agama']) ? trim($validated['agama']) : null,
             'phone' => $validated['phone'] ?? null,
             'institution' => $validated['institution'] ?? null,
         ];
@@ -114,7 +123,7 @@ class ProfileController extends Controller
             entity: $user,
             description: "Pengguna {$user->name} memperbarui data profil.",
             oldValues: $oldValues,
-            newValues: $user->fresh()->only(['name', 'email', 'phone', 'institution', 'avatar']),
+            newValues: $user->fresh()->only(['name', 'email', 'nip', 'nik', 'tempat_lahir', 'agama', 'phone', 'institution', 'avatar']),
             user: $currentUser
         );
 

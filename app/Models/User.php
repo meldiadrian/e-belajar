@@ -20,6 +20,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'nip',
+        'nik',
+        'tempat_lahir',
+        'agama',
         'password',
         'role',
         'avatar',
@@ -96,6 +100,16 @@ class User extends Authenticatable
         }
 
         return strtoupper($initials ?: substr($this->name, 0, 2));
+    }
+
+    public function getBirthPlaceAttribute(): ?string
+    {
+        return $this->tempat_lahir;
+    }
+
+    public function getReligionAttribute(): ?string
+    {
+        return $this->agama;
     }
 
     public function courses(): HasMany

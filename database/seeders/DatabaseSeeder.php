@@ -37,6 +37,10 @@ class DatabaseSeeder extends Seeder
             ['email' => 'superadmin@bengkalis.go.id'],
             [
                 'name' => 'Super Administrator Bengkalis',
+                'nip' => '198001012005011001',
+                'nik' => '1403010101800001',
+                'tempat_lahir' => 'Bengkalis',
+                'agama' => 'Islam',
                 'password' => Hash::make(env('SUPERADMIN_PASSWORD', 'password123')),
                 'role' => 'superadmin',
                 'institution' => 'Diskominfotik Kabupaten Bengkalis',
@@ -45,11 +49,23 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+        if (!$superadmin->nip) {
+            $superadmin->update([
+                'nip' => '198001012005011001',
+                'nik' => '1403010101800001',
+                'tempat_lahir' => 'Bengkalis',
+                'agama' => 'Islam',
+            ]);
+        }
 
         $admin = User::firstOrCreate(
             ['email' => 'admin@bengkalis.go.id'],
             [
                 'name' => 'Admin Pengelola Kursus',
+                'nip' => '198502022010011002',
+                'nik' => '1403010202850002',
+                'tempat_lahir' => 'Bengkalis',
+                'agama' => 'Islam',
                 'password' => Hash::make(env('ADMIN_PASSWORD', 'password123')),
                 'role' => 'admin',
                 'institution' => 'BKPSDM Kabupaten Bengkalis',
@@ -58,11 +74,23 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+        if (!$admin->nip) {
+            $admin->update([
+                'nip' => '198502022010011002',
+                'nik' => '1403010202850002',
+                'tempat_lahir' => 'Bengkalis',
+                'agama' => 'Islam',
+            ]);
+        }
 
         $peserta1 = User::firstOrCreate(
             ['email' => 'peserta1@bengkalis.go.id'],
             [
                 'name' => 'Ahmad Fauzi, S.Kom',
+                'nip' => '199003032015011003',
+                'nik' => '1403010303900003',
+                'tempat_lahir' => 'Bengkalis',
+                'agama' => 'Islam',
                 'password' => Hash::make('password123'),
                 'role' => 'user',
                 'institution' => 'Dinas Pendidikan Kabupaten Bengkalis',
@@ -71,11 +99,23 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+        if (!$peserta1->nip) {
+            $peserta1->update([
+                'nip' => '199003032015011003',
+                'nik' => '1403010303900003',
+                'tempat_lahir' => 'Bengkalis',
+                'agama' => 'Islam',
+            ]);
+        }
 
         $peserta2 = User::firstOrCreate(
             ['email' => 'peserta2@bengkalis.go.id'],
             [
                 'name' => 'Siti Rahmawati, S.AP',
+                'nip' => '199204042018012004',
+                'nik' => '1403010404920004',
+                'tempat_lahir' => 'Mandau',
+                'agama' => 'Islam',
                 'password' => Hash::make('password123'),
                 'role' => 'user',
                 'institution' => 'Bappeda Kabupaten Bengkalis',
@@ -84,6 +124,14 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+        if (!$peserta2->nip) {
+            $peserta2->update([
+                'nip' => '199204042018012004',
+                'nik' => '1403010404920004',
+                'tempat_lahir' => 'Mandau',
+                'agama' => 'Islam',
+            ]);
+        }
 
         // 2. Categories
         $categoriesData = [
