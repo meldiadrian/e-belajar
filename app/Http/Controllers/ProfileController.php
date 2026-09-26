@@ -7,6 +7,7 @@ use App\Services\ActivityLogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
@@ -20,8 +21,9 @@ class ProfileController extends Controller
         $user = User::findOrFail($id);
         $currentUser = Auth::user();
 
-        // Regular user can only edit their own profile
-        if ($currentUser->isUser() && $currentUser->id !== $user->id) {
+        // Regular user and admin can only edit their own profile
+        // Superadmin can edit their own profile or inspect/edit others
+        if (!$currentUser->isSuperAdmin() && $currentUser->id !== $user->id) {
             abort(403, 'Akses ditolak. Anda hanya dapat mengubah profil Anda sendiri.');
         }
 
@@ -36,7 +38,7 @@ class ProfileController extends Controller
         $user = User::findOrFail($id);
         $currentUser = Auth::user();
 
-        if ($currentUser->isUser() && $currentUser->id !== $user->id) {
+        if (!$currentUser->isSuperAdmin() && $currentUser->id !== $user->id) {
             return response()->json([
                 'message' => 'Akses ditolak. Anda hanya dapat melihat profil Anda sendiri.',
             ], 403);
@@ -53,8 +55,8 @@ class ProfileController extends Controller
         $user = User::findOrFail($id);
         $currentUser = Auth::user();
 
-        // Regular user can only edit their own profile
-        if ($currentUser->isUser() && $currentUser->id !== $user->id) {
+        // Regular user and admin can only edit their own profile
+        if (!$currentUser->isSuperAdmin() && $currentUser->id !== $user->id) {
             if ($request->wantsJson()) {
                 return response()->json([
                     'message' => 'Akses ditolak. Anda hanya dapat mengubah profil Anda sendiri.',
@@ -70,6 +72,16 @@ class ProfileController extends Controller
             'institution' => ['nullable', 'string', 'max:255'],
             'avatar' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'password' => ['nullable', 'confirmed', Password::min(6)],
+        ], [
+            'name.required' => 'Nama lengkap wajib diisi.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Alamat email sudah digunakan oleh akun lain.',
+            'avatar.image' => 'Berkas avatar harus berupa gambar.',
+            'avatar.mimes' => 'Format avatar yang diizinkan: JPG, JPEG, PNG, WEBP.',
+            'avatar.max' => 'Ukuran avatar maksimal 2MB.',
+            'password.confirmed' => 'Konfirmasi kata sandi baru tidak cocok.',
+            'password.min' => 'Kata sandi baru minimal 6 karakter.',
         ]);
 
         $oldValues = $user->only(['name', 'email', 'phone', 'institution', 'avatar']);
@@ -83,6 +95,9 @@ class ProfileController extends Controller
 
         // Process avatar upload
         if ($request->hasFile('avatar')) {
+            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
+            }
             $avatarPath = $request->file('avatar')->store('avatars', 'public');
             $updateData['avatar'] = $avatarPath;
         }
@@ -100,7 +115,7 @@ class ProfileController extends Controller
             description: "Pengguna {$user->name} memperbarui data profil.",
             oldValues: $oldValues,
             newValues: $user->fresh()->only(['name', 'email', 'phone', 'institution', 'avatar']),
-            user: $user
+            user: $currentUser
         );
 
         if ($request->wantsJson()) {

@@ -79,6 +79,25 @@ class User extends Authenticatable
         return $this->role === $roles;
     }
 
+    public function getAvatarUrlAttribute(): ?string
+    {
+        return $this->avatar ? asset('storage/' . $this->avatar) : null;
+    }
+
+    public function getInitialsAttribute(): string
+    {
+        $words = preg_split("/\s+/", trim($this->name));
+        $initials = '';
+        foreach ($words as $w) {
+            $initials .= mb_substr($w, 0, 1);
+            if (mb_strlen($initials) >= 2) {
+                break;
+            }
+        }
+
+        return strtoupper($initials ?: substr($this->name, 0, 2));
+    }
+
     public function courses(): HasMany
     {
         return $this->hasMany(Course::class, 'created_by');

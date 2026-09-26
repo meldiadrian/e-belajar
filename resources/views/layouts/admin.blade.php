@@ -117,6 +117,17 @@
                         <span>Audit Log Aktivitas</span>
                     </a>
                 @endif
+
+                <div class="text-[11px] uppercase tracking-wider text-slate-500 font-bold px-3 pt-4 pb-2">Akun Saya</div>
+
+                <a href="{{ route('profile.edit', Auth::id()) }}"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('profile.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span>Edit Profil & Password</span>
+                </a>
             </div>
         </div>
 
@@ -130,21 +141,35 @@
                 </svg>
                 <span>Lihat Portal Publik</span>
             </a>
-            <!-- <div class="px-3 py-2 bg-slate-800/60 rounded-xl flex items-center justify-between">
-                <div class="truncate">
-                    <div class="text-xs font-bold text-white truncate">{{ Auth::user()->name }}</div>
-                    <div class="text-[10px] text-emerald-400 truncate">{{ Auth::user()->email }}</div>
-                </div>
+
+            <div class="p-2.5 bg-slate-800/80 rounded-xl flex items-center justify-between gap-2.5 border border-slate-700/50">
+                <a href="{{ route('profile.edit', Auth::id()) }}" class="flex items-center gap-2.5 min-w-0 flex-1 hover:opacity-90 group transition-all" title="Edit Profil & Password">
+                    <div class="relative shrink-0">
+                        @if(Auth::user()->avatar)
+                            <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}"
+                                class="w-8 h-8 rounded-full object-cover ring-2 ring-emerald-500/50 shadow-xs">
+                        @else
+                            <div class="w-8 h-8 rounded-full gradient-bengkalis text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/50 shadow-xs">
+                                {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
+                            </div>
+                        @endif
+                        <span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-slate-900" title="Online"></span>
+                    </div>
+                    <div class="truncate">
+                        <div class="text-xs font-bold text-white truncate group-hover:text-emerald-300 transition-colors">{{ Auth::user()->name }}</div>
+                        <div class="text-[10px] text-slate-400 truncate">{{ Auth::user()->email }}</div>
+                    </div>
+                </a>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" title="Keluar" class="text-slate-400 hover:text-red-400 p-1">
+                    <button type="submit" title="Keluar dari akun" class="text-slate-400 hover:text-red-400 p-1.5 rounded-lg hover:bg-slate-700/50 transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
                     </button>
                 </form>
-            </div> -->
+            </div>
         </div>
     </aside>
 
@@ -159,37 +184,43 @@
                 <span class="font-semibold text-slate-800">@yield('page_title', 'Dashboard')</span>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3">
                 <span
-                    class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold {{ Auth::user()->isSuperAdmin() ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800' }}">
+                    class="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold {{ Auth::user()->isSuperAdmin() ? 'bg-amber-100 text-amber-800 border border-amber-300' : 'bg-emerald-100 text-emerald-800 border border-emerald-300' }}">
                     Role: {{ strtoupper(Auth::user()->role) }}
                 </span>
-                <!-- <a href="{{ route('courses.index') }}" target="_blank"
-                    class="text-xs font-medium text-emerald-700 hover:underline">Pratinjau Kursus &rarr;</a> -->
-                <div class="px-3 py-2 bg-slate-900 rounded-xl flex items-center justify-between">
-                    <div class="truncate">
-                        <div class="text-xs font-bold text-white truncate">{{ Auth::user()->name }}</div>
-                        <div class="text-[10px] text-emerald-400 truncate">{{ Auth::user()->email }}</div>
+
+                <!-- User Profile & Avatar -->
+                <a href="{{ route('profile.edit', Auth::id()) }}"
+                    title="Edit Profil & Password"
+                    class="flex items-center gap-2.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl transition-all shadow-xs group">
+                    <div class="relative shrink-0">
+                        @if(Auth::user()->avatar)
+                            <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}"
+                                class="w-8 h-8 rounded-full object-cover ring-2 ring-emerald-500/50 group-hover:ring-emerald-400 transition-all shadow-xs">
+                        @else
+                            <div class="w-8 h-8 rounded-full gradient-bengkalis text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/50 group-hover:ring-emerald-400 transition-all shadow-xs">
+                                {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
+                            </div>
+                        @endif
+                        <span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-slate-900" title="Online"></span>
                     </div>
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
+                    <div class="text-left hidden md:block max-w-[140px] truncate">
+                        <div class="text-xs font-bold text-white truncate group-hover:text-emerald-300 transition-colors">{{ Auth::user()->name }}</div>
+                        <div class="text-[10px] text-emerald-400 truncate">Edit Profil &rarr;</div>
+                    </div>
+                </a>
 
-                        <button type="submit" title="Keluar dari akun" class="group inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5
-               text-xs font-semibold text-slate-500
-               transition-all duration-200
-               hover:bg-red-50 hover:text-red-600">
-
-                            <svg class="h-4 w-4 transition-colors duration-200" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                            </svg>
-
-                            <span>Keluar</span>
-                        </button>
-                    </form>
-                </div>
-
+                <!-- Logout Button -->
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" title="Keluar dari akun" class="inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold text-slate-500 transition-all duration-200 hover:bg-red-50 hover:text-red-600 border border-slate-200">
+                        <svg class="h-4 w-4 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        <span class="hidden sm:inline">Keluar</span>
+                    </button>
+                </form>
             </div>
         </header>
 
