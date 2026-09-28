@@ -9,29 +9,31 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                 <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Pembelajaran</span>
-                <div class="text-2xl font-black text-slate-800">{{ $stats['total_courses'] }}</div>
+                <div class="text-2xl font-black text-slate-900">{{ $stats['total_courses'] }}</div>
                 <div class="text-[11px] text-emerald-600 font-semibold mt-1">{{ $stats['published_courses'] }}
                     Dipublikasikan</div>
             </div>
 
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                 <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Peserta</span>
-                <div class="text-2xl font-black text-slate-800">{{ number_format($stats['total_students']) }}</div>
+                <div class="text-2xl font-black text-slate-900">{{ number_format($stats['total_students']) }}</div>
                 <div class="text-[11px] text-slate-400 font-medium mt-1">Pengguna Terdaftar</div>
             </div>
 
-            <!-- <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-                                                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Enrollment</span>
-                                                <div class="text-2xl font-black text-emerald-700">{{ number_format($stats['total_enrollments']) }}</div>
-                                                <div class="text-[11px] text-emerald-600 font-semibold mt-1">{{ $stats['total_completions'] }} Telah Lulus
-                                                </div>
-                                            </div> -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Peserta yang
+                    Terdaftar</span>
+                <div class="text-2xl font-black text-slate-900">{{ number_format($stats['total_enrollments']) }}</div>
+                <div class="text-[11px] text-emerald-600 font-semibold mt-1">{{ $stats['total_completions'] }} Telah Lulus
+                </div>
+            </div>
 
-            <!-- <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-                                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Tingkat Lulus Kuis</span>
-                                        <div class="text-2xl font-black text-amber-600">{{ $stats['quiz_pass_rate'] }}%</div>
-                                        <div class="text-[11px] text-slate-400 font-medium mt-1">{{ $stats['total_quizzes'] }} Kuis Aktif</div>
-                                    </div> -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Sertifikat Terbit</span>
+                <div class="text-2xl font-black text-amber-600">{{ number_format($stats['total_certificates']) }}</div>
+                <div class="text-[11px] text-slate-400 mt-1">{{ number_format($stats['total_quiz_attempts']) }} Percobaan
+                    Kuis</div>
+            </div>
         </div>
 
         <!-- Quick Action Banner -->
@@ -50,7 +52,8 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Recent Enrollments -->
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs">
-                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Pendaftaran Peserta Terbaru</h3>
+                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Pendaftaran Peserta Terbaru
+                </h3>
                 <div class="divide-y divide-slate-100 text-xs">
                     @forelse($recentEnrollments as $enr)
                         <div class="py-3 flex items-center justify-between">

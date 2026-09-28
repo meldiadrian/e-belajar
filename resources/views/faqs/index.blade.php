@@ -25,7 +25,7 @@
                 </p>
 
                 @auth
-                    @if(Auth::user()->isAdmin() || Auth::user()->isSuperAdmin())
+                    @if(Auth::user()->isSuperAdmin())
                         <div class="pt-2">
                             <a href="{{ route('admin.faqs.index') }}"
                                 class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-md transition-all hover:scale-105">

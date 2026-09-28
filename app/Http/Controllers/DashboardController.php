@@ -151,6 +151,8 @@ class DashboardController extends Controller
             'total_enrollments' => Enrollment::count(),
             'total_completions' => Enrollment::where('status', 'completed')->count(),
             'total_quizzes' => Quiz::count(),
+            'total_certificates' => Certificate::count(),
+            'total_quiz_attempts' => QuizAttempt::count(),
             'quiz_pass_rate' => QuizAttempt::where('status', 'submitted')->count() > 0
                 ? round((QuizAttempt::where('passed', true)->count() / QuizAttempt::where('status', 'submitted')->count()) * 100, 1)
                 : 0,

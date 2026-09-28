@@ -96,9 +96,11 @@ Route::middleware('auth')->group(function () {
         Route::put('/questions/{question}', [CourseBuilderController::class, 'updateQuestion'])->name('questions.update');
         Route::delete('/questions/{question}', [CourseBuilderController::class, 'deleteQuestion'])->name('questions.destroy');
 
-        // FAQs Management (CRUD)
-        Route::resource('faqs', AdminFaqController::class)->except(['show']);
-        Route::resource('faq-categories', AdminFaqCategoryController::class)->except(['show']);
+        // FAQs Management (CRUD) - Dibatasi khusus Superadmin
+        Route::middleware('role:superadmin')->group(function () {
+            Route::resource('faqs', AdminFaqController::class)->except(['show']);
+            Route::resource('faq-categories', AdminFaqCategoryController::class)->except(['show']);
+        });
 
         // Certificate Signer Management (CRUD)
         Route::resource('certificates', CertificateSettingController::class)->except(['show']);
