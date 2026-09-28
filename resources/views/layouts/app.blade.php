@@ -7,8 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'E-Belajar Kabupaten Bengkalis') - Portal Pembelajaran Digital</title>
 
-    @include('partials.pwa-head')
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -276,7 +274,6 @@
     </footer>
 
     @include('partials.sweetalert')
-    @include('partials.pwa-installer')
     @stack('scripts')
 </body>
 
