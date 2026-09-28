@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 Route::get('/courses/{identifier}', [CourseController::class, 'show'])->name('courses.show');
-Route::get('/certificates/verify/{code}', [CertificateController::class, 'verify'])->name('certificates.verify');
+Route::get('/certificates/verify/{code?}', [CertificateController::class, 'verify'])->name('certificates.verify')->where('code', '.*');
 Route::get('/pertanyaan-umum', [FaqController::class, 'index'])->name('faqs.index');
 
 // Authentication

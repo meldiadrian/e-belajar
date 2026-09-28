@@ -87,4 +87,48 @@ class CertificateTest extends TestCase
         $invalidResponse->assertStatus(404);
         $invalidResponse->assertJson(['is_valid' => false]);
     }
+
+    public function test_certificate_can_be_verified_via_web_using_code_or_number(): void
+    {
+        $user = User::factory()->create(['role' => 'user', 'name' => 'Ahmad Dani']);
+        $category = Category::create(['name' => 'Umum', 'slug' => 'umum']);
+        $course = Course::create([
+            'category_id' => $category->id,
+            'created_by' => $user->id,
+            'title' => 'Tata Kelola Pemerintahan',
+            'slug' => 'tata-kelola-pemerintahan',
+            'certificate_enabled' => true,
+        ]);
+
+        CourseProgress::create([
+            'user_id' => $user->id,
+            'course_id' => $course->id,
+            'progress_percentage' => 100.0,
+            'completed_lessons' => 1,
+            'total_lessons' => 1,
+            'status' => 'completed',
+        ]);
+
+        $certificateService = app(CertificateService::class);
+        $cert = $certificateService->generateCertificate($user, $course);
+
+        // 1. Verify via web using query parameter with certificate_number
+        $resNumber = $this->get(route('certificates.verify', ['code' => $cert->certificate_number]));
+        $resNumber->assertStatus(200);
+        $resNumber->assertSee('TERVERIFIKASI ASLI & RESMI', false);
+        $resNumber->assertSee('Ahmad Dani');
+        $resNumber->assertSee($cert->certificate_number);
+
+        // 2. Verify via web using query parameter with certificate_code
+        $resCode = $this->get(route('certificates.verify', ['code' => $cert->certificate_code]));
+        $resCode->assertStatus(200);
+        $resCode->assertSee('TERVERIFIKASI ASLI & RESMI', false);
+        $resCode->assertSee('Ahmad Dani');
+
+        // 3. Verify with invalid code
+        $resInvalid = $this->get(route('certificates.verify', ['code' => 'INVALID-123']));
+        $resInvalid->assertStatus(200);
+        $resInvalid->assertSee('Sertifikat Tidak Ditemukan');
+    }
 }
+

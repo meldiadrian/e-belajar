@@ -7,6 +7,20 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'E-Belajar Kabupaten Bengkalis') - Portal Pembelajaran Digital</title>
 
+    <!-- PWA Settings & Cross-Browser Compatibility -->
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="theme-color" content="#047857">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="E-Belajar">
+    <link rel="apple-touch-icon" href="{{ asset('icons/icon-192x192.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('icons/icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="192x192" href="{{ asset('icons/icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('icons/icon-192x192.png') }}">
+    <meta name="msapplication-TileImage" content="{{ asset('icons/icon-144x144.png') }}">
+    <meta name="msapplication-TileColor" content="#047857">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,6 +95,8 @@
                             class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('home') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-100' }}">Beranda</a>
                         <a href="{{ route('courses.index') }}"
                             class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('courses.*') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-100' }}">Katalog Pelatihan</a>
+                        <a href="{{ route('certificates.verify') }}"
+                            class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('certificates.verify') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-100' }}">Verifikasi Sertifikat</a>
                         <a href="{{ route('faqs.index') }}"
                             class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('faqs.*') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-100' }}">Pertanyaan
                             Umum</a>
@@ -240,7 +256,8 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ route('courses.index') }}"
                                 class="hover:text-emerald-400 transition-colors">Lihat Katalog</a></li>
-
+                        <li><a href="{{ route('certificates.verify') }}"
+                                class="hover:text-emerald-400 transition-colors">Verifikasi Sertifikat</a></li>
                         <li><a href="{{ route('faqs.index') }}"
                                 class="hover:text-emerald-400 transition-colors">Pertanyaan Umum</a></li>
                         <li><a href="{{ route('login') }}" class="hover:text-emerald-400 transition-colors">Portal
@@ -271,6 +288,134 @@
 
     @include('partials.sweetalert')
     @stack('scripts')
+
+    <!-- PWA Install Banner (Works for all visitors without login) -->
+    <div id="pwa-install-banner" class="hidden fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-50 bg-white border border-emerald-200 rounded-2xl shadow-xl p-4 transition-all duration-300">
+        <div class="flex items-start gap-3">
+            <img src="{{ asset('icons/icon-96x96.png') }}" alt="Logo E-Belajar" class="w-12 h-12 rounded-xl object-contain shadow-xs shrink-0 bg-emerald-50 p-1 border border-emerald-100">
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                    <h4 class="text-sm font-bold text-slate-900 leading-tight">Pasang Aplikasi E-Belajar</h4>
+                    <button type="button" onclick="dismissPwaBanner()" class="text-slate-400 hover:text-slate-600 p-1 -mr-1" aria-label="Tutup">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                    Akses pembelajaran lebih cepat & praktis langsung dari layar HP/laptop Anda tanpa harus mengunduh di Play Store.
+                </p>
+                <div class="mt-3 flex items-center gap-2">
+                    <button id="pwa-install-btn" type="button" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        <span>Pasang Sekarang</span>
+                    </button>
+                    <button type="button" onclick="dismissPwaBanner()" class="px-3 py-2 text-xs font-semibold text-slate-500 hover:text-slate-700 transition-colors cursor-pointer">
+                        Nanti Saja
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- iOS Safari PWA Instruction Modal -->
+    <div id="pwa-ios-modal" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl">
+            <img src="{{ asset('icons/icon-128x128.png') }}" alt="Logo" class="w-16 h-16 mx-auto rounded-2xl shadow-sm bg-emerald-50 p-2 border border-emerald-100">
+            <div>
+                <h3 class="font-bold text-base text-slate-900">Pasang E-Belajar di iPhone / iPad</h3>
+                <p class="text-xs text-slate-500 mt-1">Browser Safari di iOS dapat dipasang dengan 2 langkah:</p>
+            </div>
+            <div class="text-left bg-slate-50 p-4 rounded-2xl text-xs space-y-2 text-slate-700 border border-slate-200">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-5 h-5 rounded-full bg-emerald-700 text-white font-bold text-[10px] flex items-center justify-center shrink-0">1</span>
+                    <span>Ketuk ikon <strong>Bagikan (Share)</strong> <svg class="w-4 h-4 inline-block text-blue-600 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg> di bilah browser.</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <span class="w-5 h-5 rounded-full bg-emerald-700 text-white font-bold text-[10px] flex items-center justify-center shrink-0">2</span>
+                    <span>Gulir ke bawah dan pilih <strong>'Tambahkan ke Layar Utama' (Add to Home Screen)</strong>.</span>
+                </div>
+            </div>
+            <button type="button" onclick="document.getElementById('pwa-ios-modal').classList.add('hidden')" class="w-full py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer">
+                Saya Mengerti
+            </button>
+        </div>
+    </div>
+
+    <!-- PWA Service Worker & Universal Prompt Handler -->
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('PWA ServiceWorker registered with scope:', registration.scope);
+                }).catch(function(err) {
+                    console.warn('PWA ServiceWorker registration failed:', err);
+                });
+            });
+        }
+
+        // Check if app is running in standalone mode (already installed)
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+        let deferredPrompt = null;
+        const banner = document.getElementById('pwa-install-banner');
+        const installBtn = document.getElementById('pwa-install-btn');
+        const iosModal = document.getElementById('pwa-ios-modal');
+
+        const isIos = () => {
+            const userAgent = window.navigator.userAgent.toLowerCase();
+            return /iphone|ipad|ipod/.test(userAgent);
+        };
+
+        function showPwaBanner() {
+            if (!isStandalone && !sessionStorage.getItem('pwa_banner_dismissed')) {
+                banner?.classList.remove('hidden');
+            }
+        }
+
+        function dismissPwaBanner() {
+            banner?.classList.add('hidden');
+            sessionStorage.setItem('pwa_banner_dismissed', 'true');
+        }
+
+        // Capture standard PWA install prompt (Chrome, Edge, Samsung Internet, Android, Opera)
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            showPwaBanner();
+        });
+
+        // For iOS Safari or browsers where beforeinstallprompt doesn't fire, show banner after 1.5 seconds if not installed
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!isStandalone && !sessionStorage.getItem('pwa_banner_dismissed')) {
+                setTimeout(showPwaBanner, 1500);
+            }
+        });
+
+        // Handle Click on Install Button
+        if (installBtn) {
+            installBtn.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log('PWA install prompt outcome:', outcome);
+                    deferredPrompt = null;
+                    dismissPwaBanner();
+                } else if (isIos()) {
+                    banner?.classList.add('hidden');
+                    iosModal?.classList.remove('hidden');
+                } else {
+                    alert('Untuk memasang di browser ini: Buka menu titik tiga (⋮) pada browser Anda, lalu pilih "Install aplikasi" atau "Tambahkan ke Layar Utama".');
+                    dismissPwaBanner();
+                }
+            });
+        }
+
+        // Hide banner when app is successfully installed
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed successfully');
+            banner?.classList.add('hidden');
+        });
+    </script>
 </body>
 
 </html>

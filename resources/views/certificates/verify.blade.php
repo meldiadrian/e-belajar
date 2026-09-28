@@ -14,9 +14,9 @@
             </div>
         </div>
 
-        <form action="" method="GET" onsubmit="event.preventDefault(); window.location.href='/certificates/verify/' + document.getElementById('searchCode').value.trim();" class="mt-6 flex flex-col sm:flex-row gap-3">
-            <input type="text" id="searchCode" value="{{ $code !== 'SAMPLE' ? $code : '' }}" required placeholder="Contoh: BKS-ABCDEF123456" class="flex-1 px-4 py-3 rounded-xl border border-slate-300 text-sm font-mono tracking-wider uppercase focus:border-emerald-600 focus:outline-hidden">
-            <button type="submit" class="px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-md transition-colors">
+        <form action="{{ route('certificates.verify') }}" method="GET" class="mt-6 flex flex-col sm:flex-row gap-3">
+            <input type="text" id="searchCode" name="code" value="{{ $code !== 'SAMPLE' ? $code : '' }}" required placeholder="Contoh: CERT/BKPP/2026/09/00001 atau BKS-XXXX" class="flex-1 px-4 py-3 rounded-xl border border-slate-300 text-sm font-mono tracking-wider focus:border-emerald-600 focus:outline-hidden">
+            <button type="submit" class="px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-md transition-colors cursor-pointer">
                 Periksa Dokumen
             </button>
         </form>

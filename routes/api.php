@@ -27,7 +27,7 @@ Route::get('/courses/{id}', [CourseController::class, 'show']);
 Route::get('/courses/{course}/modules', [CourseBuilderController::class, 'getModules']);
 Route::get('/modules/{module}/lessons', [CourseBuilderController::class, 'getLessons']);
 Route::get('/lessons/{id}', [CourseBuilderController::class, 'getLesson']);
-Route::get('/certificates/verify/{code}', [CertificateController::class, 'verify']);
+Route::get('/certificates/verify/{code}', [CertificateController::class, 'verify'])->where('code', '.*');
 
 // Authenticated Endpoints
 Route::middleware('auth')->group(function () {

@@ -103,10 +103,10 @@
                 &larr; Kembali ke Sertifikat Saya
             </a>
             <div class="flex items-center gap-2">
-                <!-- <a href="{{ route('certificates.verify', $certificate->certificate_code) }}" target="_blank"
-                            class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200">
-                            Tautan Verifikasi Publik
-                        </a> -->
+                <a href="{{ route('certificates.verify', $certificate->certificate_code) }}" target="_blank"
+                    class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors">
+                    Tautan Verifikasi Publik
+                </a>
                 <button onclick="window.print()"
                     class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 shadow-sm flex items-center gap-1.5">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
