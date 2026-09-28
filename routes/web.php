@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\CertificateSettingController;
 use App\Http\Controllers\Admin\CourseBuilderController;
 use App\Http\Controllers\Admin\FaqCategoryController as AdminFaqCategoryController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
+use App\Http\Controllers\Admin\IssuedCertificateController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CourseController;
@@ -97,6 +99,13 @@ Route::middleware('auth')->group(function () {
         // FAQs Management (CRUD)
         Route::resource('faqs', AdminFaqController::class)->except(['show']);
         Route::resource('faq-categories', AdminFaqCategoryController::class)->except(['show']);
+
+        // Certificate Signer Management (CRUD)
+        Route::resource('certificates', CertificateSettingController::class)->except(['show']);
+        Route::post('certificates/{certificate}/set-active', [CertificateSettingController::class, 'setActive'])->name('certificates.set-active');
+
+        // Issued Certificates Management (View & Change Certificate Numbers)
+        Route::resource('issued-certificates', IssuedCertificateController::class)->except(['create', 'store']);
     });
 
     // Superadmin - User Management & Audit Activity Logs

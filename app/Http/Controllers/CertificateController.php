@@ -60,7 +60,9 @@ class CertificateController extends Controller
             return response()->json($certificate);
         }
 
-        return view('certificates.show', compact('certificate'));
+        $signer = \App\Models\CertificateSetting::getActive();
+
+        return view('certificates.show', compact('certificate', 'signer'));
     }
 
     public function verify($code)
