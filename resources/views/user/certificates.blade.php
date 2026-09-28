@@ -1,9 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Sertifikat Kelulusan Saya - E-Belajar Kabupaten Bengkalis')
+@section('page_title', 'Sertifikat Saya')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<div class="space-y-6">
     <div class="mb-8">
         <h1 class="text-2xl font-black text-slate-900">Sertifikat Kelulusan Saya</h1>
         <p class="text-xs sm:text-sm text-slate-500 mt-1">Dokumen resmi kelulusan program pembelajaran mandiri Pemerintah Kabupaten Bengkalis</p>

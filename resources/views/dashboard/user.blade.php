@@ -1,12 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Dashboard Peserta - E-Belajar Kabupaten Bengkalis')
+@section('page_title', 'Dashboard Peserta')
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="space-y-8">
         <!-- Welcome Header -->
         <div
-            class="bg-gradient-to-r from-emerald-900 to-slate-900 text-white rounded-3xl p-8 mb-10 shadow-lg relative overflow-hidden">
+            class="bg-gradient-to-r from-emerald-900 to-slate-900 text-white rounded-3xl p-8 shadow-lg relative overflow-hidden">
             <div class="relative z-10">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
@@ -32,7 +33,7 @@
         </div>
 
         <!-- Stats Bar -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                 <span class="text-xs text-slate-500 font-semibold block mb-1">Pembelajaran Diikuti</span>
                 <div class="text-2xl font-black text-slate-800">{{ $stats['total_enrolled'] }}</div>
@@ -180,86 +181,108 @@
                     </div>
                 </form>
 
-                <!-- Courses Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <!-- Courses Grid (Tampilan Lebar) -->
+                <div class="space-y-4">
                     @forelse($courses as $course)
                         <div
-                            class="bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-xl transition-all overflow-hidden flex flex-col justify-between group">
-                            <div>
-                                <!-- Thumbnail -->
-                                <div
-                                    class="relative h-48 bg-gradient-to-br from-emerald-800 to-slate-900 flex items-center justify-center text-white overflow-hidden">
-                                    @if($course->thumbnail)
-                                        <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}"
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                                    @else
-                                        <div class="text-center p-6">
-                                            <div
-                                                class="w-12 h-12 mx-auto mb-2 rounded-xl bg-white/10 flex items-center justify-center text-amber-400">
-                                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
-                                                </svg>
-                                            </div>
-                                            <span
-                                                class="text-xs font-semibold text-emerald-300 uppercase tracking-wider">{{ $course->category->name ?? 'E-Belajar' }}</span>
-                                        </div>
-                                    @endif
-
-                                    @if($course->certificate_enabled)
+                            class="bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all overflow-hidden flex flex-col sm:flex-row group">
+                            <!-- Thumbnail -->
+                            <div
+                                class="relative w-full sm:w-56 md:w-64 shrink-0 bg-gradient-to-br from-emerald-800 to-slate-900 flex items-center justify-center text-white overflow-hidden min-h-[160px] sm:min-h-0">
+                                @if($course->thumbnail)
+                                    <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                @else
+                                    <div class="text-center p-4">
                                         <div
-                                            class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-amber-400 flex items-center gap-1 border border-amber-400/30">
-                                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clip-rule="evenodd" />
+                                            class="w-10 h-10 mx-auto mb-2 rounded-xl bg-white/10 flex items-center justify-center text-amber-400">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
                                             </svg>
-                                            <span>Sertifikat</span>
                                         </div>
-                                    @endif
-                                </div>
-
-                                <div class="p-6">
-                                    <div class="text-xs font-semibold text-emerald-700 mb-1">
-                                        {{ $course->category->name ?? 'Umum' }}
+                                        <span
+                                            class="text-[11px] font-semibold text-emerald-300 uppercase tracking-wider">{{ $course->category->name ?? 'E-Belajar' }}</span>
                                     </div>
-                                    <h3
-                                        class="text-base font-bold text-slate-900 leading-snug group-hover:text-emerald-700 transition-colors line-clamp-2">
-                                        <a
-                                            href="{{ route('courses.show', $course->slug ?? $course->id) }}">{{ $course->title }}</a>
-                                    </h3>
-                                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">
-                                        {{ Str::limit($course->description, 110) }}
-                                    </p>
-                                </div>
+                                @endif
+
+                                @if($course->certificate_enabled)
+                                    <div
+                                        class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-amber-400 flex items-center gap-1 border border-amber-400/30">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <span>Sertifikat</span>
+                                    </div>
+                                @endif
                             </div>
 
-                            <div class="px-6 pb-6 pt-0 space-y-4">
-                                <div
-                                    class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                                    <span>{{ $course->duration > 0 ? $course->duration . ' Menit' : 'Fleksibel' }}</span>
-                                    <span>{{ $course->lessons_count }} Pelajaran</span>
-                                    <span>{{ $course->enrollments_count }} Peserta</span>
+                            <!-- Content -->
+                            <div class="p-5 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                                        <span
+                                            class="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/60">
+                                            {{ $course->category->name ?? 'Umum' }}
+                                        </span>
+                                        <div class="flex items-center gap-2 text-xs text-slate-500 font-medium">
+                                            <span>{{ $course->duration > 0 ? $course->duration . ' Menit' : 'Fleksibel' }}</span>
+                                            <span>•</span>
+                                            <span>{{ $course->lessons_count }} Pelajaran</span>
+                                            <span>•</span>
+                                            <span>{{ $course->enrollments_count }} Peserta</span>
+                                        </div>
+                                    </div>
+
+                                    <h3
+                                        class="text-base font-bold text-slate-900 leading-snug group-hover:text-emerald-700 transition-colors mt-1">
+                                        <a href="{{ route('courses.show', $course->slug ?? $course->id) }}">
+                                            {{ $course->title }}
+                                        </a>
+                                    </h3>
+
+                                    <p class="text-xs text-slate-500 mt-2 line-clamp-2 leading-relaxed">
+                                        {{ Str::limit($course->description, 160) }}
+                                    </p>
                                 </div>
 
-                                @php
-                                    $isEnrolledInThis = $enrollments->pluck('course_id')->contains($course->id);
-                                @endphp
-                                @if($isEnrolledInThis)
-                                    <a href="{{ route('learning.course', $course->slug ?? $course->id) }}"
-                                        class="block w-full py-2.5 text-center text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-all shadow-xs">
-                                        Lanjutkan Belajar &rarr;
-                                    </a>
-                                @else
-                                    <a href="{{ route('courses.show', $course->slug ?? $course->id) }}"
-                                        class="block w-full py-2.5 text-center text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-all shadow-xs">
-                                        Lihat Silabus & Daftar &rarr;
-                                    </a>
-                                @endif
+                                <div
+                                    class="pt-3 mt-4 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                                    @php
+                                        $isEnrolledInThis = $enrollments->pluck('course_id')->contains($course->id);
+                                    @endphp
+
+                                    <div class="text-xs text-slate-500">
+                                        @if($isEnrolledInThis)
+                                            <span class="inline-flex items-center gap-1.5 text-emerald-700 font-semibold text-xs">
+                                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                                Sedang Diikuti
+                                            </span>
+                                        @else
+                                            <span class="text-slate-400 text-xs">Pelatihan Mandiri & Bersertifikat</span>
+                                        @endif
+                                    </div>
+
+                                    <div>
+                                        @if($isEnrolledInThis)
+                                            <a href="{{ route('learning.course', $course->slug ?? $course->id) }}"
+                                                class="inline-block px-5 py-2 text-center text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-all shadow-xs w-full sm:w-auto">
+                                                Lanjutkan Belajar &rarr;
+                                            </a>
+                                        @else
+                                            <a href="{{ route('courses.show', $course->slug ?? $course->id) }}"
+                                                class="inline-block px-5 py-2 text-center text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-all shadow-xs w-full sm:w-auto">
+                                                Lihat Silabus & Daftar &rarr;
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @empty
-                        <div class="col-span-full bg-white p-12 rounded-2xl border border-slate-200 text-center">
+                        <div class="bg-white p-12 rounded-2xl border border-slate-200 text-center">
                             <div
                                 class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
