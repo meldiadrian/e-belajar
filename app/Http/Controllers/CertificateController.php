@@ -37,6 +37,25 @@ class CertificateController extends Controller
             return redirect()->route('certificates.verify', $certificate->certificate_code);
         }
 
+        // Syarat nilai kelulusan kuis: pastikan seluruh kuis kursus telah lulus
+        $course = $certificate->course;
+        if ($course && !$currentUser->isAdmin()) {
+            $courseQuizIds = $course->quizzes()->where('is_published', true)->pluck('id');
+            if ($courseQuizIds->isNotEmpty()) {
+                $passedQuizzesCount = \App\Models\QuizAttempt::where('user_id', $certificate->user_id)
+                    ->whereIn('quiz_id', $courseQuizIds)
+                    ->where('status', 'submitted')
+                    ->where('passed', true)
+                    ->distinct('quiz_id')
+                    ->count('quiz_id');
+
+                if ($passedQuizzesCount < $courseQuizIds->count()) {
+                    return redirect()->route('learning.course', $course->slug ?? $course->id)
+                        ->with('error', 'Sertifikat belum dapat ditampilkan karena belum memenuhi syarat nilai kelulusan kuis.');
+                }
+            }
+        }
+
         if (request()->wantsJson()) {
             return response()->json($certificate);
         }

@@ -92,9 +92,6 @@ class AuthenticationTest extends TestCase
             'name' => 'Budi Pratama',
             'email' => 'budi@bengkalis.go.id',
             'nip' => '199201012020011002',
-            'nik' => '1403010101920002',
-            'tempat_lahir' => 'Bengkalis',
-            'agama' => 'Islam',
             'password' => 'password123',
             'password_confirmation' => 'password123',
             'institution' => 'Disdik Bengkalis',
@@ -105,9 +102,6 @@ class AuthenticationTest extends TestCase
         $this->assertDatabaseHas('users', [
             'email' => 'budi@bengkalis.go.id',
             'nip' => '199201012020011002',
-            'nik' => '1403010101920002',
-            'tempat_lahir' => 'Bengkalis',
-            'agama' => 'Islam',
             'role' => 'user',
         ]);
         $this->assertAuthenticated();
@@ -119,9 +113,6 @@ class AuthenticationTest extends TestCase
             'name' => 'Siti Aminah',
             'email' => 'siti@bengkalis.go.id',
             'nip' => '199503152021022005',
-            'nik' => '1403055503950001',
-            'tempat_lahir' => 'Mandau',
-            'agama' => 'Islam',
             'password' => 'password123',
             'password_confirmation' => 'password123',
         ]);

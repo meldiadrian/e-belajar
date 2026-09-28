@@ -7,8 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin Panel') - E-Belajar Kabupaten Bengkalis</title>
 
-    @include('partials.pwa-head')
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
@@ -276,7 +274,6 @@
     </div>
 
     @include('partials.sweetalert')
-    @include('partials.pwa-installer')
     @stack('scripts')
 </body>
 

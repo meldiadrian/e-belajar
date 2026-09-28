@@ -33,7 +33,7 @@
             </div>
             <div>
                 <span class="text-slate-400 block mb-0.5">Batas Percobaan</span>
-                <span class="font-bold text-slate-800 text-sm">{{ $quiz->max_attempts > 0 ? $quiz->max_attempts . 'x' : 'Bebas' }}</span>
+                <span class="font-bold text-slate-800 text-sm">{{ $quiz->max_attempts > 0 ? $quiz->max_attempts . 'x (Tanpa batas jika belum lulus)' : 'Tanpa Batas' }}</span>
             </div>
         </div>
 
@@ -50,8 +50,8 @@
                             </div>
                             <div class="flex items-center gap-3">
                                 <span class="font-bold text-sm">{{ $att->percentage }}%</span>
-                                <span class="px-2 py-0.5 rounded-full font-bold text-[10px] {{ ($att->passed || $att->status === 'submitted') ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800' }}">
-                                    {{ ($att->passed || $att->status === 'submitted') ? 'Lulus' : 'Sedang Dikerjakan' }}
+                                <span class="px-2 py-0.5 rounded-full font-bold text-[10px] {{ $att->status === 'in_progress' ? 'bg-amber-100 text-amber-800' : ($att->passed ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800') }}">
+                                    {{ $att->status === 'in_progress' ? 'Sedang Dikerjakan' : ($att->passed ? 'Lulus' : 'Tidak Lulus') }}
                                 </span>
                                 @if($att->status === 'submitted')
                                     <a href="{{ route('quiz.result', $att->id) }}" class="text-emerald-700 font-bold hover:underline">Lihat Hasil &rarr;</a>
@@ -77,7 +77,13 @@
                 <form action="{{ route('quiz.attempt', $quiz->id) }}" method="POST">
                     @csrf
                     <button type="submit" class="px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-md transition-colors">
-                        Mulai Kerjakan Kuis Sekarang &rarr;
+                        @if($hasPassed)
+                            Kerjakan Ulang Kuis &rarr;
+                        @elseif($userAttempts->count() > 0)
+                            Ulangi Kuis Sekarang (Tanpa Batas) &rarr;
+                        @else
+                            Mulai Kerjakan Kuis Sekarang &rarr;
+                        @endif
                     </button>
                 </form>
             @endif
