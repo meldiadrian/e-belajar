@@ -79,12 +79,8 @@
                     <div class="hidden md:flex items-center space-x-1 ml-8">
                         <a href="{{ route('home') }}"
                             class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('home') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-100' }}">Beranda</a>
-                        <!-- <a href="{{ route('courses.index') }}"
-                            class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('courses.*') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-100' }}">Lihat
-                            Katalog</a> -->
-                        <!-- <a href="{{ route('certificates.verify', 'SAMPLE') }}"
-                            class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-emerald-700 hover:bg-slate-100">Verifikasi
-                            Sertifikat</a> -->
+                        <a href="{{ route('courses.index') }}"
+                            class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('courses.*') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-100' }}">Katalog Pelatihan</a>
                         <a href="{{ route('faqs.index') }}"
                             class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('faqs.*') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-100' }}">Pertanyaan
                             Umum</a>
