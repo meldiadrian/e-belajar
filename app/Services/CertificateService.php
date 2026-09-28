@@ -38,20 +38,18 @@ class CertificateService
             throw new Exception('Sertifikat hanya dapat diterbitkan jika progres kursus telah mencapai 100%.');
         }
 
-        // Verify eligibility: all published quizzes in course must be completed (nilai diabaikan untuk penerbitan sertifikat)
+        // Verify eligibility: all published quizzes in course must be completed and passed (memenuhi syarat nilai)
         $courseQuizIds = $course->quizzes()->where('is_published', true)->pluck('id');
         if ($courseQuizIds->isNotEmpty()) {
-            $completedQuizzesCount = \App\Models\QuizAttempt::where('user_id', $user->id)
+            $passedQuizzesCount = \App\Models\QuizAttempt::where('user_id', $user->id)
                 ->whereIn('quiz_id', $courseQuizIds)
-                ->where(function ($q) {
-                    $q->where('status', 'submitted')
-                      ->orWhere('passed', true);
-                })
+                ->where('status', 'submitted')
+                ->where('passed', true)
                 ->distinct('quiz_id')
                 ->count('quiz_id');
 
-            if ($completedQuizzesCount < $courseQuizIds->count()) {
-                throw new Exception('Sertifikat hanya dapat diterbitkan setelah seluruh kuis evaluasi diselesaikan.');
+            if ($passedQuizzesCount < $courseQuizIds->count()) {
+                throw new Exception('Sertifikat hanya dapat diterbitkan jika seluruh kuis telah diselesaikan dan memenuhi syarat nilai kelulusan.');
             }
         }
 

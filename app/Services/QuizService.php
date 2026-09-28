@@ -29,7 +29,14 @@ class QuizService
             ->where('quiz_id', $quiz->id)
             ->count();
 
-        if ($quiz->max_attempts > 0 && $existingAttempts >= $quiz->max_attempts) {
+        // Cek apakah peserta sudah pernah lulus kuis ini
+        $hasPassed = QuizAttempt::where('user_id', $user->id)
+            ->where('quiz_id', $quiz->id)
+            ->where('passed', true)
+            ->exists();
+
+        // Jika belum lulus, peserta berhak mengulangi kuis/kelas tanpa batas percobaan
+        if ($hasPassed && $quiz->max_attempts > 0 && $existingAttempts >= $quiz->max_attempts) {
             throw new Exception("Batas maksimal percobaan ({$quiz->max_attempts}x) untuk kuis ini telah tercapai.");
         }
 
@@ -190,8 +197,9 @@ class QuizService
         }
 
         $percentage = $totalMax > 0 ? round(($totalEarned / $totalMax) * 100, 2) : 0.0;
-        // Nilai diabaikan: setiap kuis yang diselesaikan/dikirimkan dinyatakan lulus
-        $passed = true;
+        $passingScore = (float) ($quiz->passing_score ?? 0);
+        // Syarat nilai kelulusan kuis
+        $passed = ($percentage >= $passingScore);
 
         $attempt->update([
             'score' => $totalEarned,
@@ -204,44 +212,71 @@ class QuizService
 
         $user = $attempt->user;
 
-        ActivityLogService::log(
-            action: 'quiz_submitted',
-            entity: $quiz,
-            description: "Peserta {$user->name} menyelesaikan kuis '{$quiz->title}' dengan nilai {$totalEarned}/{$totalMax} ({$percentage}%) - LULUS",
-            user: $user
-        );
+        if ($passed) {
+            ActivityLogService::log(
+                action: 'quiz_submitted',
+                entity: $quiz,
+                description: "Peserta {$user->name} menyelesaikan kuis '{$quiz->title}' dengan nilai {$totalEarned}/{$totalMax} ({$percentage}%) - LULUS (Syarat: {$passingScore}%)",
+                user: $user
+            );
 
-        NotificationService::send(
-            user: $user,
-            title: 'Kuis Selesai & Lulus!',
-            message: "Nilai kuis '{$quiz->title}': {$percentage}% (Lulus).",
-            type: 'success',
-            data: ['quiz_id' => $quiz->id, 'attempt_id' => $attempt->id, 'score' => $percentage, 'passed' => true]
-        );
+            NotificationService::send(
+                user: $user,
+                title: 'Kuis Selesai & Lulus!',
+                message: "Selamat! Nilai kuis '{$quiz->title}': {$percentage}% (Lulus - Memenuhi syarat kelulusan {$passingScore}%).",
+                type: 'success',
+                data: ['quiz_id' => $quiz->id, 'attempt_id' => $attempt->id, 'score' => $percentage, 'passed' => true]
+            );
 
-        // If quiz belongs to a lesson, complete the lesson upon quiz submission (nilai diabaikan)
-        if ($quiz->lesson_id) {
-            $lesson = $quiz->lesson;
-            if ($lesson) {
-                $this->progressService->completeLesson($user, $lesson);
-            }
-        }
-
-        // Check if course progress is 100% and issue certificate upon quiz submission (nilai diabaikan)
-        $course = $quiz->course;
-        if ($course && $course->certificate_enabled) {
-            $cProgress = CourseProgress::where('user_id', $user->id)
-                ->where('course_id', $course->id)
-                ->first();
-
-            if ($cProgress && (float) $cProgress->progress_percentage >= 100.0) {
-                try {
-                    $certificateService = app(CertificateService::class);
-                    $certificateService->generateCertificate($user, $course);
-                } catch (\Throwable $e) {
-                    // Log or ignore
+            // Jika kuis terkait suatu lesson, selesaikan lesson jika lulus
+            if ($quiz->lesson_id) {
+                $lesson = $quiz->lesson;
+                if ($lesson) {
+                    $this->progressService->completeLesson($user, $lesson);
                 }
             }
+
+            // Periksa apakah progres kursus 100% dan seluruh kuis kursus telah lulus untuk penerbitan sertifikat
+            $course = $quiz->course;
+            if ($course && $course->certificate_enabled) {
+                $cProgress = CourseProgress::where('user_id', $user->id)
+                    ->where('course_id', $course->id)
+                    ->first();
+
+                $publishedQuizIds = $course->quizzes()->where('is_published', true)->pluck('id');
+                $passedQuizzesCount = QuizAttempt::where('user_id', $user->id)
+                    ->whereIn('quiz_id', $publishedQuizIds)
+                    ->where('status', 'submitted')
+                    ->where('passed', true)
+                    ->distinct('quiz_id')
+                    ->count('quiz_id');
+
+                $allQuizzesPassed = ($passedQuizzesCount >= $publishedQuizIds->count());
+
+                if ($cProgress && (float) $cProgress->progress_percentage >= 100.0 && $allQuizzesPassed) {
+                    try {
+                        $certificateService = app(CertificateService::class);
+                        $certificateService->generateCertificate($user, $course);
+                    } catch (\Throwable $e) {
+                        // Log or ignore
+                    }
+                }
+            }
+        } else {
+            ActivityLogService::log(
+                action: 'quiz_submitted',
+                entity: $quiz,
+                description: "Peserta {$user->name} menyelesaikan kuis '{$quiz->title}' dengan nilai {$totalEarned}/{$totalMax} ({$percentage}%) - TIDAK LULUS (Syarat: {$passingScore}%)",
+                user: $user
+            );
+
+            NotificationService::send(
+                user: $user,
+                title: 'Kuis Belum Memenuhi Syarat Kelulusan',
+                message: "Nilai kuis '{$quiz->title}': {$percentage}%. Belum memenuhi syarat minimal kelulusan ({$passingScore}%). Anda dapat mengulangi kuis tanpa batas percobaan.",
+                type: 'warning',
+                data: ['quiz_id' => $quiz->id, 'attempt_id' => $attempt->id, 'score' => $percentage, 'passed' => false]
+            );
         }
 
         return $attempt->fresh(['answers.question.options']);

@@ -225,7 +225,7 @@ class LearningProgressTest extends TestCase
         $resultResponse->assertSee('Buka Sertifikat');
     }
 
-    public function test_quiz_score_is_ignored_so_certificate_can_be_issued_even_with_low_or_failing_score(): void
+    public function test_quiz_score_must_meet_passing_score_for_certificate_and_allows_unlimited_retakes(): void
     {
         $user = User::factory()->create(['role' => 'user']);
         $category = Category::create(['name' => 'IT', 'slug' => 'it']);
@@ -267,6 +267,7 @@ class LearningProgressTest extends TestCase
             'lesson_id' => $lesson->id,
             'title' => 'Kuis Cloud',
             'passing_score' => 80,
+            'max_attempts' => 1, // Diberi batas 1 untuk menguji bahwa jika tidak lulus, dapat mengulangi tanpa batas
             'is_published' => true,
         ]);
 
@@ -275,6 +276,12 @@ class LearningProgressTest extends TestCase
             'question' => 'Soal Cloud',
             'type' => 'true_false',
             'points' => 100,
+        ]);
+
+        $optCorrect = \App\Models\QuestionOption::create([
+            'question_id' => $question->id,
+            'option_text' => 'Jawaban Benar',
+            'is_correct' => true,
         ]);
 
         $optWrong = \App\Models\QuestionOption::create([
@@ -286,24 +293,46 @@ class LearningProgressTest extends TestCase
         // Complete lesson
         $this->actingAs($user)->post(route('learning.lesson.complete', $lesson->id));
 
-        // Start and submit quiz with failing score (0%)
+        // Start attempt 1 and submit with failing score (0%)
         $quizService = app(\App\Services\QuizService::class);
-        $attempt = $quizService->startAttempt($user, $quiz);
-        $quizService->submitAttempt($attempt, [$question->id => $optWrong->id]);
+        $attempt1 = $quizService->startAttempt($user, $quiz);
+        $quizService->submitAttempt($attempt1, [$question->id => $optWrong->id]);
 
-        $attempt->refresh();
-        $this->assertTrue((bool) $attempt->passed);
-        $this->assertEquals(0, $attempt->score);
+        $attempt1->refresh();
+        $this->assertFalse((bool) $attempt1->passed);
+        $this->assertEquals(0, $attempt1->score);
 
-        // Certificate MUST STILL be generated because score is ignored for certificate issuance
+        // Certificate MUST NOT be generated because passing score requirement was not met
+        $this->assertDatabaseMissing('certificates', [
+            'user_id' => $user->id,
+            'course_id' => $course->id,
+        ]);
+
+        // Result page must NOT show certificate button
+        $resultResponse = $this->actingAs($user)->get(route('quiz.result', $attempt1->id));
+        $resultResponse->assertOk();
+        $resultResponse->assertSee('TIDAK LULUS');
+        $resultResponse->assertDontSee('Buka Lembar Sertifikat');
+
+        // Retake: Although max_attempts was 1, user can retake without limit because they haven't passed
+        $attempt2 = $quizService->startAttempt($user, $quiz);
+        $this->assertNotNull($attempt2);
+        $this->assertEquals(2, $attempt2->attempt_number);
+
+        // Submit attempt 2 with correct answer (100% >= 80%)
+        $quizService->submitAttempt($attempt2, [$question->id => $optCorrect->id]);
+        $attempt2->refresh();
+        $this->assertTrue((bool) $attempt2->passed);
+
+        // Certificate MUST now be generated
         $this->assertDatabaseHas('certificates', [
             'user_id' => $user->id,
             'course_id' => $course->id,
         ]);
 
-        // Result page displays Buka Sertifikat
-        $resultResponse = $this->actingAs($user)->get(route('quiz.result', $attempt->id));
-        $resultResponse->assertOk();
-        $resultResponse->assertSee('Buka Sertifikat');
+        // Result page displays Buka Lembar Sertifikat
+        $resultResponse2 = $this->actingAs($user)->get(route('quiz.result', $attempt2->id));
+        $resultResponse2->assertOk();
+        $resultResponse2->assertSee('Buka Lembar Sertifikat');
     }
 }

@@ -165,21 +165,19 @@ class ProgressService
                     'completed_at' => now(),
                 ]);
 
-            // Issue certificate if enabled and no pending unpassed quizzes
+            // Issue certificate if enabled and all quizzes have been passed (memenuhi syarat nilai)
             if ($course->certificate_enabled) {
                 $hasPendingQuizzes = false;
                 $publishedQuizIds = $course->quizzes()->where('is_published', true)->pluck('id');
                 if ($publishedQuizIds->isNotEmpty()) {
-                    $completedQuizzesCount = \App\Models\QuizAttempt::where('user_id', $user->id)
+                    $passedQuizzesCount = \App\Models\QuizAttempt::where('user_id', $user->id)
                         ->whereIn('quiz_id', $publishedQuizIds)
-                        ->where(function ($q) {
-                            $q->where('status', 'submitted')
-                              ->orWhere('passed', true);
-                        })
+                        ->where('status', 'submitted')
+                        ->where('passed', true)
                         ->distinct('quiz_id')
                         ->count('quiz_id');
 
-                    if ($completedQuizzesCount < $publishedQuizIds->count()) {
+                    if ($passedQuizzesCount < $publishedQuizIds->count()) {
                         $hasPendingQuizzes = true;
                     }
                 }

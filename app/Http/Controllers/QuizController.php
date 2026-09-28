@@ -29,16 +29,18 @@ class QuizController extends Controller
 
         $inProgressAttempt = $userAttempts->firstWhere('status', 'in_progress');
         $bestAttempt = $userAttempts->where('status', 'submitted')->sortByDesc('score')->first();
+        $hasPassed = $userAttempts->where('passed', true)->isNotEmpty();
 
         if (request()->wantsJson()) {
             return response()->json([
                 'quiz' => $quiz,
                 'attempts' => $userAttempts,
                 'best_attempt' => $bestAttempt,
+                'has_passed' => $hasPassed,
             ]);
         }
 
-        return view('quiz.show', compact('quiz', 'userAttempts', 'inProgressAttempt', 'bestAttempt'));
+        return view('quiz.show', compact('quiz', 'userAttempts', 'inProgressAttempt', 'bestAttempt', 'hasPassed'));
     }
 
     public function attempt(Request $request, $quizId)
@@ -119,8 +121,11 @@ class QuizController extends Controller
             ]);
         }
 
-        return redirect()->route('quiz.result', $attempt->id)
-            ->with('success', 'Kuis berhasil dikirim! Silakan lihat hasil evaluasi Anda.');
+        $msg = $completedAttempt->passed
+            ? 'Selamat! Anda telah lulus kuis evaluasi ini.'
+            : 'Kuis telah dikirim, namun nilai Anda belum memenuhi syarat kelulusan. Anda dapat mengulanginya tanpa batas.';
+
+        return redirect()->route('quiz.result', $attempt->id)->with('info', $msg);
     }
 
     public function result($attemptId)
@@ -140,9 +145,29 @@ class QuizController extends Controller
             return response()->json($attempt);
         }
 
-        $certificate = \App\Models\Certificate::where('user_id', $attempt->user_id)
-            ->where('course_id', $attempt->quiz->course_id)
-            ->first();
+        // Sertifikat hanya ditampilkan jika percobaan ini lulus dan seluruh kuis kursus telah memenuhi syarat nilai kelulusan
+        $certificate = null;
+        if ($attempt->passed && $attempt->quiz->course) {
+            $course = $attempt->quiz->course;
+            $courseQuizIds = $course->quizzes()->where('is_published', true)->pluck('id');
+            $allPassed = true;
+            if ($courseQuizIds->isNotEmpty()) {
+                $passedCount = QuizAttempt::where('user_id', $attempt->user_id)
+                    ->whereIn('quiz_id', $courseQuizIds)
+                    ->where('status', 'submitted')
+                    ->where('passed', true)
+                    ->distinct('quiz_id')
+                    ->count('quiz_id');
+
+                $allPassed = ($passedCount >= $courseQuizIds->count());
+            }
+
+            if ($allPassed) {
+                $certificate = \App\Models\Certificate::where('user_id', $attempt->user_id)
+                    ->where('course_id', $course->id)
+                    ->first();
+            }
+        }
 
         return view('quiz.result', compact('attempt', 'certificate'));
     }

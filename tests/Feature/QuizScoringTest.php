@@ -145,6 +145,6 @@ class QuizScoringTest extends TestCase
 
         $this->assertEquals(50.0, (float) $resultFailed->score);
         $this->assertEquals(50.0, (float) $resultFailed->percentage);
-        $this->assertTrue((bool) $resultFailed->passed);
+        $this->assertFalse((bool) $resultFailed->passed);
     }
 }

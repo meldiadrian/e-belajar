@@ -119,23 +119,21 @@ class LearningController extends Controller
             ? $allLessons[$currentIndex + 1]
             : null;
 
-        // Check course and lesson quizzes (nilai diabaikan untuk syarat kuis selesai)
+        // Check course and lesson quizzes (harus memenuhi syarat nilai kelulusan)
         $publishedQuizIds = $course->quizzes()->where('is_published', true)->pluck('id');
         $courseQuiz = $lesson->quizzes()->where('is_published', true)->first()
             ?? $course->quizzes()->where('is_published', true)->first();
 
         $courseQuizPassed = false;
         if ($publishedQuizIds->isNotEmpty()) {
-            $completedQuizzesCount = QuizAttempt::where('user_id', $user->id)
+            $passedQuizzesCount = QuizAttempt::where('user_id', $user->id)
                 ->whereIn('quiz_id', $publishedQuizIds)
-                ->where(function ($q) {
-                    $q->where('status', 'submitted')
-                      ->orWhere('passed', true);
-                })
+                ->where('status', 'submitted')
+                ->where('passed', true)
                 ->distinct('quiz_id')
                 ->count('quiz_id');
 
-            $courseQuizPassed = ($completedQuizzesCount >= $publishedQuizIds->count());
+            $courseQuizPassed = ($passedQuizzesCount >= $publishedQuizIds->count());
         } else {
             $courseQuizPassed = true;
         }
@@ -145,16 +143,18 @@ class LearningController extends Controller
         if ($lessonQuiz) {
             $lessonQuizPassed = QuizAttempt::where('user_id', $user->id)
                 ->where('quiz_id', $lessonQuiz->id)
-                ->where(function ($q) {
-                    $q->where('status', 'submitted')
-                      ->orWhere('passed', true);
-                })
+                ->where('status', 'submitted')
+                ->where('passed', true)
                 ->exists();
         }
 
-        $certificate = Certificate::where('user_id', $user->id)
-            ->where('course_id', $course->id)
-            ->first();
+        // Sertifikat hanya ditampilkan jika seluruh materi dan kuis evaluasi memenuhi syarat kelulusan
+        $certificate = null;
+        if ($courseQuizPassed && (($courseProgress->progress_percentage ?? 0) >= 100)) {
+            $certificate = Certificate::where('user_id', $user->id)
+                ->where('course_id', $course->id)
+                ->first();
+        }
 
         return view('learning.player', compact(
             'course',
