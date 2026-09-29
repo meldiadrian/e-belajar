@@ -19,14 +19,14 @@
     .animate-pulse-slow {
         animation: pulseSlow 4s ease-in-out infinite;
     }
-    /* INAgov / DTS Deep GovTech Mesh Gradient */
+    /* E-Belajar New Color Palette Mesh Gradient */
     .govtech-hero {
-        background-color: #061826;
+        background-color: #2F3375; /* Darker shade of #4D52B4 for contrast */
         background-image: 
-            radial-gradient(at 0% 0%, rgba(4, 120, 87, 0.45) 0px, transparent 50%),
-            radial-gradient(at 100% 0%, rgba(13, 148, 136, 0.35) 0px, transparent 50%),
-            radial-gradient(at 50% 100%, rgba(245, 158, 11, 0.12) 0px, transparent 50%),
-            radial-gradient(at 100% 100%, rgba(6, 78, 59, 0.55) 0px, transparent 50%);
+            radial-gradient(at 0% 0%, #4D52B4 0px, transparent 60%),
+            radial-gradient(at 100% 0%, #4E9CE8 0px, transparent 60%),
+            radial-gradient(at 50% 100%, #70D6C5 0px, transparent 60%),
+            radial-gradient(at 100% 100%, #2F3375 0px, transparent 60%);
     }
     .govtech-card {
         background: rgba(15, 23, 42, 0.72);
@@ -54,26 +54,26 @@
     <!-- ==================== HERO SECTION (INAgov / DTS STYLE) ==================== -->
     <section class="relative overflow-hidden govtech-hero text-white pt-10 pb-20 lg:pt-14 lg:pb-28">
         <!-- Ambient Cyber Orbs -->
-        <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-emerald-500/20 blur-3xl pointer-events-none animate-pulse-slow"></div>
-        <div class="absolute top-1/2 -left-32 w-80 h-80 rounded-full bg-teal-500/15 blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 right-1/4 w-80 h-80 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[#4E9CE8]/20 blur-3xl pointer-events-none animate-pulse-slow"></div>
+        <div class="absolute top-1/2 -left-32 w-80 h-80 rounded-full bg-[#70D6C5]/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 right-1/4 w-80 h-80 rounded-full bg-[#CAE5BC]/15 blur-3xl pointer-events-none"></div>
 
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 <!-- Left Column: Copy, Search & Actions -->
                 <div class="lg:col-span-7 space-y-6">
                     <!-- Institutional Breadcrumb Badge -->
-                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-900/80 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-semibold backdrop-blur-md shadow-inner">
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#4D52B4]/60 border border-[#4E9CE8]/40 text-[#CAE5BC] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-inner">
                         <span class="relative flex h-2.5 w-2.5">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#70D6C5] opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#70D6C5]"></span>
                         </span>
                         <span>Platform Pengembangan Kompetensi ASN • Kab. Bengkalis</span>
                     </div>
 
                     <!-- Main Heading -->
                     <h1 class="text-3xl sm:text-5xl lg:text-5.5xl font-extrabold tracking-tight text-white leading-tight">
-                        Akselerasi Kompetensi & Transformasi Digital ASN <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-amber-300">Bengkalis Bermasa</span>
+                        Akselerasi Kompetensi & Transformasi Digital ASN <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#70D6C5] via-[#4E9CE8] to-white">Bengkalis Bermasa</span>
                     </h1>
 
                     <!-- Lead Description -->
@@ -93,7 +93,7 @@
                                 </svg>
                             </div>
                             <button type="submit"
-                                class="px-5 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-md shadow-emerald-700/30 text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
+                                class="px-5 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-[#4E9CE8] to-[#4D52B4] hover:from-[#70D6C5] hover:to-[#4E9CE8] shadow-md shadow-[#4D52B4]/30 text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
                                 <span>Cari Modul</span>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -114,7 +114,7 @@
                     <!-- Action Buttons -->
                     <div class="flex flex-wrap items-center gap-3.5 pt-1">
                         <a href="{{ route('courses.index') }}"
-                            class="px-5 py-3 rounded-xl font-bold text-white bg-emerald-700 hover:bg-emerald-600 shadow-lg shadow-emerald-900/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 text-sm">
+                            class="px-5 py-3 rounded-xl font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] shadow-lg shadow-[#4D52B4]/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 text-sm">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                             </svg>
@@ -163,7 +163,7 @@
                         </div>
 
                         <!-- 20 JP Target Indicator Card -->
-                        <div class="rounded-2xl bg-gradient-to-br from-emerald-950/90 via-slate-900 to-slate-950 p-4 sm:p-5 border border-slate-700/80 mb-4">
+                        <div class="rounded-2xl bg-gradient-to-br from-[#4D52B4]/90 via-[#2F3375] to-slate-900 p-4 sm:p-5 border border-slate-700/80 mb-4 shadow-xl">
                             <div class="flex items-center justify-between text-xs font-semibold text-slate-300 mb-2">
                                 <span class="flex items-center gap-1.5 text-amber-400 font-bold">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -178,7 +178,7 @@
                             </p>
                             <!-- Mini Progress Visual -->
                             <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden mb-1">
-                                <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-2 rounded-full w-4/5 animate-pulse"></div>
+                                <div class="bg-gradient-to-r from-[#4E9CE8] to-[#70D6C5] h-2 rounded-full w-4/5 animate-pulse"></div>
                             </div>
                             <div class="flex justify-between text-[10px] text-slate-400">
                                 <span>Microlearning Asinkronus</span>
@@ -252,81 +252,12 @@
         </div>
     </div>
 
-    <!-- ==================== INDIKATOR KINERJA BANGKOM ASN (STATS BAR) ==================== -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-20">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <!-- Stat 1: Total ASN Terdaftar -->
-            <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex items-center gap-4">
-                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center flex-shrink-0 border border-emerald-100">
-                    <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                </div>
-                <div>
-                    <div class="text-2xl sm:text-3xl font-black text-slate-900 leading-none">
-                        {{ number_format($stats['total_students']) }}
-                    </div>
-                    <div class="text-xs sm:text-sm font-semibold text-slate-600 mt-1">ASN & Aparatur Terdaftar</div>
-                </div>
-            </div>
-
-            <!-- Stat 2: Total Kursus Aktif -->
-            <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex items-center gap-4">
-                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-teal-50 text-teal-700 flex items-center justify-center flex-shrink-0 border border-teal-100">
-                    <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                    </svg>
-                </div>
-                <div>
-                    <div class="text-2xl sm:text-3xl font-black text-slate-900 leading-none">
-                        {{ number_format($stats['total_courses']) }}
-                    </div>
-                    <div class="text-xs sm:text-sm font-semibold text-slate-600 mt-1">Modul Kompetensi Aktif</div>
-                </div>
-            </div>
-
-            <!-- Stat 3: Total Enrollments -->
-            <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex items-center gap-4">
-                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center flex-shrink-0 border border-blue-100">
-                    <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                    </svg>
-                </div>
-                <div>
-                    <div class="text-2xl sm:text-3xl font-black text-slate-900 leading-none">
-                        {{ number_format($stats['total_enrollments']) }}
-                    </div>
-                    <div class="text-xs sm:text-sm font-semibold text-slate-600 mt-1">Aktivitas Belajar (Enrollment)</div>
-                </div>
-            </div>
-
-            <!-- Stat 4: Total Sertifikat -->
-            <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex items-center gap-4">
-                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center flex-shrink-0 border border-amber-100">
-                    <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 013.138-3.138z" />
-                    </svg>
-                </div>
-                <div>
-                    <div class="text-2xl sm:text-3xl font-black text-slate-900 leading-none">
-                        {{ number_format($stats['total_certificates']) }}
-                    </div>
-                    <div class="text-xs sm:text-sm font-semibold text-slate-600 mt-1">E-Sertifikat Resmi Terbit</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ==================== JALUR AKADEMI KOMPETENSI ASN (DTS ACADEMY STYLE) ==================== -->
     <section class="bg-slate-100/70 border-y border-slate-200/80 py-16 sm:py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10">
                 <div>
-                    <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                    <div class="inline-flex items-center gap-2 text-xs font-bold text-[#4D52B4] bg-[#4E9CE8]/15 border border-[#4E9CE8]/30 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
                         <span>Pilar Akademi Pembelajaran ASN</span>
                     </div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
@@ -337,7 +268,7 @@
                     </p>
                 </div>
                 <a href="{{ route('courses.index') }}"
-                    class="text-sm font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5 transition-colors group">
+                    class="text-sm font-bold text-[#4D52B4] hover:text-[#4E9CE8] flex items-center gap-1.5 transition-colors group">
                     <span>Lihat Semua Modul Pelatihan</span>
                     <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -352,8 +283,8 @@
                             'title' => 'Transformasi Digital & SPBE',
                             'badge' => 'Digital Academy',
                             'icon' => 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
-                            'bg' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
-                            'badgeClass' => 'bg-emerald-100 text-emerald-800'
+                            'bg' => 'bg-[#70D6C5]/20 text-[#2F3375] border-[#70D6C5]/40',
+                            'badgeClass' => 'bg-[#70D6C5]/30 text-[#2F3375]'
                         ],
                         'Administrasi' => [
                             'title' => 'Tata Kelola Pemerintahan',
@@ -392,12 +323,12 @@
                             'title' => $category->name,
                             'badge' => 'Akademi ASN',
                             'icon' => 'M13 10V3L4 14h7v7l9-11h-7z',
-                            'bg' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
-                            'badgeClass' => 'bg-emerald-100 text-emerald-800'
+                            'bg' => 'bg-[#4E9CE8]/15 text-[#4D52B4] border-[#4E9CE8]/30',
+                            'badgeClass' => 'bg-[#4E9CE8]/20 text-[#4D52B4]'
                         ];
                     @endphp
                     <a href="{{ route('courses.index', ['category' => $category->slug]) }}"
-                        class="group bg-white p-5 rounded-2xl border border-slate-200/90 hover:border-emerald-500 shadow-xs hover:shadow-lg card-hover-lift flex flex-col justify-between transition-all">
+                        class="group bg-white p-5 rounded-2xl border border-slate-200/90 hover:border-[#4E9CE8] shadow-xs hover:shadow-lg card-hover-lift flex flex-col justify-between transition-all">
                         <div>
                             <div class="flex items-center justify-between mb-4">
                                 <div class="w-12 h-12 rounded-xl {{ $preset['bg'] }} flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -409,7 +340,7 @@
                                     {{ $preset['badge'] }}
                                 </span>
                             </div>
-                            <h3 class="font-bold text-slate-800 text-sm group-hover:text-emerald-700 transition-colors leading-snug mb-1">
+                            <h3 class="font-bold text-slate-800 text-sm group-hover:text-[#4D52B4] transition-colors leading-snug mb-1">
                                 {{ $preset['title'] }}
                             </h3>
                             <p class="text-xs text-slate-500 line-clamp-2">
@@ -417,8 +348,8 @@
                             </p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                            <span class="font-bold text-emerald-700">{{ $category->courses_count }} Modul Kursus</span>
-                            <span class="text-slate-400 group-hover:text-emerald-600 transition-colors">&rarr;</span>
+                            <span class="font-bold text-[#4D52B4]">{{ $category->courses_count }} Modul Kursus</span>
+                            <span class="text-slate-400 group-hover:text-[#4E9CE8] transition-colors">&rarr;</span>
                         </div>
                     </a>
                 @empty
@@ -494,11 +425,11 @@
                     <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
                         <div>
                             <div class="flex items-center gap-2 mb-2">
-                                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                                <span class="text-[11px] font-bold text-[#4D52B4] bg-[#4E9CE8]/15 px-2 py-0.5 rounded">
                                     Government Transformation
                                 </span>
                             </div>
-                            <h3 class="text-base sm:text-lg font-bold text-slate-900 leading-snug group-hover:text-emerald-700 transition-colors line-clamp-2">
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900 leading-snug group-hover:text-[#4E9CE8] transition-colors line-clamp-2">
                                 <a href="{{ route('courses.show', $course->slug ?? $course->id) }}">
                                     {{ $course->title }}
                                 </a>
@@ -532,16 +463,23 @@
                             </div>
 
                             <!-- Button Action -->
-                            <a href="{{ route('courses.show', $course->slug ?? $course->id) }}"
-                                class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-emerald-800 bg-emerald-50 hover:bg-emerald-700 hover:text-white transition-all flex items-center justify-center gap-1.5 group-hover:bg-emerald-700 group-hover:text-white">
-                                <span>Ikuti Pelatihan &rarr;</span>
-                            </a>
+                            @auth
+                                <a href="{{ route('courses.show', $course->slug ?? $course->id) }}"
+                                    class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-white bg-[#4D52B4] hover:bg-[#4E9CE8] shadow-md shadow-[#4D52B4]/30 transition-all flex items-center justify-center gap-1.5 group-hover:bg-[#4E9CE8]">
+                                    <span>Mulai Belajar &rarr;</span>
+                                </a>
+                            @else
+                                <a href="{{ route('courses.show', $course->slug ?? $course->id) }}"
+                                    class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-[#4D52B4] bg-[#4E9CE8]/15 hover:bg-[#4D52B4] hover:text-white transition-all flex items-center justify-center gap-1.5 group-hover:bg-[#4D52B4] group-hover:text-white">
+                                    <span>Lihat Detail Modul &rarr;</span>
+                                </a>
+                            @endauth
                         </div>
                     </div>
                 </div>
             @empty
                 <div class="col-span-full bg-white rounded-2xl p-12 text-center border border-slate-200">
-                    <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                    <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-[#4E9CE8]/15 text-[#4D52B4] flex items-center justify-center">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
@@ -771,92 +709,53 @@
         </div>
 
         <div class="space-y-4">
-            <!-- FAQ 1 -->
-            <details class="group bg-white rounded-2xl border border-slate-200/90 shadow-xs p-5 [&_summary::-webkit-details-marker]:none">
-                <summary class="flex items-center justify-between cursor-pointer font-bold text-slate-900 text-sm sm:text-base list-none">
-                    <span>Apakah sertifikat pelatihan di E-Belajar diakui untuk pemenuhan 20 JP per tahun?</span>
-                    <span class="faq-chevron ml-4 flex-shrink-0 transition-transform duration-200 text-slate-400 group-hover:text-emerald-700">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </span>
-                </summary>
-                <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
-                    Ya, diakui secara resmi. Sertifikat kelulusan memuat materi kompetensi, estimasi Jam Pelajaran (JP), nomor registrasi unik, dan kode QR resmi yang dapat digunakan sebagai bukti dukung pengembangan kompetensi pada e-Kinerja ASN dan diverifikasi oleh BKPPD Kabupaten Bengkalis.
+            @forelse($faqs as $faq)
+                <details class="group bg-white rounded-2xl border border-slate-200/90 shadow-xs p-5 [&_summary::-webkit-details-marker]:none">
+                    <summary class="flex items-center justify-between cursor-pointer font-bold text-slate-900 text-sm sm:text-base list-none">
+                        <div class="flex flex-col items-start gap-1.5">
+                            @if($faq->category_name)
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-[#4E9CE8]/10 text-[#4D52B4] border border-[#4E9CE8]/20 flex-shrink-0 w-fit">
+                                    {{ $faq->category_name }}
+                                </span>
+                            @endif
+                            <span class="mt-0.5">{{ $faq->question }}</span>
+                        </div>
+                        <span class="faq-chevron ml-4 flex-shrink-0 transition-transform duration-200 text-slate-400 group-hover:text-[#4E9CE8]">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                        {!! nl2br(e($faq->answer)) !!}
+                    </div>
+                </details>
+            @empty
+                <div class="bg-white rounded-2xl p-8 text-center text-slate-500 border border-slate-200">
+                    <p class="text-sm">Belum ada pertanyaan umum yang diterbitkan.</p>
                 </div>
-            </details>
+            @endforelse
+        </div>
 
-            <!-- FAQ 2 -->
-            <details class="group bg-white rounded-2xl border border-slate-200/90 shadow-xs p-5 [&_summary::-webkit-details-marker]:none">
-                <summary class="flex items-center justify-between cursor-pointer font-bold text-slate-900 text-sm sm:text-base list-none">
-                    <span>Siapa saja pegawai yang berhak mengikuti program di E-Belajar Bengkalis?</span>
-                    <span class="faq-chevron ml-4 flex-shrink-0 transition-transform duration-200 text-slate-400 group-hover:text-emerald-700">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </span>
-                </summary>
-                <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
-                    Platform ini ditujukan bagi seluruh Pegawai Negeri Sipil (PNS), Pegawai Pemerintah dengan Perjanjian Kerja (PPPK), tenaga honorer, dan aparatur pemerintah desa di seluruh wilayah Kabupaten Bengkalis.
-                </div>
-            </details>
-
-            <!-- FAQ 3 -->
-            <details class="group bg-white rounded-2xl border border-slate-200/90 shadow-xs p-5 [&_summary::-webkit-details-marker]:none">
-                <summary class="flex items-center justify-between cursor-pointer font-bold text-slate-900 text-sm sm:text-base list-none">
-                    <span>Apakah pembelajaran terikat jam kerja kantor atau dapat dilakukan mandiri?</span>
-                    <span class="faq-chevron ml-4 flex-shrink-0 transition-transform duration-200 text-slate-400 group-hover:text-emerald-700">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </span>
-                </summary>
-                <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
-                    E-Belajar dirancang dengan metode <em>asynchronous microlearning</em>. Anda dapat mengakses materi video dan modul secara mandiri kapan saja (24 jam sehari, 7 hari seminggu) melalui smartphone, tablet, maupun komputer dinas.
-                </div>
-            </details>
-
-            <!-- FAQ 4 -->
-            <details class="group bg-white rounded-2xl border border-slate-200/90 shadow-xs p-5 [&_summary::-webkit-details-marker]:none">
-                <summary class="flex items-center justify-between cursor-pointer font-bold text-slate-900 text-sm sm:text-base list-none">
-                    <span>Berapa batas nilai kelulusan (passing grade) kuis untuk mendapatkan sertifikat?</span>
-                    <span class="faq-chevron ml-4 flex-shrink-0 transition-transform duration-200 text-slate-400 group-hover:text-emerald-700">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </span>
-                </summary>
-                <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
-                    Passing grade kelulusan disesuaikan dengan standar kurikulum masing-masing modul (umumnya minimal 70% atau 80%). Apabila belum mencapai nilai kelulusan, Anda dapat mengulang kuis evaluasi sesuai dengan kebijakan kursus.
-                </div>
-            </details>
-
-            <!-- FAQ 5 -->
-            <details class="group bg-white rounded-2xl border border-slate-200/90 shadow-xs p-5 [&_summary::-webkit-details-marker]:none">
-                <summary class="flex items-center justify-between cursor-pointer font-bold text-slate-900 text-sm sm:text-base list-none">
-                    <span>Bagaimana jika akun ASN mengalami kendala login atau lupa kata sandi?</span>
-                    <span class="faq-chevron ml-4 flex-shrink-0 transition-transform duration-200 text-slate-400 group-hover:text-emerald-700">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </span>
-                </summary>
-                <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
-                    Anda dapat melakukan reset kata sandi mandiri atau menghubungi Tim Layanan Helpdesk Diskominfotik Kabupaten Bengkalis melalui email resmi <strong>diskominfotik@bengkaliskab.go.id</strong> pada jam kerja dinas.
-                </div>
-            </details>
+        <div class="text-center mt-8">
+            <a href="{{ route('faqs.index') }}" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-800 hover:underline">
+                <span>Lihat Seluruh Pertanyaan & Jawaban di Pusat Bantuan</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
         </div>
     </section>
 
     <!-- ==================== CALL TO ACTION BANNER (SMART ASN BENGKALIS BERMASA) ==================== -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
-        <div class="relative rounded-3xl bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 p-8 sm:p-14 text-white overflow-hidden shadow-2xl text-center border border-emerald-500/30">
+        <div class="relative rounded-3xl bg-gradient-to-r from-[#2F3375] via-[#4D52B4] to-[#4E9CE8] p-8 sm:p-14 text-white overflow-hidden shadow-2xl text-center border border-[#4E9CE8]/30">
             <!-- Decorative Cyber Ambient -->
             <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
-            <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-amber-400/20 blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-[#CAE5BC]/20 blur-2xl pointer-events-none"></div>
 
             <div class="relative max-w-3xl mx-auto space-y-6">
-                <span class="inline-block px-3.5 py-1 rounded-full bg-white/15 border border-white/20 text-emerald-200 text-xs font-bold tracking-wider uppercase backdrop-blur-xs">
+                <span class="inline-block px-3.5 py-1 rounded-full bg-white/15 border border-white/20 text-[#CAE5BC] text-xs font-bold tracking-wider uppercase backdrop-blur-xs">
                     Wujudkan Birokrasi Berkelas Dunia
                 </span>
 
@@ -864,14 +763,14 @@
                     Tingkatkan Kapasitas Smart ASN Anda Hari Ini
                 </h2>
 
-                <p class="text-sm sm:text-base text-emerald-100 leading-relaxed max-w-xl mx-auto">
+                <p class="text-sm sm:text-base text-white/90 leading-relaxed max-w-xl mx-auto">
                     Bergabung bersama ribuan ASN Pemerintah Kabupaten Bengkalis yang aktif meningkatkan kompetensi mandiri demi pelayanan publik yang bermarwah, maju, dan sejahtera.
                 </p>
 
                 <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
                     @auth
                         <a href="{{ route('dashboard') }}"
-                            class="px-8 py-3.5 rounded-xl font-bold text-emerald-950 bg-amber-400 hover:bg-amber-300 shadow-lg shadow-black/20 hover:scale-105 active:scale-95 transition-all text-sm sm:text-base flex items-center gap-2">
+                            class="px-8 py-3.5 rounded-xl font-bold text-[#2F3375] bg-[#70D6C5] hover:bg-white shadow-lg shadow-black/20 hover:scale-105 active:scale-95 transition-all text-sm sm:text-base flex items-center gap-2">
                             <span>Buka Dashboard ASN</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -879,7 +778,7 @@
                         </a>
                     @else
                         <a href="{{ route('register') }}"
-                            class="px-8 py-3.5 rounded-xl font-bold text-emerald-950 bg-amber-400 hover:bg-amber-300 shadow-lg shadow-black/20 hover:scale-105 active:scale-95 transition-all text-sm sm:text-base flex items-center gap-2">
+                            class="px-8 py-3.5 rounded-xl font-bold text-[#2F3375] bg-[#70D6C5] hover:bg-white shadow-lg shadow-black/20 hover:scale-105 active:scale-95 transition-all text-sm sm:text-base flex items-center gap-2">
                             <span>Daftar / Aktivasi Akun ASN</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -888,7 +787,7 @@
                     @endauth
 
                     <a href="{{ route('courses.index') }}"
-                        class="px-6 py-3.5 rounded-xl font-semibold text-white bg-emerald-950/70 hover:bg-emerald-950 border border-white/20 backdrop-blur-md transition-all text-sm sm:text-base">
+                        class="px-6 py-3.5 rounded-xl font-semibold text-white bg-[#2F3375]/70 hover:bg-[#2F3375] border border-white/20 backdrop-blur-md transition-all text-sm sm:text-base">
                         Katalog Modul Kompetensi
                     </a>
                 </div>

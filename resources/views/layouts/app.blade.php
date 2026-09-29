@@ -68,9 +68,9 @@
                         <img src="{{ asset('storage/logo.png') }}" alt="Logo Kabupaten Bengkalis"
                             class="w-10 h-10 object-contain group-hover:scale-105 transition-transform">
                         <div>
-                            <div class="font-extrabold text-lg text-emerald-900 leading-tight tracking-tight">E-Belajar
+                            <div class="font-extrabold text-lg text-[#2F3375] leading-tight tracking-tight">E-Belajar
                             </div>
-                            <div class="text-[11px] font-semibold text-emerald-700 uppercase tracking-widest">Kab.
+                            <div class="text-[11px] font-semibold text-[#4D52B4] uppercase tracking-widest">Kab.
                                 Bengkalis</div>
                         </div>
                     </a>
@@ -78,11 +78,11 @@
                     <!-- Nav Links Desktop -->
                     <div class="hidden md:flex items-center space-x-1 ml-8">
                         <a href="{{ route('home') }}"
-                            class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('home') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-100' }}">Beranda</a>
+                            class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('home') ? 'text-[#4D52B4] bg-[#4E9CE8]/15 font-semibold' : 'text-slate-600 hover:text-[#4E9CE8] hover:bg-slate-100' }}">Beranda</a>
                         <a href="{{ route('courses.index') }}"
-                            class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('courses.*') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-100' }}">Katalog Pelatihan</a>
+                            class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('courses.*') ? 'text-[#4D52B4] bg-[#4E9CE8]/15 font-semibold' : 'text-slate-600 hover:text-[#4E9CE8] hover:bg-slate-100' }}">Katalog Pelatihan</a>
                         <a href="{{ route('faqs.index') }}"
-                            class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('faqs.*') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-100' }}">Pertanyaan
+                            class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('faqs.*') ? 'text-[#4D52B4] bg-[#4E9CE8]/15 font-semibold' : 'text-slate-600 hover:text-[#4E9CE8] hover:bg-slate-100' }}">Pertanyaan
                             Umum</a>
                     </div>
                 </div>
@@ -92,8 +92,8 @@
                     @auth
                         <!-- Dashboard Button -->
                         <a href="{{ route('dashboard') }}"
-                            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-sm font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition-colors">
-                            <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-sm font-semibold bg-[#4E9CE8]/15 text-[#4D52B4] border border-[#4E9CE8]/30 hover:bg-[#4E9CE8]/25 transition-colors">
+                            <svg class="w-4 h-4 text-[#4D52B4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                             </svg>
@@ -130,15 +130,15 @@
                                 <div class="relative shrink-0">
                                     @if(Auth::user()->avatar)
                                         <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}"
-                                            class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover ring-2 ring-emerald-600/20 group-hover:ring-emerald-500 shadow-xs transition-all">
+                                            class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover ring-2 ring-[#4E9CE8]/50 group-hover:ring-[#4D52B4] shadow-xs transition-all">
                                     @else
                                         <div
-                                            class="w-8 h-8 sm:w-9 sm:h-9 rounded-full gradient-bengkalis text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-600/20 group-hover:ring-emerald-500 shadow-xs transition-all">
+                                            class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-r from-[#2F3375] to-[#4D52B4] text-white font-bold text-xs flex items-center justify-center ring-2 ring-[#4E9CE8]/50 group-hover:ring-[#4D52B4] shadow-xs transition-all">
                                             {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
                                         </div>
                                     @endif
                                     <span
-                                        class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"
+                                        class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#70D6C5] ring-2 ring-white"
                                         title="Online"></span>
                                 </div>
                             </a>
@@ -162,9 +162,9 @@
                         </div>
                     @else
                         <a href="{{ route('login') }}"
-                            class="px-4 py-2 text-sm font-semibold text-emerald-800 hover:text-emerald-950 transition-colors">Masuk</a>
+                            class="px-4 py-2 text-sm font-semibold text-[#4D52B4] hover:text-[#2F3375] transition-colors">Masuk</a>
                         <a href="{{ route('register') }}"
-                            class="px-4 py-2 text-sm font-semibold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl shadow-xs transition-all hover:shadow-md">Daftar
+                            class="px-4 py-2 text-sm font-semibold text-white bg-[#4D52B4] hover:bg-[#2F3375] rounded-xl shadow-xs transition-all hover:shadow-md">Daftar
                             Sekarang</a>
                     @endauth
                 </div>
@@ -230,7 +230,7 @@
                         Platform peningkatan kompetensi aparatur dan masyarakat berbasis digital yang transparan,
                         terukur, dan bersertifikasi resmi Pemerintah Kabupaten Bengkalis.
                     </p>
-                    <div class="mt-4 text-xs text-emerald-400 font-medium">
+                    <div class="mt-4 text-xs text-[#70D6C5] font-medium">
                         Dikelola oleh Dinas Komunikasi, Informatika dan Statistik Kabupaten Bengkalis.
                     </div>
                 </div>
@@ -239,14 +239,14 @@
                     <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Tautan Cepat</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ route('courses.index') }}"
-                                class="hover:text-emerald-400 transition-colors">Lihat Katalog</a></li>
+                                class="hover:text-[#70D6C5] transition-colors">Lihat Katalog</a></li>
 
                         <li><a href="{{ route('faqs.index') }}"
-                                class="hover:text-emerald-400 transition-colors">Pertanyaan Umum</a></li>
-                        <li><a href="{{ route('login') }}" class="hover:text-emerald-400 transition-colors">Portal
+                                class="hover:text-[#70D6C5] transition-colors">Pertanyaan Umum</a></li>
+                        <li><a href="{{ route('login') }}" class="hover:text-[#70D6C5] transition-colors">Portal
                                 Masuk</a></li>
                         <li><a href="{{ route('register') }}"
-                                class="hover:text-emerald-400 transition-colors">Pendaftaran Akun Baru</a></li>
+                                class="hover:text-[#70D6C5] transition-colors">Pendaftaran Akun Baru</a></li>
                     </ul>
                 </div>
 

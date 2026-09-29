@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Certificate;
 use App\Models\Course;
 use App\Models\Enrollment;
+use App\Models\Faq;
 use App\Models\User;
 
 class HomeController extends Controller
@@ -30,6 +31,12 @@ class HomeController extends Controller
             'total_certificates' => Certificate::count(),
         ];
 
-        return view('home', compact('featuredCourses', 'categories', 'stats'));
+        $faqs = Faq::with('faqCategory')
+            ->published()
+            ->ordered()
+            ->take(6)
+            ->get();
+
+        return view('home', compact('featuredCourses', 'categories', 'stats', 'faqs'));
     }
 }
