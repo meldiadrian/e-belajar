@@ -10,7 +10,7 @@
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 10-1-1zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
             </div>
             <div>
-                <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">{{ $quiz->course->title }}</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-[#4D52B4]">{{ $quiz->course->title }}</span>
                 <h1 class="text-2xl font-black text-slate-900 leading-tight">{{ $quiz->title }}</h1>
             </div>
         </div>
@@ -25,7 +25,7 @@
             </div>
             <div>
                 <span class="text-slate-400 block mb-0.5">Standar Kelulusan</span>
-                <span class="font-bold text-emerald-700 text-sm">{{ $quiz->passing_score }}%</span>
+                <span class="font-bold text-[#4D52B4] text-sm">{{ $quiz->passing_score }}%</span>
             </div>
             <div>
                 <span class="text-slate-400 block mb-0.5">Batas Waktu</span>
@@ -50,11 +50,11 @@
                             </div>
                             <div class="flex items-center gap-3">
                                 <span class="font-bold text-sm">{{ $att->percentage }}%</span>
-                                <span class="px-2 py-0.5 rounded-full font-bold text-[10px] {{ $att->status === 'in_progress' ? 'bg-amber-100 text-amber-800' : ($att->passed ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800') }}">
+                                <span class="px-2 py-0.5 rounded-full font-bold text-[10px] {{ $att->status === 'in_progress' ? 'bg-amber-100 text-amber-800' : ($att->passed ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : 'bg-rose-100 text-rose-800') }}">
                                     {{ $att->status === 'in_progress' ? 'Sedang Dikerjakan' : ($att->passed ? 'Lulus' : 'Tidak Lulus') }}
                                 </span>
                                 @if($att->status === 'submitted')
-                                    <a href="{{ route('quiz.result', $att->id) }}" class="text-emerald-700 font-bold hover:underline">Lihat Hasil &rarr;</a>
+                                    <a href="{{ route('quiz.result', $att->id) }}" class="text-[#4D52B4] font-bold hover:underline">Lihat Hasil &rarr;</a>
                                 @else
                                     <a href="{{ route('quiz.take', $att->id) }}" class="px-2.5 py-1 bg-amber-400 text-slate-900 font-bold rounded-lg">Lanjutkan</a>
                                 @endif
@@ -76,7 +76,7 @@
             @else
                 <form action="{{ route('quiz.attempt', $quiz->id) }}" method="POST">
                     @csrf
-                    <button type="submit" class="px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-md transition-colors">
+                    <button type="submit" class="px-6 py-3 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-sm shadow-md transition-colors">
                         @if($hasPassed)
                             Kerjakan Ulang Kuis &rarr;
                         @elseif($userAttempts->count() > 0)

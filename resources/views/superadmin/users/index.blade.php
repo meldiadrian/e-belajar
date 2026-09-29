@@ -132,7 +132,7 @@
                                                 class="inline">
                                                 @csrf
                                                 <button type="submit"
-                                                    class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-[#4E9CE8]/20 text-[#4D52B4] font-bold text-[10px] transition-colors"
+                                                    class="px-2.5 py-1 rounded-lg bg-[#4E9CE8]/10 hover:bg-[#4E9CE8]/20 text-[#4D52B4] font-bold text-[10px] transition-colors"
                                                     title="Pulihkan Pengguna">
                                                     Pulihkan
                                                 </button>

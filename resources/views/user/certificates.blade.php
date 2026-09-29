@@ -32,7 +32,7 @@
                     </div>
                     <div class="flex justify-between text-slate-500">
                         <span>Kode Verifikasi:</span>
-                        <span class="font-mono font-bold text-emerald-700">{{ $cert->certificate_code }}</span>
+                        <span class="font-mono font-bold text-[#4D52B4]">{{ $cert->certificate_code }}</span>
                     </div>
                     <div class="flex justify-between text-slate-500">
                         <span>Tanggal Terbit:</span>

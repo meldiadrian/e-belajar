@@ -6,7 +6,7 @@
     <div class="bg-slate-900 text-white border-b border-slate-800 py-4 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <div>
-                <div class="flex items-center gap-2 text-xs text-emerald-400 font-semibold mb-1">
+                <div class="flex items-center gap-2 text-xs text-[#4E9CE8] font-semibold mb-1">
                     <a href="{{ route('my.courses') }}" class="hover:underline">&larr; Kembali ke Kursus Saya</a>
                     <span>&bull;</span>
                     <span class="text-slate-400">{{ $course->title }}</span>
@@ -17,11 +17,11 @@
             <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
                 <div class="text-right">
                     <div class="text-[11px] text-slate-400">Kemajuan Kursus</div>
-                    <div class="text-xs font-bold text-emerald-400">{{ $courseProgress->progress_percentage ?? 0 }}% Selesai
+                    <div class="text-xs font-bold text-[#4E9CE8]">{{ $courseProgress->progress_percentage ?? 0 }}% Selesai
                     </div>
                 </div>
                 <div class="w-24 sm:w-32 bg-slate-800 rounded-full h-2 overflow-hidden border border-slate-700">
-                    <div class="bg-emerald-500 h-2 rounded-full transition-all duration-300"
+                    <div class="bg-[#70D6C5] h-2 rounded-full transition-all duration-300"
                         style="width: {{ $courseProgress->progress_percentage ?? 0 }}%"></div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                             @else
                                 <div class="text-center p-8">
                                     <div
-                                        class="w-16 h-16 mx-auto mb-3 rounded-full bg-emerald-900/60 flex items-center justify-center text-emerald-400">
+                                        class="w-16 h-16 mx-auto mb-3 rounded-full bg-[#4D52B4]/40 flex items-center justify-center text-[#4E9CE8]">
                                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd"
                                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
@@ -142,12 +142,12 @@
                     <div class="p-6 sm:p-8 space-y-4">
                         <div class="flex items-center justify-between pb-4 border-b border-slate-100">
                             <div>
-                                <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">Modul:
+                                <span class="text-xs font-bold text-[#4D52B4] uppercase tracking-wider">Modul:
                                     {{ $lesson->module->title }}</span>
                                 <h2 class="text-xl font-extrabold text-slate-900 mt-0.5">{{ $lesson->title }}</h2>
                             </div>
                             <span
-                                class="px-3 py-1 rounded-full text-xs font-semibold {{ ($currentLessonProgress->status ?? '') === 'completed' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600' }}">
+                                class="px-3 py-1 rounded-full text-xs font-semibold {{ ($currentLessonProgress->status ?? '') === 'completed' ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : 'bg-slate-100 text-slate-600' }}">
                                 {{ ($currentLessonProgress->status ?? '') === 'completed' ? '✓ Telah Selesai' : 'Sedang Dipelajari' }}
                             </span>
                         </div>
@@ -167,17 +167,17 @@
                                             class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
                                             <div class="flex items-center gap-2">
                                                 <span
-                                                    class="w-6 h-6 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">
+                                                    class="w-6 h-6 rounded-md bg-[#4E9CE8]/20 text-[#4D52B4] flex items-center justify-center font-bold text-[10px]">
                                                     {{ strtoupper(substr($content->type, 0, 1)) }}
                                                 </span>
                                                 <span class="font-semibold text-slate-800">{{ $content->title }}</span>
                                             </div>
                                             @if($content->url)
                                                 <a href="{{ $content->url }}" target="_blank"
-                                                    class="text-emerald-700 font-bold hover:underline">Buka Tautan &rarr;</a>
+                                                    class="text-[#4D52B4] font-bold hover:underline">Buka Tautan &rarr;</a>
                                             @elseif($content->file_path)
                                                 <a href="{{ asset('storage/' . $content->file_path) }}" target="_blank"
-                                                    class="text-emerald-700 font-bold hover:underline">Unduh File &rarr;</a>
+                                                    class="text-[#4D52B4] font-bold hover:underline">Unduh File &rarr;</a>
                                             @endif
                                         </div>
                                     @endforeach
@@ -228,8 +228,8 @@
                             <form id="completeBtnForm" action="{{ route('learning.lesson.complete', $lesson->id) }}" method="POST" class="{{ $waitForVideo ? 'hidden' : 'inline-flex' }}">
                                 @csrf
                                 <button type="submit"
-                                    class="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 shadow-md transition-all flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-emerald-300" fill="currentColor" viewBox="0 0 20 20">
+                                    class="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] shadow-md transition-all flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-[#70D6C5]" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                             clip-rule="evenodd" />
@@ -287,7 +287,7 @@
                     @elseif($course->certificate_enabled && ($courseQuizPassed || !$courseQuiz))
                         <!-- Certificate Card: Tampil setelah kuis selesai dan lulus -->
                         <div
-                            class="p-6 rounded-3xl bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                            class="p-6 rounded-3xl bg-gradient-to-r from-[#4D52B4] to-[#4E9CE8] text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
                             <div class="flex items-center gap-4">
                                 <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center font-black shrink-0">
                                     <svg class="w-7 h-7 text-amber-300" fill="currentColor" viewBox="0 0 20 20">
@@ -297,7 +297,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold uppercase tracking-wider text-emerald-200">Selamat! Seluruh Materi & Evaluasi Selesai</div>
+                                    <div class="text-xs font-bold uppercase tracking-wider text-[#4E9CE8]">Selamat! Seluruh Materi & Evaluasi Selesai</div>
                                     <div class="text-lg font-black">Sertifikat Kelulusan Resmi Anda Siap Dibuka</div>
                                 </div>
                             </div>
@@ -339,10 +339,10 @@
                                         $isCurrent = ($les->id === $lesson->id);
                                     @endphp
                                     <a href="{{ route('learning.lesson', [$course->id, $les->id]) }}"
-                                        class="p-3 flex items-center justify-between text-xs transition-colors {{ $isCurrent ? 'bg-emerald-50 text-emerald-900 font-bold border-l-4 border-emerald-600' : 'hover:bg-slate-50 text-slate-700' }}">
+                                        class="p-3 flex items-center justify-between text-xs transition-colors {{ $isCurrent ? 'bg-[#4E9CE8]/10 text-[#4D52B4] font-bold border-l-4 border-[#4D52B4]' : 'hover:bg-slate-50 text-slate-700' }}">
                                         <div class="flex items-center gap-2 truncate pr-2">
                                             <div
-                                                class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] {{ $isCompleted ? 'bg-emerald-600 text-white' : ($isCurrent ? 'border-2 border-emerald-600 text-emerald-600' : 'border border-slate-300 text-slate-400') }}">
+                                                class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] {{ $isCompleted ? 'bg-[#70D6C5] text-white' : ($isCurrent ? 'border-2 border-[#4D52B4] text-[#4D52B4]' : 'border border-slate-300 text-slate-400') }}">
                                                 @if($isCompleted)
                                                     ✓
                                                 @else
@@ -361,13 +361,13 @@
 
                 @if($courseQuiz)
                     <div class="pt-2 border-t border-slate-200">
-                        <div id="sidebarQuizCard" class="p-3.5 rounded-2xl border {{ $courseQuizPassed ? 'border-emerald-200 bg-emerald-50/50' : ($waitForVideo ? 'border-slate-200 bg-slate-50/50' : 'border-amber-200 bg-amber-50/50') }} flex items-center justify-between transition-all duration-300">
+                        <div id="sidebarQuizCard" class="p-3.5 rounded-2xl border {{ $courseQuizPassed ? 'border-[#4E9CE8]/30 bg-[#4E9CE8]/10' : ($waitForVideo ? 'border-slate-200 bg-slate-50/50' : 'border-amber-200 bg-amber-50/50') }} flex items-center justify-between transition-all duration-300">
                             <div class="truncate pr-2">
-                                <span class="text-[10px] font-bold uppercase tracking-wider {{ $courseQuizPassed ? 'text-emerald-700' : ($waitForVideo ? 'text-slate-500' : 'text-amber-800') }}" id="sidebarQuizLabel">Kuis Evaluasi</span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider {{ $courseQuizPassed ? 'text-[#4D52B4]' : ($waitForVideo ? 'text-slate-500' : 'text-amber-800') }}" id="sidebarQuizLabel">Kuis Evaluasi</span>
                                 <div class="text-xs font-bold text-slate-900 truncate">{{ $courseQuiz->title }}</div>
                             </div>
                             @if($courseQuizPassed)
-                                <a href="{{ route('quiz.show', $courseQuiz->id) }}" class="px-2.5 py-1.5 rounded-lg text-xs font-bold shrink-0 bg-emerald-700 text-white hover:bg-emerald-800 transition-colors">
+                                <a href="{{ route('quiz.show', $courseQuiz->id) }}" class="px-2.5 py-1.5 rounded-lg text-xs font-bold shrink-0 bg-[#4D52B4] text-white hover:bg-[#4E9CE8] transition-colors">
                                     Lihat Hasil
                                 </a>
                             @elseif($waitForVideo)
