@@ -62,7 +62,7 @@
                 width: 100% !important;
                 max-width: 100% !important;
                 margin: 0 auto !important;
-                padding: 24mm 16mm 20mm 16mm !important;
+                padding: 24mm 16mm 24mm 16mm !important;
                 border: none !important;
                 border-radius: 0 !important;
                 box-shadow: none !important;
@@ -122,7 +122,7 @@
 
         <!-- Official Printable Certificate Layout -->
         <div id="certificate-print-area"
-            class="bg-white pt-24 pb-20 px-8 sm:pt-28 sm:pb-24 sm:px-14 md:pt-32 md:pb-24 md:px-16 shadow-2xl relative overflow-hidden text-center text-slate-900 print:shadow-none print:m-0 border border-slate-200/80">
+            class="bg-white pt-24 pb-32 px-8 sm:pt-28 sm:pb-36 sm:px-14 md:pt-32 md:pb-20 md:px-16 shadow-2xl relative overflow-hidden text-center text-slate-900 print:shadow-none print:m-0 border border-slate-200/80">
             <!-- FRAME BINGKAI (NAVY & GOLD GEOMETRIC BORDER) -->
             <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1024 723"
                 preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -255,8 +255,8 @@
                         {{ $certificate->user->name }}
                     </div>
                     <!-- <div class="text-xs text-slate-500 font-semibold mt-2">
-                                {{ $certificate->user->institution ?? 'Peserta Pelatihan Mandiri' }}
-                            </div> -->
+                                                                                                                                                        {{ $certificate->user->institution ?? 'Peserta Pelatihan Mandiri' }}
+                                                                                                                                                    </div> -->
                 </div>
 
                 <!-- Body -->
@@ -279,30 +279,38 @@
                         {{ $certificate->issued_at ? $certificate->issued_at->translatedFormat('d F Y') : now()->translatedFormat('d F Y') }}
                     </div>
 
-                    <div class="text-xs font-bold text-slate-900">
-                        {{ $signer->jabatan ?? 'Kepala Dinas Komunikasi, Informatika dan Statistik' }}
-                    </div>
+                    <!-- <div class="text-xs font-bold text-slate-900">
+                            {{ $signer->jabatan ?? 'Kepala Dinas Komunikasi, Informatika dan Statistik' }}
+                        </div>
 
-                    <div class="text-xs font-bold text-slate-900">
-                        {{ $signer->instansi ?? 'Kabupaten Bengkalis' }}
-                    </div>
+                        <div class="text-xs font-bold text-slate-900">
+                            {{ $signer->instansi ?? 'Kabupaten Bengkalis' }}
+                        </div> -->
 
                     <!-- Container for Signer Name, NIP, and Overlapping Stamp/Signature -->
-                    <div class="relative inline-flex flex-col items-center justify-center pt-3 pb-1 min-w-[280px]">
+                    <div class="relative inline-flex flex-col items-center justify-center min-w-[280px] h-32 sm:h-36">
+                        <!-- @if(!empty($signer?->signature_image))
+                                                                                                                                            <img src="{{ asset('storage/' . $signer->signature_image) }}" alt="Tanda Tangan & Stempel"
+                                                                                                                                                class="absolute -left-12 -top-4 w-36 h-28 object-contain pointer-events-none select-none z-0 mix-blend-multiply opacity-95">
+                                                                                                                                        @endif -->
+
                         @if(!empty($signer?->signature_image))
                             <img src="{{ asset('storage/' . $signer->signature_image) }}" alt="Tanda Tangan & Stempel"
-                                class="absolute -left-12 -top-4 w-36 h-28 object-contain pointer-events-none select-none z-0 mix-blend-multiply opacity-95">
+                                class="absolute left-1/2 -translate-x-1/2 -top-20 w-80 h-64 object-contain pointer-events-none select-none z-0"
+                                style="image-rendering: -webkit-optimize-contrast; image-rendering: high-quality;">
                         @endif
 
-                        <div class="relative z-10 text-center">
-                            <div
-                                class="font-bold text-sm sm:text-base text-slate-900 tracking-wide underline decoration-slate-900 decoration-1 underline-offset-2">
-                                {{ $signer->name ?? 'AGUS SOFYAN, S.STP.,MPA' }}
-                            </div>
-                            <div class="text-xs text-slate-800 font-mono mt-0.5">
-                                NIP.{{ $signer->nip ?? '197908161998021001' }}
-                            </div>
-                        </div>
+
+
+                        <!-- <div class="relative z-10 text-center">
+                                                                                                                                                    <div
+                                                                                                                                                        class="font-bold text-sm sm:text-base text-slate-900 tracking-wide underline decoration-slate-900 decoration-1 underline-offset-2">
+                                                                                                                                                        {{ $signer->name ?? 'AGUS SOFYAN, S.STP.,MPA' }}
+                                                                                                                                                    </div>
+                                                                                                                                                    <div class="text-xs text-slate-800 font-mono mt-0.5">
+                                                                                                                                                        NIP.{{ $signer->nip ?? '197908161998021001' }}
+                                                                                                                                                    </div>
+                                                                                                                                                </div> -->
                     </div>
                 </div>
 

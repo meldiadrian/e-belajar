@@ -39,14 +39,14 @@ class CertificateSettingController extends Controller
             'nip' => ['required', 'string', 'max:50'],
             'jabatan' => ['nullable', 'string', 'max:255'],
             'instansi' => ['nullable', 'string', 'max:255'],
-            'signature_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
+            'signature_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,webp', 'max:10240'],
             'is_active' => ['nullable', 'boolean'],
         ], [
             'name.required' => 'Nama penandatangan wajib diisi.',
             'nip.required' => 'NIP penandatangan wajib diisi.',
             'signature_image.image' => 'File tanda tangan harus berupa gambar.',
             'signature_image.mimes' => 'Format gambar yang diperbolehkan: PNG, JPG, JPEG, WEBP.',
-            'signature_image.max' => 'Ukuran gambar maksimal 2MB.',
+            'signature_image.max' => 'Ukuran gambar maksimal 10MB.',
         ]);
 
         $signaturePath = null;
@@ -97,14 +97,14 @@ class CertificateSettingController extends Controller
             'nip' => ['required', 'string', 'max:50'],
             'jabatan' => ['nullable', 'string', 'max:255'],
             'instansi' => ['nullable', 'string', 'max:255'],
-            'signature_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
+            'signature_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,webp', 'max:10240'],
             'is_active' => ['nullable', 'boolean'],
         ], [
             'name.required' => 'Nama penandatangan wajib diisi.',
             'nip.required' => 'NIP penandatangan wajib diisi.',
             'signature_image.image' => 'File tanda tangan harus berupa gambar.',
             'signature_image.mimes' => 'Format gambar yang diperbolehkan: PNG, JPG, JPEG, WEBP.',
-            'signature_image.max' => 'Ukuran gambar maksimal 2MB.',
+            'signature_image.max' => 'Ukuran gambar maksimal 10MB.',
         ]);
 
         $signaturePath = $certificate->signature_image;

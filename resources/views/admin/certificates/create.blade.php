@@ -83,7 +83,7 @@
                                 <input id="signature_image" name="signature_image" type="file" accept="image/png,image/jpeg,image/webp" class="sr-only" onchange="previewImage(this)">
                             </label>
                         </div>
-                        <p class="text-[11px] text-slate-400">PNG, JPG, WEBP hingga 2MB (Background transparan direkomendasikan)</p>
+                        <p class="text-[11px] text-slate-400">PNG, JPG, WEBP hingga 10MB (Kualitas Penuh / Tanpa Kompresi, background transparan direkomendasikan)</p>
                     </div>
                 </div>
                 @error('signature_image')
