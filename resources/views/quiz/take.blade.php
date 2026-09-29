@@ -27,7 +27,7 @@
             @foreach($quizData['questions'] as $qIndex => $question)
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-xs p-6 sm:p-8 space-y-4">
                     <div class="flex items-center justify-between">
-                        <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+                        <span class="px-3 py-1 rounded-full bg-[#4E9CE8]/20 text-[#4D52B4] text-xs font-bold">
                             Soal {{ $qIndex + 1 }} dari {{ count($quizData['questions']) }}
                         </span>
                         <span class="text-xs font-semibold text-slate-500">Bobot: {{ $question['points'] }} Poin</span>
@@ -41,23 +41,23 @@
                     <div class="pt-3 space-y-2.5">
                         @if($question['type'] === 'single_choice' || $question['type'] === 'true_false')
                             @foreach($question['options'] as $option)
-                                <label class="flex items-center gap-3 p-4 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 cursor-pointer transition-all">
-                                    <input type="radio" name="answers[{{ $question['id'] }}]" value="{{ $option['id'] }}" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500">
+                                <label class="flex items-center gap-3 p-4 rounded-2xl border border-slate-200 hover:border-[#4E9CE8] hover:bg-[#4E9CE8]/10 cursor-pointer transition-all">
+                                    <input type="radio" name="answers[{{ $question['id'] }}]" value="{{ $option['id'] }}" class="w-4 h-4 text-[#4D52B4] focus:ring-[#4E9CE8]">
                                     <span class="text-sm text-slate-800">{{ $option['option_text'] }}</span>
                                 </label>
                             @endforeach
                         @elseif($question['type'] === 'multiple_choice')
                             <p class="text-xs text-amber-700 italic mb-2">* Pilih satu atau lebih jawaban yang benar</p>
                             @foreach($question['options'] as $option)
-                                <label class="flex items-center gap-3 p-4 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 cursor-pointer transition-all">
-                                    <input type="checkbox" name="answers[{{ $question['id'] }}][]" value="{{ $option['id'] }}" class="w-4 h-4 text-emerald-600 rounded-sm focus:ring-emerald-500">
+                                <label class="flex items-center gap-3 p-4 rounded-2xl border border-slate-200 hover:border-[#4E9CE8] hover:bg-[#4E9CE8]/10 cursor-pointer transition-all">
+                                    <input type="checkbox" name="answers[{{ $question['id'] }}][]" value="{{ $option['id'] }}" class="w-4 h-4 text-[#4D52B4] rounded-sm focus:ring-[#4E9CE8]">
                                     <span class="text-sm text-slate-800">{{ $option['option_text'] }}</span>
                                 </label>
                             @endforeach
                         @elseif($question['type'] === 'short_answer')
-                            <input type="text" name="answers[{{ $question['id'] }}]" placeholder="Ketik jawaban singkat Anda di sini..." class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                            <input type="text" name="answers[{{ $question['id'] }}]" placeholder="Ketik jawaban singkat Anda di sini..." class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                         @elseif($question['type'] === 'essay')
-                            <textarea name="answers[{{ $question['id'] }}]" rows="4" placeholder="Tuliskan uraian jawaban lengkap Anda di sini..." class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden"></textarea>
+                            <textarea name="answers[{{ $question['id'] }}]" rows="4" placeholder="Tuliskan uraian jawaban lengkap Anda di sini..." class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden"></textarea>
                         @endif
                     </div>
                 </div>
@@ -67,7 +67,7 @@
         <!-- Submit Button & Confirmation Bar -->
         <div class="mt-10 p-6 bg-white rounded-3xl border border-slate-200 shadow-md flex flex-col sm:flex-row justify-between items-center gap-4">
             <span class="text-xs text-slate-500">Pastikan seluruh butir pertanyaan telah Anda periksa sebelum mengirim lembar kuis.</span>
-            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menyelesaikan dan mengirim jawaban kuis ini?')" class="w-full sm:w-auto px-8 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-2xl text-sm shadow-md transition-colors">
+            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menyelesaikan dan mengirim jawaban kuis ini?')" class="w-full sm:w-auto px-8 py-3.5 bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold rounded-2xl text-sm shadow-md transition-colors">
                 Kirim Lembar Jawaban Kuis &rarr;
             </button>
         </div>

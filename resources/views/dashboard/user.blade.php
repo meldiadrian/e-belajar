@@ -62,7 +62,7 @@
                                                                             <h2 class="text-lg font-bold text-slate-900">Kursus Yang Sedang Diikuti</h2>
                                                                             <span class="text-xs text-slate-500">Pantau progres dan lanjutkan belajar</span>
                                                                         </div>
-                                                                        <a href="{{ route('courses.index') }}" class="text-xs font-bold text-emerald-700 hover:underline">+
+                                                                        <a href="{{ route('courses.index') }}" class="text-xs font-bold text-[#4D52B4] hover:underline">+
                                                                             Cari Kursus Baru</a>
                                                                     </div>
 
@@ -72,12 +72,12 @@
                                                                                 class="p-5 rounded-2xl border border-slate-100 bg-slate-50/60 hover:bg-slate-50 transition-colors flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                                                                                 <div class="flex-1 min-w-0">
                                                                                     <span
-                                                                                        class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+                                                                                        class="text-[10px] font-bold uppercase tracking-wider text-[#4D52B4] bg-[#4E9CE8]/20 px-2 py-0.5 rounded-full">
                                                                                         {{ $enrollment->course->category->name ?? 'Program' }}
                                                                                     </span>
                                                                                     <h3 class="text-base font-bold text-slate-900 truncate mt-1">
                                                                                         <a href="{{ route('learning.course', $enrollment->course->slug ?? $enrollment->course->id) }}"
-                                                                                            class="hover:text-emerald-700">
+                                                                                            class="hover:text-[#4E9CE8]">
                                                                                             {{ $enrollment->course->title }}
                                                                                         </a>
                                                                                     </h3>
@@ -90,7 +90,7 @@
                                                                                                 Pelajaran</span>
                                                                                         </div>
                                                                                         <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
-                                                                                            <div class="bg-emerald-600 h-2 rounded-full transition-all duration-500"
+                                                                                            <div class="bg-[#70D6C5] h-2 rounded-full transition-all duration-500"
                                                                                                 style="width: {{ $enrollment->progress->progress_percentage ?? 0 }}%"></div>
                                                                                         </div>
                                                                                     </div>
@@ -98,7 +98,7 @@
 
                                                                                 <div class="flex sm:flex-col gap-2 w-full sm:w-auto">
                                                                                     <a href="{{ route('learning.course', $enrollment->course->slug ?? $enrollment->course->id) }}"
-                                                                                        class="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 transition-colors text-center shadow-xs w-full sm:w-auto">
+                                                                                        class="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] transition-colors text-center shadow-xs w-full sm:w-auto">
                                                                                         Lanjutkan Belajar &rarr;
                                                                                     </a>
                                                                                 </div>
@@ -106,7 +106,7 @@
                                                                         @empty
                                                                             <div class="text-center py-8 text-slate-400 text-xs">
                                                                                 Anda belum terdaftar pada kursus apapun. <a href="{{ route('courses.index') }}"
-                                                                                    class="font-bold text-emerald-700 underline">Lihat Katalog Kursus</a>
+                                                                                    class="font-bold text-[#4D52B4] underline">Lihat Katalog Kursus</a>
                                                                             </div>
                                                                         @endforelse
                                                                     </div>
@@ -364,7 +364,7 @@
                                             ({{ $lastQuizAttempt->percentage }}%)</span></div>
                                 </div>
                                 <span
-                                    class="px-2.5 py-1 rounded-full text-xs font-bold {{ $lastQuizAttempt->passed ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800' }}">
+                                    class="px-2.5 py-1 rounded-full text-xs font-bold {{ $lastQuizAttempt->passed ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : 'bg-red-100 text-red-800' }}">
                                     {{ $lastQuizAttempt->passed ? 'LULUS' : 'REMIDI' }}
                                 </span>
                             </div>

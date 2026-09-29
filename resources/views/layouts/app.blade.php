@@ -113,15 +113,15 @@
                                 class="flex items-center gap-2.5 group hover:opacity-90 transition-all">
                                 <!-- <div class="text-right hidden sm:block"> -->
                                 <!-- <div
-                                                class="text-xs font-bold text-slate-800 flex items-center justify-end gap-1 group-hover:text-emerald-700 transition-colors">
+                                                class="text-xs font-bold text-slate-800 flex items-center justify-end gap-1 group-hover:text-[#4E9CE8] transition-colors">
                                                 <span>{{ Auth::user()->name }}</span>
-                                                <svg class="w-3 h-3 text-slate-400 group-hover:text-emerald-600 transition-colors"
+                                                <svg class="w-3 h-3 text-slate-400 group-hover:text-[#4E9CE8] transition-colors"
                                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                 </svg>
                                             </div>
-                                            <div class="text-[10px] font-medium text-emerald-700 uppercase">
+                                            <div class="text-[10px] font-medium text-[#4D52B4] uppercase">
                                                 {{ Auth::user()->institution ?? Auth::user()->role }}
                                             </div> -->
                                 <!-- </div> -->
@@ -176,9 +176,9 @@
     <noscript>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 w-full">
             @if(session('success'))
-                <div class="flex items-center p-4 mb-4 text-emerald-800 rounded-xl bg-emerald-50 border border-emerald-200 shadow-xs"
+                <div class="flex items-center p-4 mb-4 text-[#4D52B4] rounded-xl bg-[#4E9CE8]/10 border border-[#4E9CE8]/30 shadow-xs"
                     role="alert">
-                    <svg class="flex-shrink-0 w-5 h-5 mr-3 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="flex-shrink-0 w-5 h-5 mr-3 text-[#4D52B4]" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
                             d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                             clip-rule="evenodd"></path>

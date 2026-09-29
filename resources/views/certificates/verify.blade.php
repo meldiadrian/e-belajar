@@ -15,8 +15,8 @@
         </div>
 
         <form action="{{ route('certificates.verify') }}" method="GET" class="mt-6 flex flex-col sm:flex-row gap-3">
-            <input type="text" id="searchCode" name="code" value="{{ $code !== 'SAMPLE' ? $code : '' }}" required placeholder="Contoh: CERT/BKPP/2026/09/00001 atau BKS-XXXX" class="flex-1 px-4 py-3 rounded-xl border border-slate-300 text-sm font-mono tracking-wider focus:border-emerald-600 focus:outline-hidden">
-            <button type="submit" class="px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-md transition-colors cursor-pointer">
+            <input type="text" id="searchCode" name="code" value="{{ $code !== 'SAMPLE' ? $code : '' }}" required placeholder="Contoh: CERT/BKPP/2026/09/00001 atau BKS-XXXX" class="flex-1 px-4 py-3 rounded-xl border border-slate-300 text-sm font-mono tracking-wider focus:border-[#4E9CE8] focus:outline-hidden">
+            <button type="submit" class="px-6 py-3 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-sm shadow-md transition-colors cursor-pointer">
                 Periksa Dokumen
             </button>
         </form>
@@ -25,15 +25,15 @@
     <!-- Verification Result -->
     @if($code !== 'SAMPLE')
         @if($isValid)
-            <div class="bg-white rounded-3xl border-2 border-emerald-500 shadow-xl overflow-hidden">
+            <div class="bg-white rounded-3xl border-2 border-[#4E9CE8] shadow-xl overflow-hidden">
                 <!-- Status Banner -->
-                <div class="bg-emerald-600 text-white p-6 flex items-center justify-between">
+                <div class="bg-[#70D6C5] text-white p-6 flex items-center justify-between">
                     <div class="flex items-center gap-3">
                         <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                             <svg class="w-7 h-7 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
                         </div>
                         <div>
-                            <div class="text-xs font-bold tracking-widest uppercase text-emerald-100">Status Keabsahan Dokumen</div>
+                            <div class="text-xs font-bold tracking-widest uppercase text-[#4E9CE8]/20">Status Keabsahan Dokumen</div>
                             <div class="text-xl font-black text-white">TERVERIFIKASI ASLI & RESMI</div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="border-b border-slate-100 pb-3">
                             <span class="text-xs text-slate-400 block mb-1">Kode Unik Verifikasi</span>
-                            <span class="font-bold text-emerald-700 font-mono text-base">{{ $verificationData['certificate_code'] }}</span>
+                            <span class="font-bold text-[#4D52B4] font-mono text-base">{{ $verificationData['certificate_code'] }}</span>
                         </div>
                         <div class="border-b border-slate-100 pb-3">
                             <span class="text-xs text-slate-400 block mb-1">Nama Penerima / Peserta</span>

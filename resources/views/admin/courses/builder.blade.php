@@ -165,7 +165,7 @@
                             <p class="text-xs text-slate-500 mt-1 mb-4">Tambahkan modul pertama untuk mulai mengunggah materi
                                 pelajaran.</p>
                             <button onclick="document.getElementById('modalAddModule').classList.remove('hidden')"
-                                class="px-5 py-2.5 bg-[#4D52B4] text-white rounded-xl text-xs font-bold hover:bg-emerald-800">
+                                class="px-5 py-2.5 bg-[#4D52B4] text-white rounded-xl text-xs font-bold hover:bg-[#4E9CE8]">
                                 + Tambah Modul Pertama
                             </button>
                         </div>
@@ -360,7 +360,7 @@
 
                 <div>
                     <label class="flex items-center gap-2 cursor-pointer text-xs">
-                        <input type="checkbox" name="is_preview" value="1" class="rounded text-emerald-600">
+                        <input type="checkbox" name="is_preview" value="1" class="rounded text-[#4D52B4]">
                         <span class="text-slate-700">Izinkan Pratinjau Gratis (Bisa dilihat sebelum enroll)</span>
                     </label>
                 </div>
@@ -426,7 +426,7 @@
 
                 <div>
                     <label class="flex items-center gap-2 cursor-pointer text-xs">
-                        <input type="checkbox" name="is_preview" id="editLessonIsPreview" value="1" class="rounded text-emerald-600">
+                        <input type="checkbox" name="is_preview" id="editLessonIsPreview" value="1" class="rounded text-[#4D52B4]">
                         <span class="text-slate-700">Izinkan Pratinjau Gratis (Bisa dilihat sebelum enroll)</span>
                     </label>
                 </div>
@@ -472,11 +472,11 @@
                 </div>
                 <div class="space-y-1">
                     <label class="flex items-center gap-2 cursor-pointer text-xs">
-                        <input type="checkbox" name="shuffle_questions" value="1" class="rounded text-emerald-600">
+                        <input type="checkbox" name="shuffle_questions" value="1" class="rounded text-[#4D52B4]">
                         <span class="text-slate-700">Acak Urutan Soal (Shuffle)</span>
                     </label>
                     <label class="flex items-center gap-2 cursor-pointer text-xs">
-                        <input type="checkbox" name="shuffle_options" value="1" class="rounded text-emerald-600">
+                        <input type="checkbox" name="shuffle_options" value="1" class="rounded text-[#4D52B4]">
                         <span class="text-slate-700">Acak Urutan Opsi Pilihan</span>
                     </label>
                 </div>
@@ -524,12 +524,12 @@
                 <div class="space-y-1">
                     <label class="flex items-center gap-2 cursor-pointer text-xs">
                         <input type="checkbox" name="shuffle_questions" id="editQuizShuffleQuestions" value="1"
-                            class="rounded text-emerald-600">
+                            class="rounded text-[#4D52B4]">
                         <span class="text-slate-700">Acak Urutan Soal (Shuffle)</span>
                     </label>
                     <label class="flex items-center gap-2 cursor-pointer text-xs">
                         <input type="checkbox" name="shuffle_options" id="editQuizShuffleOptions" value="1"
-                            class="rounded text-emerald-600">
+                            class="rounded text-[#4D52B4]">
                         <span class="text-slate-700">Acak Urutan Opsi Pilihan</span>
                     </label>
                 </div>
@@ -583,7 +583,7 @@
                     @for($i = 0; $i < 4; $i++)
                         <div class="flex items-center gap-2">
                             <input type="radio" name="correct_option" value="{{ $i }}" {{ $i === 0 ? 'checked' : '' }}
-                                class="w-4 h-4 text-emerald-600">
+                                class="w-4 h-4 text-[#4D52B4]">
                             <input type="text" name="options[{{ $i }}][text]" placeholder="Opsi {{ chr(65 + $i) }}"
                                 class="flex-1 px-3 py-1.5 rounded-lg border border-slate-300 text-xs">
                         </div>
@@ -648,7 +648,7 @@
                     @for($i = 0; $i < 4; $i++)
                         <div class="flex items-center gap-2">
                             <input type="radio" name="correct_option" id="editCorrectOption{{ $i }}" value="{{ $i }}" {{ $i === 0 ? 'checked' : '' }}
-                                class="w-4 h-4 text-emerald-600">
+                                class="w-4 h-4 text-[#4D52B4]">
                             <input type="text" name="options[{{ $i }}][text]" id="editOptionText{{ $i }}" placeholder="Opsi {{ chr(65 + $i) }}"
                                 class="flex-1 px-3 py-1.5 rounded-lg border border-slate-300 text-xs">
                         </div>

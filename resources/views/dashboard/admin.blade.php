@@ -10,7 +10,7 @@
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                 <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Pembelajaran</span>
                 <div class="text-2xl font-black text-slate-900">{{ $stats['total_courses'] }}</div>
-                <div class="text-[11px] text-emerald-600 font-semibold mt-1">{{ $stats['published_courses'] }}
+                <div class="text-[11px] text-[#4D52B4] font-semibold mt-1">{{ $stats['published_courses'] }}
                     Dipublikasikan</div>
             </div>
 
@@ -24,7 +24,7 @@
                 <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Peserta yang
                     Terdaftar</span>
                 <div class="text-2xl font-black text-slate-900">{{ number_format($stats['total_enrollments']) }}</div>
-                <div class="text-[11px] text-emerald-600 font-semibold mt-1">{{ $stats['total_completions'] }} Telah Lulus
+                <div class="text-[11px] text-[#4D52B4] font-semibold mt-1">{{ $stats['total_completions'] }} Telah Lulus
                 </div>
             </div>
 
@@ -38,10 +38,10 @@
 
         <!-- Quick Action Banner -->
         <div
-            class="bg-gradient-to-r from-emerald-800 to-slate-900 text-white p-6 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+            class="bg-gradient-to-r from-[#4D52B4] to-slate-900 text-white p-6 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
             <div>
                 <h3 class="text-lg font-bold">Mulai Tambah Pembelajaran Baru</h3>
-                <p class="text-xs text-emerald-200 mt-0.5">Susun Pembelajaran secara bertahap</p>
+                <p class="text-xs text-[#4E9CE8] mt-0.5">Susun Pembelajaran secara bertahap</p>
             </div>
             <a href="{{ route('admin.courses.create') }}"
                 class="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-md transition-colors shrink-0">
@@ -65,7 +65,7 @@
                             </div>
                             <div class="text-right shrink-0">
                                 <span
-                                    class="px-2 py-0.5 rounded-full font-bold text-[10px] {{ $enr->status === 'completed' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800' }}">
+                                    class="px-2 py-0.5 rounded-full font-bold text-[10px] {{ $enr->status === 'completed' ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : 'bg-blue-100 text-blue-800' }}">
                                     {{ ucfirst($enr->status) }}
                                 </span>
                                 <span
@@ -94,7 +94,7 @@
                             <div class="text-right shrink-0">
                                 <span class="font-bold text-slate-800">{{ $att->percentage }}%</span>
                                 <span
-                                    class="ml-1 px-2 py-0.5 rounded-full font-bold text-[10px] {{ $att->passed ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800' }}">
+                                    class="ml-1 px-2 py-0.5 rounded-full font-bold text-[10px] {{ $att->passed ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : 'bg-red-100 text-red-800' }}">
                                     {{ $att->passed ? 'Lulus' : 'Remidi' }}
                                 </span>
                             </div>

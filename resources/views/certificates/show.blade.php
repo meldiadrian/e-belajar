@@ -110,7 +110,7 @@
                     Tautan Verifikasi Publik
                 </a>
                 <button onclick="window.print()"
-                    class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 shadow-sm flex items-center gap-1.5">
+                    class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] shadow-sm flex items-center gap-1.5">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
@@ -224,7 +224,7 @@
                 <div class="flex flex-col items-center">
                     <img src="{{ asset('storage/logo.png') }}" alt="Lambang Kabupaten Bengkalis"
                         class="w-16 h-16 object-contain mb-2 drop-shadow-sm">
-                    <div class="text-xs font-bold tracking-widest uppercase text-emerald-900">Pemerintah Kabupaten Bengkalis
+                    <div class="text-xs font-bold tracking-widest uppercase text-[#4D52B4]">Pemerintah Kabupaten Bengkalis
                     </div>
                     <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider"> Badan Kepegawaian,
                         Pendidikan dan Pelatihan</div>
@@ -232,7 +232,7 @@
 
                 <!-- Title -->
                 <div class="py-2 border-y border-amber-500/30 max-w-lg mx-auto">
-                    <h2 class="text-2xl sm:text-3xl font-black tracking-wider uppercase text-emerald-950 font-serif">
+                    <h2 class="text-2xl sm:text-3xl font-black tracking-wider uppercase text-[#4D52B4] font-serif">
                         Sertifikat Kelulusan</h2>
                     <div class="text-xs font-mono font-bold text-amber-800 tracking-widest mt-1">NO:
                         {{ $certificate->certificate_number }}
@@ -258,9 +258,9 @@
                     kompetensi pada kursus:
                 </p>
 
-                <div class="p-4 bg-emerald-50/70 border border-emerald-200 rounded-2xl max-w-xl mx-auto">
-                    <div class="text-lg sm:text-xl font-black text-emerald-950">{{ $certificate->course->title }}</div>
-                    <div class="text-[11px] text-emerald-800 font-medium mt-1">Kategori:
+                <div class="p-4 bg-[#4E9CE8]/10/70 border border-[#4E9CE8]/30 rounded-2xl max-w-xl mx-auto">
+                    <div class="text-lg sm:text-xl font-black text-[#4D52B4]">{{ $certificate->course->title }}</div>
+                    <div class="text-[11px] text-[#4D52B4] font-medium mt-1">Kategori:
                         {{ $certificate->course->category->name ?? 'Kompetensi Mandiri' }} &bull; Durasi:
                         {{ round($certificate->course->duration / 60, 1) }} Jam Pelatihan
                     </div>

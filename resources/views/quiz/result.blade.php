@@ -11,37 +11,37 @@
                 {{-- KONDISI 1: LULUS --}}
                 @if($certificate)
                     <div
-                        class="px-6 py-4 bg-emerald-50 border-b border-emerald-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-emerald-950">
+                        class="px-6 py-4 bg-[#4E9CE8]/10 border-b border-[#4E9CE8]/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-[#4D52B4]">
                         <div class="flex items-center gap-3 text-xs">
                             <span
-                                class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0">✓</span>
+                                class="w-7 h-7 rounded-full bg-[#70D6C5] text-white flex items-center justify-center font-bold text-xs shrink-0">✓</span>
                             <div>
                                 <div class="font-bold text-slate-900">Kuis Evaluasi Telah Lulus & Memenuhi Syarat Nilai.</div>
                                 <div class="text-slate-600">Sertifikat resmi kelulusan telah diterbitkan dan dapat langsung diakses.</div>
                             </div>
                         </div>
                         <a href="{{ route('certificates.show', $certificate->certificate_code ?? $certificate->id) }}"
-                            class="px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold transition-colors shrink-0 shadow-xs flex items-center gap-1.5">
+                            class="px-4 py-2 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white text-xs font-bold transition-colors shrink-0 shadow-xs flex items-center gap-1.5">
                             <span>Buka Sertifikat</span>
                             &rarr;
                         </a>
                     </div>
                 @endif
 
-                <div class="p-8 sm:p-12 text-center bg-gradient-to-b from-emerald-900 via-emerald-950 to-slate-950 text-white">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <div class="p-8 sm:p-12 text-center bg-gradient-to-b from-[#4D52B4] via-[#4D52B4] to-slate-950 text-white">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 bg-[#4E9CE8]/20 text-[#4E9CE8] border border-[#4E9CE8]/30">
+                        <span class="w-2 h-2 rounded-full bg-[#70D6C5] animate-pulse"></span>
                         Status: LULUS (Memenuhi Syarat Nilai)
                     </div>
 
                     <div class="text-6xl sm:text-7xl font-black mb-3 text-white tracking-tight">{{ $attempt->percentage }}%</div>
                     <p class="text-xs sm:text-sm text-slate-300 max-w-md mx-auto">
-                        Nilai Anda: <span class="font-bold text-white">{{ $attempt->score }}</span> dari total <span class="font-bold text-white">{{ $attempt->max_score }}</span> poin &bull; Standar Kelulusan: <span class="font-bold text-emerald-300">{{ $attempt->quiz->passing_score }}%</span>
+                        Nilai Anda: <span class="font-bold text-white">{{ $attempt->score }}</span> dari total <span class="font-bold text-white">{{ $attempt->max_score }}</span> poin &bull; Standar Kelulusan: <span class="font-bold text-[#4E9CE8]">{{ $attempt->quiz->passing_score }}%</span>
                     </p>
 
                     @if($attempt->quiz->course)
                         <div class="mt-4">
-                            <span class="inline-block text-xs sm:text-sm font-semibold text-emerald-200 bg-emerald-900/60 px-4 py-1 rounded-xl border border-emerald-700/40">
+                            <span class="inline-block text-xs sm:text-sm font-semibold text-[#4E9CE8] bg-[#4D52B4]/40 px-4 py-1 rounded-xl border border-[#4E9CE8]/30">
                                 {{ $attempt->quiz->course->title }}
                             </span>
                         </div>
@@ -149,10 +149,10 @@
 
                     <div class="space-y-4">
                         @foreach($attempt->answers as $index => $ans)
-                            <div class="p-5 rounded-2xl border {{ $ans->is_correct ? 'border-emerald-200 bg-emerald-50/40' : 'border-rose-200 bg-rose-50/40' }} space-y-2">
+                            <div class="p-5 rounded-2xl border {{ $ans->is_correct ? 'border-[#4E9CE8]/30 bg-[#4E9CE8]/10' : 'border-rose-200 bg-rose-50/40' }} space-y-2">
                                 <div class="flex items-center justify-between text-xs">
                                     <span class="font-bold text-slate-600">Pertanyaan {{ $index + 1 }}</span>
-                                    <span class="font-bold {{ $ans->is_correct ? 'text-emerald-700' : 'text-rose-700' }}">
+                                    <span class="font-bold {{ $ans->is_correct ? 'text-[#4D52B4]' : 'text-rose-700' }}">
                                         {{ $ans->is_correct ? '✓ Benar' : '✗ Belum Tepat' }} (+{{ $ans->points_earned }} Poin)
                                     </span>
                                 </div>
