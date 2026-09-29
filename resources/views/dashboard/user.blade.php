@@ -7,14 +7,14 @@
     <div class="space-y-8">
         <!-- Welcome Header -->
         <div
-            class="bg-gradient-to-r from-emerald-900 to-slate-900 text-white rounded-3xl p-8 shadow-lg relative overflow-hidden">
+            class="bg-gradient-to-r from-[#2F3375] to-slate-900 text-white rounded-3xl p-8 shadow-lg relative overflow-hidden">
             <div class="relative z-10">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
-                        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Portal Pembelajaran
+                        <span class="text-xs font-bold uppercase tracking-widest text-[#70D6C5]">Portal Pembelajaran
                             Peserta</span>
                         <h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Selamat Datang, {{ Auth::user()->name }}!</h1>
-                        <p class="text-xs sm:text-sm text-emerald-200 mt-2 max-w-xl">
+                        <p class="text-xs sm:text-sm text-[#4E9CE8] mt-2 max-w-xl">
                             Instansi: {{ Auth::user()->institution ?? 'Masyarakat Umum' }} &bull; Lanjutkan materi
                             pembelajaran mandiri Anda untuk menyelesaikan kurikulum dan mendapatkan sertifikat.
                         </p>
@@ -29,7 +29,7 @@
                     </a>
                 </div>
             </div>
-            <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-emerald-500/20 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-[#4E9CE8]/20 rounded-full blur-2xl"></div>
         </div>
 
         <!-- Stats Bar -->
@@ -44,7 +44,7 @@
             </div>
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                 <span class="text-xs text-slate-500 font-semibold block mb-1">Pembelajaran Selesai</span>
-                <div class="text-2xl font-black text-emerald-600">{{ $stats['completed_courses'] }}</div>
+                <div class="text-2xl font-black text-[#4D52B4]">{{ $stats['completed_courses'] }}</div>
             </div>
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                 <span class="text-xs text-slate-500 font-semibold block mb-1">Sertifikat</span>
@@ -129,7 +129,7 @@
                             <div class="relative">
                                 <input type="text" name="search" id="search" value="{{ request('search') }}"
                                     placeholder="Ketik judul pelatihan atau materi..."
-                                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                                 <svg class="w-5 h-5 text-slate-400 absolute left-3 top-2.5" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -143,7 +143,7 @@
                             <label for="category"
                                 class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Kategori</label>
                             <select name="category" id="category"
-                                class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden bg-white">
+                                class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden bg-white">
                                 <option value="">Semua Kategori</option>
                                 @foreach($categories as $cat)
                                     <option value="{{ $cat->slug }}" {{ request('category') === $cat->slug ? 'selected' : '' }}>
@@ -174,7 +174,7 @@
                                     class="px-3 py-1.5 text-xs font-semibold text-red-600 hover:text-red-800">Reset Filter</a>
                             @endif
                             <button type="submit"
-                                class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs">
+                                class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] shadow-xs">
                                 Terapkan Filter
                             </button>
                         </div>
@@ -188,7 +188,7 @@
                             class="bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all overflow-hidden flex flex-col sm:flex-row group">
                             <!-- Thumbnail -->
                             <div
-                                class="relative w-full sm:w-56 md:w-64 shrink-0 bg-gradient-to-br from-emerald-800 to-slate-900 flex items-center justify-center text-white overflow-hidden min-h-[160px] sm:min-h-0">
+                                class="relative w-full sm:w-56 md:w-64 shrink-0 bg-gradient-to-br from-[#4D52B4] to-slate-900 flex items-center justify-center text-white overflow-hidden min-h-[160px] sm:min-h-0">
                                 @if($course->thumbnail)
                                     <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}"
                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
@@ -202,7 +202,7 @@
                                             </svg>
                                         </div>
                                         <span
-                                            class="text-[11px] font-semibold text-emerald-300 uppercase tracking-wider">{{ $course->category->name ?? 'E-Belajar' }}</span>
+                                            class="text-[11px] font-semibold text-[#70D6C5] uppercase tracking-wider">{{ $course->category->name ?? 'E-Belajar' }}</span>
                                     </div>
                                 @endif
 
@@ -224,7 +224,7 @@
                                 <div>
                                     <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
                                         <span
-                                            class="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/60">
+                                            class="text-[11px] font-bold uppercase tracking-wider text-[#4D52B4] bg-[#4E9CE8]/10 px-2.5 py-0.5 rounded-full border border-[#4E9CE8]/30">
                                             {{ $course->category->name ?? 'Umum' }}
                                         </span>
                                         <div class="flex items-center gap-2 text-xs text-slate-500 font-medium">
@@ -237,7 +237,7 @@
                                     </div>
 
                                     <h3
-                                        class="text-base font-bold text-slate-900 leading-snug group-hover:text-emerald-700 transition-colors mt-1">
+                                        class="text-base font-bold text-slate-900 leading-snug group-hover:text-[#4D52B4] transition-colors mt-1">
                                         <a href="{{ route('courses.show', $course->slug ?? $course->id) }}">
                                             {{ $course->title }}
                                         </a>
@@ -256,8 +256,8 @@
 
                                     <div class="text-xs text-slate-500">
                                         @if($isEnrolledInThis)
-                                            <span class="inline-flex items-center gap-1.5 text-emerald-700 font-semibold text-xs">
-                                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                            <span class="inline-flex items-center gap-1.5 text-[#4D52B4] font-semibold text-xs">
+                                                <span class="w-2 h-2 rounded-full bg-[#70D6C5]"></span>
                                                 Sedang Diikuti
                                             </span>
                                         @else
@@ -268,12 +268,12 @@
                                     <div>
                                         @if($isEnrolledInThis)
                                             <a href="{{ route('learning.course', $course->slug ?? $course->id) }}"
-                                                class="inline-block px-5 py-2 text-center text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-all shadow-xs w-full sm:w-auto">
+                                                class="inline-block px-5 py-2 text-center text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] rounded-xl transition-all shadow-xs w-full sm:w-auto">
                                                 Lanjutkan Belajar &rarr;
                                             </a>
                                         @else
                                             <a href="{{ route('courses.show', $course->slug ?? $course->id) }}"
-                                                class="inline-block px-5 py-2 text-center text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-all shadow-xs w-full sm:w-auto">
+                                                class="inline-block px-5 py-2 text-center text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] rounded-xl transition-all shadow-xs w-full sm:w-auto">
                                                 Lihat Silabus & Daftar &rarr;
                                             </a>
                                         @endif
@@ -294,7 +294,7 @@
                             <p class="text-xs text-slate-500 mb-4">Coba sesuaikan kata kunci atau atur ulang filter pencarian
                                 Anda.</p>
                             <a href="{{ route('dashboard') }}"
-                                class="px-4 py-2 text-xs font-bold text-emerald-700 bg-emerald-50 rounded-lg hover:bg-emerald-100">Reset
+                                class="px-4 py-2 text-xs font-bold text-[#4D52B4] bg-[#4E9CE8]/10 rounded-lg hover:bg-[#4E9CE8]/20">Reset
                                 Semua Filter</a>
                         </div>
                     @endforelse
@@ -319,7 +319,7 @@
                                 </div>
                                 <div class="text-right">
                                     <span
-                                        class="px-2 py-0.5 rounded-full font-bold text-[10px] {{ $history->status === 'completed' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800' }}">
+                                        class="px-2 py-0.5 rounded-full font-bold text-[10px] {{ $history->status === 'completed' ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : 'bg-amber-100 text-amber-800' }}">
                                         {{ $history->status === 'completed' ? 'Selesai' : 'Sedang Dipelajari' }}
                                     </span>
                                     <span
@@ -337,15 +337,15 @@
             <div class="lg:col-span-4 space-y-6">
                 <!-- Last Lesson Shortcut -->
                 @if($lastLessonProgress)
-                    <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-800 block mb-1">Terakhir
+                    <div class="bg-[#4E9CE8]/10 border border-[#4E9CE8]/30 p-5 rounded-2xl">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-[#4D52B4] block mb-1">Terakhir
                             Dipelajari</span>
-                        <h4 class="text-sm font-bold text-emerald-950 truncate">{{ $lastLessonProgress->lesson->title }}</h4>
-                        <p class="text-xs text-emerald-700 mt-1 truncate">
+                        <h4 class="text-sm font-bold text-[#2F3375] truncate">{{ $lastLessonProgress->lesson->title }}</h4>
+                        <p class="text-xs text-[#4D52B4] mt-1 truncate">
                             {{ $lastLessonProgress->lesson->module->course->title ?? '' }}
                         </p>
                         <a href="{{ route('learning.lesson', [$lastLessonProgress->lesson->module->course_id, $lastLessonProgress->lesson_id]) }}"
-                            class="mt-3 inline-block px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold hover:bg-emerald-800 transition-colors">
+                            class="mt-3 inline-block px-4 py-2 bg-[#4D52B4] text-white rounded-xl text-xs font-bold hover:bg-[#4E9CE8] transition-colors">
                             Buka Materi Kembali &rarr;
                         </a>
                     </div>
@@ -376,7 +376,7 @@
                     <div class="flex justify-between items-center mb-3">
                         <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Sertifikat Saya</h3>
                         <a href="{{ route('my.certificates') }}"
-                            class="text-xs text-emerald-700 font-semibold hover:underline">Semua</a>
+                            class="text-xs text-[#4D52B4] font-semibold hover:underline">Semua</a>
                     </div>
 
                     <div class="space-y-2">
@@ -385,7 +385,7 @@
                                 class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between text-xs">
                                 <div class="truncate mr-2">
                                     <div class="font-bold text-slate-800 truncate">{{ $cert->course->title }}</div>
-                                    <div class="text-[10px] font-mono text-emerald-700">{{ $cert->certificate_code }}</div>
+                                    <div class="text-[10px] font-mono text-[#4D52B4]">{{ $cert->certificate_code }}</div>
                                 </div>
                                 <a href="{{ route('certificates.show', $cert->id) }}"
                                     class="px-2.5 py-1 bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold rounded-lg text-[11px] shrink-0">

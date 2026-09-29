@@ -8,12 +8,12 @@
 
     <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
         <!-- Header Profile Card -->
-        <div class="bg-gradient-to-r from-emerald-900 to-slate-900 text-white p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6">
+        <div class="bg-gradient-to-r from-[#4D52B4] to-slate-900 text-white p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6">
             <div class="relative shrink-0">
                 @if($user->avatar)
-                    <img id="headerAvatarImg" src="{{ asset('storage/' . $user->avatar) }}" alt="{{ $user->name }}" class="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-400 shadow-md">
+                    <img id="headerAvatarImg" src="{{ asset('storage/' . $user->avatar) }}" alt="{{ $user->name }}" class="w-20 h-20 rounded-2xl object-cover border-2 border-[#4E9CE8] shadow-md">
                 @else
-                    <div id="headerAvatarFallback" class="w-20 h-20 rounded-2xl gradient-bengkalis flex items-center justify-center text-white text-2xl font-black shadow-md border-2 border-emerald-400">
+                    <div id="headerAvatarFallback" class="w-20 h-20 rounded-2xl gradient-bengkalis flex items-center justify-center text-white text-2xl font-black shadow-md border-2 border-[#4E9CE8]">
                         {{ strtoupper(substr($user->name, 0, 2)) }}
                     </div>
                 @endif
@@ -22,17 +22,17 @@
             <div class="text-center sm:text-left flex-1">
                 <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
                     <h1 class="text-xl sm:text-2xl font-black text-white">{{ $user->name }}</h1>
-                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider {{ $user->isSuperAdmin() ? 'bg-amber-500/30 text-amber-200 border border-amber-400/30' : ($user->isAdmin() ? 'bg-emerald-500/30 text-emerald-200 border border-emerald-400/30' : 'bg-slate-500/30 text-slate-200 border border-slate-400/30') }}">
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider {{ $user->isSuperAdmin() ? 'bg-amber-500/30 text-amber-200 border border-amber-400/30' : ($user->isAdmin() ? 'bg-[#4E9CE8]/30 text-[#4E9CE8] border border-[#4E9CE8]/30' : 'bg-slate-500/30 text-slate-200 border border-slate-400/30') }}">
                         {{ $user->isSuperAdmin() ? 'Super Admin' : ($user->isAdmin() ? 'Admin Kursus' : 'Peserta') }}
                     </span>
                 </div>
                 <p class="text-xs text-slate-300 font-mono">
                     @if($user->nip)
-                        <span class="text-emerald-300 font-bold">NIP: {{ $user->nip }}</span> &bull;
+                        <span class="text-[#4E9CE8] font-bold">NIP: {{ $user->nip }}</span> &bull;
                     @endif
                     {{ $user->email }}
                 </p>
-                <p class="text-xs text-emerald-300 mt-1 font-semibold">{{ $user->institution ?? ($user->isAdmin() ? 'Pemerintah Kabupaten Bengkalis' : 'Masyarakat Umum / Aparatur') }}</p>
+                <p class="text-xs text-[#4E9CE8] mt-1 font-semibold">{{ $user->institution ?? ($user->isAdmin() ? 'Pemerintah Kabupaten Bengkalis' : 'Masyarakat Umum / Aparatur') }}</p>
             </div>
         </div>
 
@@ -43,7 +43,7 @@
 
             <div class="space-y-4">
                 <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider pb-2 border-b border-slate-100 flex items-center gap-2">
-                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 text-[#4D52B4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                     <span>Informasi Pribadi & Kepegawaian</span>
@@ -52,7 +52,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Nama Lengkap *</label>
-                        <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                        <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                         @error('name')
                             <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                         @enderror
@@ -60,7 +60,7 @@
 
                     <div>
                         <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Alamat Email *</label>
-                        <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                        <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                         @error('email')
                             <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                         @enderror
@@ -70,9 +70,9 @@
                 <div>
                     <label for="nip" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                         NIP (Nomor Induk Pegawai)
-                        <span class="text-[10px] text-emerald-600 lowercase font-normal">(digunakan untuk login)</span>
+                        <span class="text-[10px] text-[#4D52B4] lowercase font-normal">(digunakan untuk login)</span>
                     </label>
-                    <input type="text" name="nip" id="nip" value="{{ old('nip', $user->nip) }}" placeholder="Contoh: 198501012010011001" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                    <input type="text" name="nip" id="nip" value="{{ old('nip', $user->nip) }}" placeholder="Contoh: 198501012010011001" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                     @error('nip')
                         <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                     @enderror
@@ -81,7 +81,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label for="institution" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Instansi / Unit Kerja</label>
-                        <input type="text" name="institution" id="institution" value="{{ old('institution', $user->institution) }}" placeholder="Contoh: Disdik Bengkalis / Bappeda" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                        <input type="text" name="institution" id="institution" value="{{ old('institution', $user->institution) }}" placeholder="Contoh: Disdik Bengkalis / Bappeda" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                         @error('institution')
                             <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                         @enderror
@@ -89,7 +89,7 @@
 
                     <div>
                         <label for="phone" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Nomor Telepon / WhatsApp</label>
-                        <input type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" placeholder="08xxxxxxxxxx" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                        <input type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" placeholder="08xxxxxxxxxx" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                         @error('phone')
                             <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                         @enderror
@@ -101,15 +101,15 @@
                     <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-200">
                         <div id="avatarPreviewContainer" class="shrink-0">
                             @if($user->avatar)
-                                <img id="avatarPreview" src="{{ asset('storage/' . $user->avatar) }}" alt="{{ $user->name }}" class="w-16 h-16 rounded-2xl object-cover ring-2 ring-emerald-500/30 shadow-xs">
+                                <img id="avatarPreview" src="{{ asset('storage/' . $user->avatar) }}" alt="{{ $user->name }}" class="w-16 h-16 rounded-2xl object-cover ring-2 ring-[#4E9CE8]/30 shadow-xs">
                             @else
-                                <div id="avatarPreviewFallback" class="w-16 h-16 rounded-2xl gradient-bengkalis flex items-center justify-center text-white font-black text-lg shadow-xs ring-2 ring-emerald-500/30">
+                                <div id="avatarPreviewFallback" class="w-16 h-16 rounded-2xl gradient-bengkalis flex items-center justify-center text-white font-black text-lg shadow-xs ring-2 ring-[#4E9CE8]/30">
                                     {{ strtoupper(substr($user->name, 0, 2)) }}
                                 </div>
                             @endif
                         </div>
                         <div class="flex-1">
-                            <input type="file" name="avatar" id="avatar" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" onchange="previewAvatar(this)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer">
+                            <input type="file" name="avatar" id="avatar" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" onchange="previewAvatar(this)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#4E9CE8]/10 file:text-[#4D52B4] hover:file:bg-[#4E9CE8]/20 cursor-pointer">
                             <p class="text-[11px] text-slate-400 mt-1.5">Format file: JPG, JPEG, PNG, WEBP (Maksimal 2MB).</p>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
             <div class="space-y-4 pt-4 border-t border-slate-100">
                 <div class="flex items-center justify-between pb-2 border-b border-slate-100">
                     <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-[#4D52B4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                         <span>Ubah Kata Sandi (Password)</span>
@@ -134,7 +134,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label for="password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Kata Sandi Baru</label>
-                        <input type="password" name="password" id="password" autocomplete="new-password" placeholder="Minimal 6 karakter" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                        <input type="password" name="password" id="password" autocomplete="new-password" placeholder="Minimal 6 karakter" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                         @error('password')
                             <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                         @enderror
@@ -142,7 +142,7 @@
 
                     <div>
                         <label for="password_confirmation" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Konfirmasi Kata Sandi Baru</label>
-                        <input type="password" name="password_confirmation" id="password_confirmation" autocomplete="new-password" placeholder="Ulangi kata sandi baru" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                        <input type="password" name="password_confirmation" id="password_confirmation" autocomplete="new-password" placeholder="Ulangi kata sandi baru" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                     </div>
                 </div>
             </div>
@@ -152,7 +152,7 @@
                 <a href="{{ route('dashboard') }}" class="text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors">
                     &larr; Batal & Kembali ke Dashboard
                 </a>
-                <button type="submit" class="px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition-colors flex items-center gap-2">
+                <button type="submit" class="px-6 py-3 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-xs shadow-md transition-colors flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
@@ -176,7 +176,7 @@ function previewAvatar(input) {
         reader.onload = function(e) {
             const container = document.getElementById('avatarPreviewContainer');
             if (container) {
-                container.innerHTML = `<img src="${e.target.result}" class="w-16 h-16 rounded-2xl object-cover ring-2 ring-emerald-500 shadow-xs">`;
+                container.innerHTML = `<img src="${e.target.result}" class="w-16 h-16 rounded-2xl object-cover ring-2 ring-[#4E9CE8] shadow-xs">`;
             }
         };
         reader.readAsDataURL(file);

@@ -11,7 +11,7 @@
                 <p class="text-xs text-slate-500">Kelola kurikulum, modul pembelajaran, dan asesmen kuis</p>
             </div>
             <a href="{{ route('admin.courses.create') }}"
-                class="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition-colors">
+                class="px-5 py-2.5 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-xs shadow-md transition-colors">
                 + Buat Pembelajaran Baru
             </a>
         </div>
@@ -49,7 +49,7 @@
                                 <td class="py-4 px-4">
                                     <span
                                         class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider
-                                            {{ $course->status === 'published' ? 'bg-emerald-100 text-emerald-800' : ($course->status === 'draft' ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-700') }}">
+                                            {{ $course->status === 'published' ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : ($course->status === 'draft' ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-700') }}">
                                         {{ $course->status }}
                                     </span>
                                 </td>
@@ -61,7 +61,7 @@
                                         class="inline">
                                         @csrf
                                         <button type="submit"
-                                            class="px-2.5 py-1.5 rounded-lg text-[11px] font-bold {{ $course->status === 'published' ? 'bg-amber-50 text-amber-800 hover:bg-amber-100' : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100' }}">
+                                            class="px-2.5 py-1.5 rounded-lg text-[11px] font-bold {{ $course->status === 'published' ? 'bg-amber-50 text-amber-800 hover:bg-amber-100' : 'bg-[#4E9CE8]/10 text-[#4D52B4] hover:bg-[#4E9CE8]/20' }}">
                                             {{ $course->status === 'published' ? 'Jadikan Draft' : 'Publikasikan' }}
                                         </button>
                                     </form>

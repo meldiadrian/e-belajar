@@ -31,8 +31,8 @@
                 <!-- Hero Header -->
                 <div class="text-center space-y-4">
                     <div
-                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider">
-                        <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#4E9CE8]/20 text-[#4D52B4] text-xs font-bold uppercase tracking-wider">
+                        <svg class="w-4 h-4 text-[#4D52B4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -75,14 +75,14 @@
                         </div>
                         <input type="text" name="q" value="{{ $search }}"
                             placeholder="Ketik kata kunci pertanyaan (misal: kuis, daftar)..."
-                            class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                            class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                     </div>
                     @if($selectedCategory)
                         <input type="hidden" name="category" value="{{ $selectedCategory }}">
                     @endif
                     <div class="flex gap-2">
                         <button type="submit"
-                            class="px-5 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-xs transition-colors shrink-0">
+                            class="px-5 py-3 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-sm shadow-xs transition-colors shrink-0">
                             Cari
                         </button>
                         @if($search || $selectedCategory)
@@ -99,12 +99,12 @@
                     <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100 text-xs">
                         <span class="font-bold text-slate-500 mr-1">Kategori:</span>
                         <a href="{{ route('faqs.index', array_filter(['q' => $search])) }}"
-                            class="px-3 py-1.5 rounded-full font-semibold transition-all {{ empty($selectedCategory) ? 'bg-emerald-700 text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
+                            class="px-3 py-1.5 rounded-full font-semibold transition-all {{ empty($selectedCategory) ? 'bg-[#4D52B4] text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
                             Semua Kategori
                         </a>
                         @foreach($categories as $cat)
                             <a href="{{ route('faqs.index', array_filter(['category' => $cat, 'q' => $search])) }}"
-                                class="px-3 py-1.5 rounded-full font-semibold transition-all {{ $selectedCategory === $cat ? 'bg-emerald-700 text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
+                                class="px-3 py-1.5 rounded-full font-semibold transition-all {{ $selectedCategory === $cat ? 'bg-[#4D52B4] text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
                                 {{ $cat }}
                             </a>
                         @endforeach
@@ -115,22 +115,22 @@
             <!-- FAQs Accordion List -->
             <div class="space-y-4">
                 @forelse($faqs as $index => $faq)
-                    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden transition-all duration-200 hover:border-emerald-300 faq-item"
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden transition-all duration-200 hover:border-[#4E9CE8] faq-item"
                         id="faq-{{ $faq->id }}">
                         <button type="button" onclick="toggleFaq({{ $faq->id }})"
                             class="w-full px-6 py-5 text-left flex items-start justify-between gap-4 focus:outline-hidden group">
                             <div class="space-y-1">
                                 <div class="flex items-center gap-2">
-                                    <span class="px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 text-[11px] font-bold">
+                                    <span class="px-2.5 py-0.5 rounded-md bg-[#4E9CE8]/10 text-[#4D52B4] text-[11px] font-bold">
                                         {{ $faq->category_name }}
                                     </span>
                                 </div>
                                 <h3
-                                    class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                                    class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#4D52B4] transition-colors">
                                     {{ $faq->question }}
                                 </h3>
                             </div>
-                            <div class="shrink-0 p-1.5 rounded-lg bg-slate-100 group-hover:bg-emerald-100 transition-colors text-slate-500 group-hover:text-emerald-800"
+                            <div class="shrink-0 p-1.5 rounded-lg bg-slate-100 group-hover:bg-[#4E9CE8]/20 transition-colors text-slate-500 group-hover:text-[#4D52B4]"
                                 id="icon-{{ $faq->id }}">
                                 <svg class="w-5 h-5 transform transition-transform duration-200" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
@@ -157,7 +157,7 @@
                         </p>
                         <div class="pt-2">
                             <a href="{{ route('faqs.index') }}"
-                                class="px-4 py-2 rounded-xl bg-emerald-700 text-white font-bold text-xs hover:bg-emerald-800 transition-colors inline-block">
+                                class="px-4 py-2 rounded-xl bg-[#4D52B4] text-white font-bold text-xs hover:bg-[#4E9CE8] transition-colors inline-block">
                                 Lihat Semua Pertanyaan
                             </a>
                         </div>

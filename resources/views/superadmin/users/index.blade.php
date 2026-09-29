@@ -11,7 +11,7 @@
                 <p class="text-xs text-slate-500">Atur hak akses peran Superadmin, Admin Kursus, dan Peserta</p>
             </div>
             <button onclick="document.getElementById('modalAddUser').classList.remove('hidden')"
-                class="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition-colors flex items-center gap-2">
+                class="px-5 py-2.5 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-xs shadow-md transition-colors flex items-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
@@ -22,10 +22,10 @@
         <!-- Status Tabs -->
         <div class="flex border-b border-slate-200 text-xs font-bold gap-4">
             <a href="{{ route('superadmin.users.index', ['status' => 'active']) }}"
-                class="pb-3 flex items-center gap-1.5 transition-colors {{ ($status ?? 'active') === 'active' ? 'text-emerald-700 border-b-2 border-emerald-600' : 'text-slate-500 hover:text-emerald-700 border-b-2 border-transparent' }}">
+                class="pb-3 flex items-center gap-1.5 transition-colors {{ ($status ?? 'active') === 'active' ? 'text-[#4D52B4] border-b-2 border-[#4E9CE8]' : 'text-slate-500 hover:text-[#4E9CE8] border-b-2 border-transparent' }}">
                 <span>Pengguna Aktif</span>
                 <span
-                    class="px-2 py-0.5 rounded-full text-[10px] {{ ($status ?? 'active') === 'active' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600' }}">{{ $activeCount }}</span>
+                    class="px-2 py-0.5 rounded-full text-[10px] {{ ($status ?? 'active') === 'active' ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : 'bg-slate-100 text-slate-600' }}">{{ $activeCount }}</span>
             </a>
             <a href="{{ route('superadmin.users.index', ['status' => 'trashed']) }}"
                 class="pb-3 flex items-center gap-1.5 transition-colors {{ ($status ?? 'active') === 'trashed' ? 'text-amber-700 border-b-2 border-amber-600' : 'text-slate-500 hover:text-amber-700 border-b-2 border-transparent' }}">
@@ -42,7 +42,7 @@
             <div class="flex-1 min-w-[200px]">
                 <input type="text" name="search" value="{{ request('search') }}"
                     placeholder="Cari nama, email, atau instansi..."
-                    class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs focus:border-emerald-600 focus:outline-hidden">
+                    class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs focus:border-[#4E9CE8] focus:outline-hidden">
             </div>
             <div>
                 <select name="role" class="px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white"
@@ -114,7 +114,7 @@
                                             class="inline">
                                             @csrf
                                             <button type="submit"
-                                                class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase {{ $user->is_active ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800' }}">
+                                                class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase {{ $user->is_active ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : 'bg-red-100 text-red-800' }}">
                                                 {{ $user->is_active ? 'Aktif' : 'Nonaktif' }}
                                             </button>
                                         </form>
@@ -132,7 +132,7 @@
                                                 class="inline">
                                                 @csrf
                                                 <button type="submit"
-                                                    class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-[10px] transition-colors"
+                                                    class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-[#4E9CE8]/20 text-[#4D52B4] font-bold text-[10px] transition-colors"
                                                     title="Pulihkan Pengguna">
                                                     Pulihkan
                                                 </button>
@@ -196,7 +196,7 @@
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap *</label>
                     <input type="text" name="name" value="{{ old('name') }}" required
-                        class="w-full px-3 py-2 rounded-xl border {{ $errors->has('name') ? 'border-red-400 bg-red-50/30' : 'border-slate-300' }} text-sm focus:border-emerald-600 focus:outline-hidden">
+                        class="w-full px-3 py-2 rounded-xl border {{ $errors->has('name') ? 'border-red-400 bg-red-50/30' : 'border-slate-300' }} text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                     @error('name')
                         <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                     @enderror
@@ -204,7 +204,7 @@
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Email *</label>
                     <input type="email" name="email" value="{{ old('email') }}" required
-                        class="w-full px-3 py-2 rounded-xl border {{ $errors->has('email') ? 'border-red-400 bg-red-50/30' : 'border-slate-300' }} text-sm focus:border-emerald-600 focus:outline-hidden">
+                        class="w-full px-3 py-2 rounded-xl border {{ $errors->has('email') ? 'border-red-400 bg-red-50/30' : 'border-slate-300' }} text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                     @error('email')
                         <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                     @enderror
@@ -215,7 +215,7 @@
                         <span class="text-[10px] text-slate-400">Minimal 6 karakter</span>
                     </div>
                     <input type="password" name="password" required
-                        class="w-full px-3 py-2 rounded-xl border {{ $errors->has('password') ? 'border-red-400 bg-red-50/30' : 'border-slate-300' }} text-sm focus:border-emerald-600 focus:outline-hidden">
+                        class="w-full px-3 py-2 rounded-xl border {{ $errors->has('password') ? 'border-red-400 bg-red-50/30' : 'border-slate-300' }} text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                     @error('password')
                         <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                     @enderror
@@ -233,14 +233,14 @@
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Instansi</label>
                         <input type="text" name="institution" value="{{ old('institution') }}"
-                            class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                            class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                     </div>
                 </div>
                 <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
                     <button type="button" onclick="document.getElementById('modalAddUser').classList.add('hidden')"
                         class="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-700">Batal</button>
                     <button type="submit"
-                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 shadow-md">Simpan
+                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] shadow-md">Simpan
                         Pengguna</button>
                 </div>
             </form>

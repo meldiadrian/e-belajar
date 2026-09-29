@@ -14,8 +14,8 @@
                 <p class="text-xs text-slate-500 mt-0.5">Perbarui nama, NIP, atau gambar tanda tangan pejabat bersangkutan.</p>
             </div>
             @if($signer->is_active)
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#4E9CE8]/20 text-[#4D52B4] border border-[#4E9CE8]/30">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#4E9CE8]"></span>
                     Aktif
                 </span>
             @endif
@@ -30,7 +30,7 @@
                 <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                     Nama Lengkap beserta Gelar <span class="text-red-500">*</span>
                 </label>
-                <input type="text" name="name" id="name" value="{{ old('name', $signer->name) }}" required placeholder="Contoh: AGUS SOFYAN, S.STP.,MPA" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                <input type="text" name="name" id="name" value="{{ old('name', $signer->name) }}" required placeholder="Contoh: AGUS SOFYAN, S.STP.,MPA" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                 @error('name')
                     <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                 @enderror
@@ -41,7 +41,7 @@
                 <label for="nip" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                     NIP <span class="text-red-500">*</span>
                 </label>
-                <input type="text" name="nip" id="nip" value="{{ old('nip', $signer->nip) }}" required placeholder="Contoh: 197908161998021001" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden font-mono">
+                <input type="text" name="nip" id="nip" value="{{ old('nip', $signer->nip) }}" required placeholder="Contoh: 197908161998021001" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden font-mono">
                 @error('nip')
                     <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                 @enderror
@@ -53,7 +53,7 @@
                     <label for="jabatan" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                         Jabatan
                     </label>
-                    <input type="text" name="jabatan" id="jabatan" value="{{ old('jabatan', $signer->jabatan) }}" placeholder="Contoh: Kepala Dinas Komunikasi, Informatika dan Statistik" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                    <input type="text" name="jabatan" id="jabatan" value="{{ old('jabatan', $signer->jabatan) }}" placeholder="Contoh: Kepala Dinas Komunikasi, Informatika dan Statistik" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                     @error('jabatan')
                         <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                     @enderror
@@ -64,7 +64,7 @@
                     <label for="instansi" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                         Instansi / Daerah
                     </label>
-                    <input type="text" name="instansi" id="instansi" value="{{ old('instansi', $signer->instansi) }}" placeholder="Contoh: Kabupaten Bengkalis" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                    <input type="text" name="instansi" id="instansi" value="{{ old('instansi', $signer->instansi) }}" placeholder="Contoh: Kabupaten Bengkalis" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                     @error('instansi')
                         <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                     @enderror
@@ -78,7 +78,7 @@
                 </label>
                 <p class="text-xs text-slate-500 mb-2">Unggah file baru jika ingin mengganti tanda tangan & stempel saat ini.</p>
                 
-                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-2xl hover:border-emerald-500 transition-colors bg-slate-50/50">
+                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-2xl hover:border-[#4E9CE8] transition-colors bg-slate-50/50">
                     <div class="space-y-3 text-center">
                         <div id="preview-container" class="{{ $signer->signature_image ? '' : 'hidden' }} mb-2">
                             <img id="image-preview" 
@@ -89,7 +89,7 @@
                         </div>
                         
                         <div class="flex text-xs text-slate-600 justify-center">
-                            <label for="signature_image" class="relative cursor-pointer bg-white rounded-md font-bold text-emerald-700 hover:text-emerald-800 focus-within:outline-hidden px-3 py-1.5 border border-slate-200 shadow-2xs">
+                            <label for="signature_image" class="relative cursor-pointer bg-white rounded-md font-bold text-[#4D52B4] hover:text-[#4E9CE8] focus-within:outline-hidden px-3 py-1.5 border border-slate-200 shadow-2xs">
                                 <span>{{ $signer->signature_image ? 'Ganti File Gambar' : 'Pilih Berkas Gambar' }}</span>
                                 <input id="signature_image" name="signature_image" type="file" accept="image/png,image/jpeg,image/webp" class="sr-only" onchange="previewImage(this)">
                             </label>
@@ -105,7 +105,7 @@
             <!-- Active Checkbox -->
             <div class="pt-2">
                 <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" name="is_active" value="1" {{ old('is_active', $signer->is_active) ? 'checked' : '' }} class="w-4 h-4 rounded text-emerald-700 focus:ring-emerald-500 border-slate-300">
+                    <input type="checkbox" name="is_active" value="1" {{ old('is_active', $signer->is_active) ? 'checked' : '' }} class="w-4 h-4 rounded text-[#4D52B4] focus:ring-[#4E9CE8] border-slate-300">
                     <div>
                         <span class="text-sm font-bold text-slate-800">Jadikan Penandatangan Aktif</span>
                         <p class="text-xs text-slate-500">Jika dicentang, penandatangan ini otomatis digunakan pada semua sertifikat kelulusan yang dicetak/dilihat.</p>
@@ -118,7 +118,7 @@
                 <a href="{{ route('admin.certificates.index') }}" class="px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs transition-colors">
                     Batal
                 </a>
-                <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition-colors">
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-xs shadow-md transition-colors">
                     Simpan Perubahan
                 </button>
             </div>

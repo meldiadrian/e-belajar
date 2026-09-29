@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Kelola Nomor Sertifikat')
+@section('page_title', 'Kelola Nomor Sertifikat')
 
 @section('content')
 <div class="space-y-6">
@@ -20,7 +21,7 @@
 
     <!-- Navigation Tabs -->
     <div class="flex border-b border-slate-200 gap-4 text-sm font-bold">
-        <a href="{{ route('admin.issued-certificates.index') }}" class="pb-3 px-1 border-b-2 border-emerald-700 text-emerald-800 flex items-center gap-2">
+        <a href="{{ route('admin.issued-certificates.index') }}" class="pb-3 px-1 border-b-2 border-[#4E9CE8] text-[#4D52B4] flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
             <span>Daftar & Edit No. Sertifikat ({{ $certificates->total() }})</span>
         </a>
@@ -34,10 +35,10 @@
     <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3">
         <form action="{{ route('admin.issued-certificates.index') }}" method="GET" class="w-full sm:max-w-md flex items-center gap-2">
             <div class="relative w-full">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari No. Sertifikat, Nama Peserta, Kursus..." class="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari No. Sertifikat, Nama Peserta, Kursus..." class="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                 <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             </div>
-            <button type="submit" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition-colors shrink-0">
+            <button type="submit" class="px-4 py-2 bg-[#4D52B4] hover:bg-[#4E9CE8] text-white rounded-xl text-xs font-bold transition-colors shrink-0">
                 Cari
             </button>
             @if(request('search'))
@@ -66,7 +67,7 @@
                     @forelse($certificates as $cert)
                         <tr class="hover:bg-slate-50/60 transition-colors">
                             <td class="py-4 px-6">
-                                <div class="font-mono font-bold text-slate-900 tracking-wide text-xs sm:text-sm text-emerald-900 bg-emerald-50 px-2.5 py-1 rounded-lg inline-block border border-emerald-200/80">
+                                <div class="font-mono font-bold text-slate-900 tracking-wide text-xs sm:text-sm text-[#4D52B4] bg-[#4E9CE8]/10 px-2.5 py-1 rounded-lg inline-block border border-[#4E9CE8]/30">
                                     {{ $cert->certificate_number }}
                                 </div>
                                 <div class="text-[11px] font-mono text-slate-400 mt-1">Kode: {{ $cert->certificate_code }}</div>
@@ -87,12 +88,12 @@
                             </td>
                             <td class="py-4 px-6 text-right">
                                 <div class="flex items-center justify-end gap-2">
-                                    <a href="{{ route('admin.issued-certificates.edit', $cert->id) }}" class="inline-flex items-center gap-1 px-3 py-1.5 bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 rounded-lg text-xs font-bold transition-colors border border-slate-200 hover:border-emerald-200" title="Ubah Nomor Sertifikat">
+                                    <a href="{{ route('admin.issued-certificates.edit', $cert->id) }}" class="inline-flex items-center gap-1 px-3 py-1.5 bg-slate-100 hover:bg-[#4E9CE8]/10 text-slate-700 hover:text-[#4D52B4] rounded-lg text-xs font-bold transition-colors border border-slate-200 hover:border-[#4E9CE8]/30" title="Ubah Nomor Sertifikat">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
-                                        <span>Ubah No.</span>
+                                        <span>Ubah</span>
                                     </a>
 
-                                    <a href="{{ route('certificates.show', $cert->id) }}" target="_blank" class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg transition-colors" title="Lihat Sertifikat Asli">
+                                    <a href="{{ route('certificates.show', $cert->id) }}" target="_blank" class="p-1.5 text-slate-500 hover:text-[#4D52B4] hover:bg-[#4E9CE8]/10 rounded-lg transition-colors" title="Lihat Sertifikat Asli">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                                     </a>
 

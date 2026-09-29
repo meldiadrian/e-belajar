@@ -365,7 +365,7 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10">
             <div>
-                <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                <div class="inline-flex items-center gap-2 text-xs font-bold text-[#4D52B4] bg-[#4E9CE8]/15 border border-[#4E9CE8]/30 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
                     <span>Program Pelatihan Prioritas</span>
                 </div>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
@@ -495,7 +495,7 @@
     <section class="bg-white border-t border-slate-200/80 py-16 sm:py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="inline-block text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                <span class="inline-block text-xs font-bold text-[#4D52B4] bg-[#4E9CE8]/15 border border-[#4E9CE8]/30 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
                     Standar LMS Pemerintah
                 </span>
                 <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -574,7 +574,7 @@
     <section class="bg-gradient-to-b from-slate-50 via-emerald-50/30 to-slate-50 border-t border-slate-200/80 py-16 sm:py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-14">
-                <span class="inline-block text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                <span class="inline-block text-xs font-bold text-[#4D52B4] bg-[#4E9CE8]/15 border border-[#4E9CE8]/30 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
                     Tahapan Pembelajaran
                 </span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
@@ -697,7 +697,7 @@
     <!-- ==================== FAQ KHUSUS ASN KABUPATEN BENGKALIS ==================== -->
     <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div class="text-center mb-12">
-            <span class="inline-block text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+            <span class="inline-block text-xs font-bold text-[#4D52B4] bg-[#4E9CE8]/15 border border-[#4E9CE8]/30 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
                 Pusat Informasi & Regulasi
             </span>
             <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
@@ -738,7 +738,7 @@
         </div>
 
         <div class="text-center mt-8">
-            <a href="{{ route('faqs.index') }}" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-800 hover:underline">
+            <a href="{{ route('faqs.index') }}" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#4D52B4] hover:text-[#4E9CE8] hover:underline">
                 <span>Lihat Seluruh Pertanyaan & Jawaban di Pusat Bantuan</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
