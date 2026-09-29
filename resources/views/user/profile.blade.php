@@ -1,20 +1,10 @@
-@extends(Auth::user()->isAdmin() ? 'layouts.admin' : 'layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Edit Profil & Kata Sandi - E-Belajar Kabupaten Bengkalis')
 @section('page_title', 'Edit Profil & Kata Sandi')
 
 @section('content')
-<div class="{{ Auth::user()->isAdmin() ? 'max-w-4xl space-y-6' : 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10' }}">
-    @if(!Auth::user()->isAdmin())
-        <!-- Breadcrumb untuk Pengguna Publik -->
-        <div class="flex items-center gap-2 text-xs text-slate-500 mb-6">
-            <a href="{{ route('home') }}" class="hover:text-emerald-700">Beranda</a>
-            <span>/</span>
-            <a href="{{ route('dashboard') }}" class="hover:text-emerald-700">Dashboard</a>
-            <span>/</span>
-            <span class="font-bold text-slate-800">Edit Profil</span>
-        </div>
-    @endif
+<div class="max-w-4xl space-y-6">
 
     <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
         <!-- Header Profile Card -->

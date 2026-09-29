@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\CertificateSettingController;
 use App\Http\Controllers\Admin\CourseBuilderController;
 use App\Http\Controllers\Admin\FaqCategoryController as AdminFaqCategoryController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
+use App\Http\Controllers\Admin\IssuedCertificateController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CourseController;
@@ -26,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 Route::get('/courses/{identifier}', [CourseController::class, 'show'])->name('courses.show');
-Route::get('/certificates/verify/{code}', [CertificateController::class, 'verify'])->name('certificates.verify');
+Route::get('/certificates/verify/{code?}', [CertificateController::class, 'verify'])->name('certificates.verify')->where('code', '.*');
 Route::get('/pertanyaan-umum', [FaqController::class, 'index'])->name('faqs.index');
 
 // Authentication
@@ -94,9 +96,18 @@ Route::middleware('auth')->group(function () {
         Route::put('/questions/{question}', [CourseBuilderController::class, 'updateQuestion'])->name('questions.update');
         Route::delete('/questions/{question}', [CourseBuilderController::class, 'deleteQuestion'])->name('questions.destroy');
 
-        // FAQs Management (CRUD)
-        Route::resource('faqs', AdminFaqController::class)->except(['show']);
-        Route::resource('faq-categories', AdminFaqCategoryController::class)->except(['show']);
+        // FAQs Management (CRUD) - Dibatasi khusus Superadmin
+        Route::middleware('role:superadmin')->group(function () {
+            Route::resource('faqs', AdminFaqController::class)->except(['show']);
+            Route::resource('faq-categories', AdminFaqCategoryController::class)->except(['show']);
+        });
+
+        // Certificate Signer Management (CRUD)
+        Route::resource('certificates', CertificateSettingController::class)->except(['show']);
+        Route::post('certificates/{certificate}/set-active', [CertificateSettingController::class, 'setActive'])->name('certificates.set-active');
+
+        // Issued Certificates Management (View & Change Certificate Numbers)
+        Route::resource('issued-certificates', IssuedCertificateController::class)->except(['create', 'store']);
     });
 
     // Superadmin - User Management & Audit Activity Logs

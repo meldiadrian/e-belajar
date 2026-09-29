@@ -7,6 +7,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin Panel') - E-Belajar Kabupaten Bengkalis</title>
 
+    <!-- PWA Settings -->
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="theme-color" content="#047857">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="E-Belajar">
+    <link rel="apple-touch-icon" href="{{ asset('icons/icon-192x192.png') }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
@@ -55,7 +64,7 @@
                 <div>
                     <div class="font-extrabold text-white text-base leading-tight">E-Belajar Panel</div>
                     <div class="text-[11px] font-bold text-amber-400 uppercase tracking-wider">
-                        {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : 'Admin Kursus' }}
+                        {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isAdmin() ? 'Admin Kursus' : 'Peserta') }}
                     </div>
                 </div>
             </div>
@@ -74,8 +83,47 @@
                     <span>Dashboard</span>
                 </a>
 
-                <div class="text-[11px] uppercase tracking-wider text-slate-500 font-bold px-3 pt-4 pb-2">Manajemen
-                    Konten</div>
+                @if(Auth::user()->isUser())
+                    <a href="{{ route('my.courses') }}"
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ (request()->routeIs('my.courses*') || request()->routeIs('learning.*')) ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                        <span>Pembelajaran Saya</span>
+                    </a>
+
+                    <a href="{{ route('courses.index') }}"
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('courses.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        <span>Katalog Pelatihan</span>
+                    </a>
+
+                    <a href="{{ route('my.certificates') }}"
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('my.certificates*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                        <span>Sertifikat Saya</span>
+                    </a>
+
+                    <a href="{{ route('faqs.index') }}"
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('faqs.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Pertanyaan Umum (FAQ)</span>
+                    </a>
+                @endif
+
+                @if(Auth::user()->isAdmin())
+                    <div class="text-[11px] uppercase tracking-wider text-slate-500 font-bold px-3 pt-4 pb-2">Manajemen
+                        Konten</div>
 
                 <a href="{{ route('admin.courses.index') }}"
                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.courses.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
@@ -86,16 +134,40 @@
                     <span>Kelola Pembelajaran & Builder</span>
                 </a>
 
-                <a href="{{ route('admin.faqs.index') }}"
-                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ (request()->routeIs('admin.faqs.*') || request()->routeIs('admin.faq-categories.*')) ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
-                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Pertanyaan Umum (FAQ)</span>
-                </a>
+                @if(Auth::user()->isSuperAdmin())
+                    <a href="{{ route('admin.faqs.index') }}"
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ (request()->routeIs('admin.faqs.*') || request()->routeIs('admin.faq-categories.*')) ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Pertanyaan Umum (FAQ)</span>
+                    </a>
+                @endif
 
                 @if(Auth::user()->isSuperAdmin())
+                    <a href="{{ route('admin.certificates.index') }}"
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.certificates.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                        <span>Penandatangan Sertifikat</span>
+                    </a>
+                @endif
+
+
+                @if(Auth::user()->isSuperAdmin())
+                    <a href="{{ route('admin.issued-certificates.index') }}"
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.issued-certificates.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                        <span>Ubah No. Sertifikat</span>
+                    </a>
+
+
                     <div class="text-[11px] uppercase tracking-wider text-slate-500 font-bold px-3 pt-4 pb-2">Sistem & Audit
                     </div>
 
@@ -117,8 +189,10 @@
                         <span>Audit Log Aktivitas</span>
                     </a>
                 @endif
+            @endif
 
-                <div class="text-[11px] uppercase tracking-wider text-slate-500 font-bold px-3 pt-4 pb-2">Akun Saya</div>
+                <div class="text-[11px] uppercase tracking-wider text-slate-500 font-bold px-3 pt-4 pb-2">Akun Saya
+                </div>
 
                 <a href="{{ route('profile.edit', Auth::id()) }}"
                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('profile.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
@@ -142,27 +216,37 @@
                 <span>Lihat Portal Publik</span>
             </a>
 
-            <div class="p-2.5 bg-slate-800/80 rounded-xl flex items-center justify-between gap-2.5 border border-slate-700/50">
-                <a href="{{ route('profile.edit', Auth::id()) }}" class="flex items-center gap-2.5 min-w-0 flex-1 hover:opacity-90 group transition-all" title="Edit Profil & Password">
+            <div
+                class="p-2.5 bg-slate-800/80 rounded-xl flex items-center justify-between gap-2.5 border border-slate-700/50">
+                <a href="{{ route('profile.edit', Auth::id()) }}"
+                    class="flex items-center gap-2.5 min-w-0 flex-1 hover:opacity-90 group transition-all"
+                    title="Edit Profil & Password">
                     <div class="relative shrink-0">
                         @if(Auth::user()->avatar)
                             <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}"
                                 class="w-8 h-8 rounded-full object-cover ring-2 ring-emerald-500/50 shadow-xs">
                         @else
-                            <div class="w-8 h-8 rounded-full gradient-bengkalis text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/50 shadow-xs">
+                            <div
+                                class="w-8 h-8 rounded-full gradient-bengkalis text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/50 shadow-xs">
                                 {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
                             </div>
                         @endif
-                        <span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-slate-900" title="Online"></span>
+                        <span
+                            class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-slate-900"
+                            title="Online"></span>
                     </div>
                     <div class="truncate">
-                        <div class="text-xs font-bold text-white truncate group-hover:text-emerald-300 transition-colors">{{ Auth::user()->name }}</div>
+                        <div
+                            class="text-xs font-bold text-white truncate group-hover:text-emerald-300 transition-colors">
+                            {{ Auth::user()->name }}
+                        </div>
                         <div class="text-[10px] text-slate-400 truncate">{{ Auth::user()->email }}</div>
                     </div>
                 </a>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" title="Keluar dari akun" class="text-slate-400 hover:text-red-400 p-1.5 rounded-lg hover:bg-slate-700/50 transition-colors">
+                    <button type="submit" title="Keluar dari akun"
+                        class="text-slate-400 hover:text-red-400 p-1.5 rounded-lg hover:bg-slate-700/50 transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -191,22 +275,27 @@
                 </span>
 
                 <!-- User Profile & Avatar -->
-                <a href="{{ route('profile.edit', Auth::id()) }}"
-                    title="Edit Profil & Password"
+                <a href="{{ route('profile.edit', Auth::id()) }}" title="Edit Profil & Password"
                     class="flex items-center gap-2.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl transition-all shadow-xs group">
                     <div class="relative shrink-0">
                         @if(Auth::user()->avatar)
                             <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}"
                                 class="w-8 h-8 rounded-full object-cover ring-2 ring-emerald-500/50 group-hover:ring-emerald-400 transition-all shadow-xs">
                         @else
-                            <div class="w-8 h-8 rounded-full gradient-bengkalis text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/50 group-hover:ring-emerald-400 transition-all shadow-xs">
+                            <div
+                                class="w-8 h-8 rounded-full gradient-bengkalis text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/50 group-hover:ring-emerald-400 transition-all shadow-xs">
                                 {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
                             </div>
                         @endif
-                        <span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-slate-900" title="Online"></span>
+                        <span
+                            class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-slate-900"
+                            title="Online"></span>
                     </div>
                     <div class="text-left hidden md:block max-w-[140px] truncate">
-                        <div class="text-xs font-bold text-white truncate group-hover:text-emerald-300 transition-colors">{{ Auth::user()->name }}</div>
+                        <div
+                            class="text-xs font-bold text-white truncate group-hover:text-emerald-300 transition-colors">
+                            {{ Auth::user()->name }}
+                        </div>
                         <div class="text-[10px] text-emerald-400 truncate">Edit Profil &rarr;</div>
                     </div>
                 </a>
@@ -214,9 +303,12 @@
                 <!-- Logout Button -->
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" title="Keluar dari akun" class="inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold text-slate-500 transition-all duration-200 hover:bg-red-50 hover:text-red-600 border border-slate-200">
-                        <svg class="h-4 w-4 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    <button type="submit" title="Keluar dari akun"
+                        class="inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold text-slate-500 transition-all duration-200 hover:bg-red-50 hover:text-red-600 border border-slate-200">
+                        <svg class="h-4 w-4 transition-colors duration-200" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
                         <span class="hidden sm:inline">Keluar</span>
                     </button>
@@ -256,7 +348,8 @@
                     </div>
                 @endif
                 @if(session('error'))
-                    <div class="flex items-center p-4 mb-4 text-red-800 rounded-xl bg-red-50 border border-red-200 shadow-xs">
+                    <div
+                        class="flex items-center p-4 mb-4 text-red-800 rounded-xl bg-red-50 border border-red-200 shadow-xs">
                         <svg class="flex-shrink-0 w-5 h-5 mr-3 text-red-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
                                 d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
@@ -275,6 +368,19 @@
 
     @include('partials.sweetalert')
     @stack('scripts')
+
+    <!-- PWA Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/sw.js').then(function (registration) {
+                    console.log('PWA ServiceWorker registered with scope:', registration.scope);
+                }).catch(function (err) {
+                    console.warn('PWA ServiceWorker registration failed:', err);
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>

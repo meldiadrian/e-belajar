@@ -22,10 +22,11 @@
                 <div class="text-[11px] text-emerald-600 font-semibold mt-1">Dalam Database Sistem</div>
             </div>
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Enrollment</span>
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Peserta yang
+                    Terdaftar</span>
                 <div class="text-2xl font-black text-slate-900">{{ number_format($stats['total_enrollments']) }}</div>
                 <div class="text-[11px] text-blue-600 font-semibold mt-1">
-                    {{ number_format($stats['total_lesson_completions']) }} Lesson Diselesaikan
+                    {{ number_format($stats['total_lesson_completions']) }} Materi Diselesaikan
                 </div>
             </div>
 

@@ -1,21 +1,38 @@
-@extends('layouts.app')
+@extends(Auth::check() ? 'layouts.admin' : 'layouts.app')
 
-@section('title', 'Katalog Kursus - E-Belajar Kabupaten Bengkalis')
+@section('title', 'Katalog Pelatihan - E-Belajar Kabupaten Bengkalis')
+@section('page_title', 'Katalog Pelatihan')
 
 @section('content')
-    <div class="bg-emerald-950 text-white py-12 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-emerald-900 to-slate-900 opacity-95"></div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Katalog Pembelajaran Digital</h1>
-            <p class="text-sm sm:text-base text-emerald-200 mt-2 max-w-2xl">
-                Pilih pembelajaran peningkatan kompetensi mandiri sesuai kebutuhan Anda. Semua pembelajaran diselenggarakan
-                secara
-                daring dan bersertifikat resmi.
-            </p>
+    @if(Auth::check())
+        <div class="space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                <div>
+                    <h1 class="text-2xl font-black text-slate-900">Katalog Pelatihan Digital</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1">Pilih dan ikuti pembelajaran peningkatan kompetensi mandiri sesuai kebutuhan Anda</p>
+                </div>
+                @if(Auth::user()->isUser())
+                    <a href="{{ route('my.courses') }}"
+                        class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold hover:bg-emerald-800 shadow-xs">
+                        &larr; Pembelajaran Saya
+                    </a>
+                @endif
+            </div>
+    @else
+        <div class="bg-emerald-950 text-white py-12 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-emerald-900 to-slate-900 opacity-95"></div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Katalog Pembelajaran Digital</h1>
+                <p class="text-sm sm:text-base text-emerald-200 mt-2 max-w-2xl">
+                    Pilih pembelajaran peningkatan kompetensi mandiri sesuai kebutuhan Anda. Semua pembelajaran diselenggarakan
+                    secara
+                    daring dan bersertifikat resmi.
+                </p>
+            </div>
         </div>
-    </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    @endif
         <!-- Search & Filter Controls -->
         <form method="GET" action="{{ route('courses.index') }}"
             class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs mb-8 space-y-4">

@@ -60,16 +60,26 @@ class CertificateController extends Controller
             return response()->json($certificate);
         }
 
-        return view('certificates.show', compact('certificate'));
+        $signer = \App\Models\CertificateSetting::getActive();
+
+        return view('certificates.show', compact('certificate', 'signer'));
     }
 
-    public function verify($code)
+    public function verify(Request $request, $code = 'SAMPLE')
     {
-        $certificate = Certificate::where('certificate_code', $code)
-            ->with(['user:id,name,institution', 'course:id,title,duration,category_id', 'course.category:id,name'])
-            ->first();
+        $input = $request->query('code') ?: ($code ?: 'SAMPLE');
+        $input = trim(urldecode($input));
+
+        $certificate = null;
+        if ($input !== 'SAMPLE' && $input !== '') {
+            $certificate = Certificate::where('certificate_code', $input)
+                ->orWhere('certificate_number', $input)
+                ->with(['user:id,name,institution', 'course:id,title,duration,category_id', 'course.category:id,name'])
+                ->first();
+        }
 
         $isValid = ($certificate !== null);
+        $displayCode = ($input !== 'SAMPLE' && $input !== '') ? $input : 'SAMPLE';
 
         $verificationData = [
             'is_valid' => $isValid,
@@ -84,7 +94,7 @@ class CertificateController extends Controller
             'issuer' => 'Pemerintah Kabupaten Bengkalis - E-Belajar Platform',
         ];
 
-        if (request()->wantsJson()) {
+        if ($request->wantsJson()) {
             if (!$isValid) {
                 return response()->json([
                     'is_valid' => false,
@@ -95,6 +105,11 @@ class CertificateController extends Controller
             return response()->json($verificationData);
         }
 
-        return view('certificates.verify', compact('isValid', 'verificationData', 'certificate', 'code'));
+        return view('certificates.verify', [
+            'isValid' => $isValid,
+            'verificationData' => $verificationData,
+            'certificate' => $certificate,
+            'code' => $displayCode,
+        ]);
     }
 }
