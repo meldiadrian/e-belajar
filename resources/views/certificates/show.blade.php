@@ -246,7 +246,7 @@
                     </div>
                 </div>
 
-                <p class="text-xs text-slate-600 italic">Diberikan dengan penuh kehormatan kepada:</p>
+                <p class="text-xs text-slate-600 italic">Diberikan kepada:</p>
 
                 <!-- Recipient Name -->
                 <div class="py-2">
@@ -255,8 +255,8 @@
                         {{ $certificate->user->name }}
                     </div>
                     <!-- <div class="text-xs text-slate-500 font-semibold mt-2">
-                            {{ $certificate->user->institution ?? 'Peserta Pelatihan Mandiri' }}
-                        </div> -->
+                                {{ $certificate->user->institution ?? 'Peserta Pelatihan Mandiri' }}
+                            </div> -->
                 </div>
 
                 <!-- Body -->
