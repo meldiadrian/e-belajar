@@ -58,12 +58,13 @@ class CertificateService
             $code = 'BKS-' . strtoupper(Str::random(12));
         } while (Certificate::where('certificate_code', $code)->exists());
 
-        // Generate serial certificate number
-        $year = date('Y');
-        $month = date('m');
-        $count = Certificate::whereYear('created_at', $year)->count() + 1;
-        $serial = str_pad((string) $count, 5, '0', STR_PAD_LEFT);
-        $certNumber = "CERT/BKS/{$year}/{$month}/{$serial}";
+        // Generate sequential certificate number for this course
+        $certNumber = Certificate::getNextCertificateNumber($course->id);
+        while (Certificate::where('course_id', $course->id)->where('certificate_number', $certNumber)->exists()) {
+            $certNumber = Certificate::incrementCertificateNumber($certNumber);
+        }
+
+
 
         $verificationUrl = url("/certificates/verify/{$code}");
 

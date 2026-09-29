@@ -162,6 +162,13 @@ class CertificateSettingTest extends TestCase
             'issued_at' => now(),
         ]);
 
+        \App\Models\CourseProgress::create([
+            'user_id' => $user->id,
+            'course_id' => $course->id,
+            'progress_percentage' => 100.0,
+            'status' => 'completed',
+        ]);
+
         $signer = CertificateSetting::create([
             'name' => 'AGUS SOFYAN, S.STP.,MPA',
             'nip' => '197908161998021001',

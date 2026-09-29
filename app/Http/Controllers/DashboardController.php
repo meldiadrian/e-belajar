@@ -68,8 +68,8 @@ class DashboardController extends Controller
             ->latest('created_at')
             ->first();
 
-        // Certificates
-        $certificates = Certificate::where('user_id', $user->id)
+        // Certificates (Hanya tampil jika telah menyelesaikan kursus 100% dan lulus kuis)
+        $certificates = Certificate::visibleToUser($user->id)
             ->with('course')
             ->latest('issued_at')
             ->take(5)
@@ -93,7 +93,7 @@ class DashboardController extends Controller
             'total_enrolled' => $enrollments->count(),
             'in_progress' => $progresses->where('status', 'in_progress')->count(),
             'completed_courses' => $progresses->where('status', 'completed')->count(),
-            'total_certificates' => Certificate::where('user_id', $user->id)->count(),
+            'total_certificates' => Certificate::visibleToUser($user->id)->count(),
         ];
 
         // Catalog Courses for user dashboard

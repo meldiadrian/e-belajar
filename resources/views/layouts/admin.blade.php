@@ -167,8 +167,9 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                         </svg>
-                        <span>Ubah No. Sertifikat</span>
+                        <span>Nomor Sertifikat</span>
                     </a>
+
 
 
                     <div class="text-[11px] uppercase tracking-wider text-slate-500 font-bold px-3 pt-4 pb-2">Sistem & Audit

@@ -163,9 +163,13 @@ class QuizController extends Controller
             }
 
             if ($allPassed) {
-                $certificate = \App\Models\Certificate::where('user_id', $attempt->user_id)
+                $cert = \App\Models\Certificate::where('user_id', $attempt->user_id)
                     ->where('course_id', $course->id)
                     ->first();
+
+                if ($cert && $cert->isEligibleForUser()) {
+                    $certificate = $cert;
+                }
             }
         }
 

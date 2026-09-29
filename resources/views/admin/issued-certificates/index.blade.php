@@ -9,9 +9,13 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Kelola Nomor Sertifikat</h1>
-            <p class="text-sm text-slate-500 mt-1">Lihat dan ubah nomor sertifikat resmi yang telah diterbitkan kepada peserta pelatihan.</p>
+            <p class="text-sm text-slate-500 mt-1">Input, lihat, dan kelola nomor registrasi sertifikat resmi untuk peserta pelatihan.</p>
         </div>
         <div class="flex items-center gap-2">
+            <a href="{{ route('admin.issued-certificates.create') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-xs shadow-xs transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                <span>Input Nomor Sertifikat</span>
+            </a>
             <a href="{{ route('admin.certificates.index') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs transition-colors shadow-2xs">
                 <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
                 <span>Pengaturan Penandatangan</span>
@@ -113,7 +117,13 @@
                                 <div class="max-w-sm mx-auto space-y-2">
                                     <svg class="w-10 h-10 text-slate-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                                     <p class="font-medium text-slate-600">Belum ada sertifikat yang diterbitkan.</p>
-                                    <p class="text-[11px] text-slate-400">Sertifikat otomatis tercatat di sini saat peserta menyelesaikan kursus dan lulus kuis.</p>
+                                    <p class="text-[11px] text-slate-400">Sertifikat otomatis tercatat di sini saat peserta menyelesaikan kursus atau diinput manual oleh admin.</p>
+                                    <div class="pt-2">
+                                        <a href="{{ route('admin.issued-certificates.create') }}" class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#4D52B4] hover:bg-[#4E9CE8] text-white rounded-xl text-xs font-bold transition-colors shadow-xs">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                                            <span>Input Nomor Sertifikat</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </td>
                         </tr>

@@ -106,8 +106,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('certificates', CertificateSettingController::class)->except(['show']);
         Route::post('certificates/{certificate}/set-active', [CertificateSettingController::class, 'setActive'])->name('certificates.set-active');
 
-        // Issued Certificates Management (View & Change Certificate Numbers)
-        Route::resource('issued-certificates', IssuedCertificateController::class)->except(['create', 'store']);
+        // Issued Certificates Management (CRUD: Input, View, Edit & Delete Certificate Numbers)
+        Route::resource('issued-certificates', IssuedCertificateController::class);
+
     });
 
     // Superadmin - User Management & Audit Activity Logs

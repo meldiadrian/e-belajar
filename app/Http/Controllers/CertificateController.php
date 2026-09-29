@@ -11,7 +11,7 @@ class CertificateController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $certificates = Certificate::where('user_id', $user->id)
+        $certificates = Certificate::visibleToUser($user->id)
             ->with('course')
             ->latest('issued_at')
             ->paginate(10);
@@ -37,22 +37,12 @@ class CertificateController extends Controller
             return redirect()->route('certificates.verify', $certificate->certificate_code);
         }
 
-        // Syarat nilai kelulusan kuis: pastikan seluruh kuis kursus telah lulus
+        // Syarat mengikuti kursus terdahulu dan nilai kelulusan kuis: pastikan seluruh syarat terpenuhi untuk role user
         $course = $certificate->course;
         if ($course && !$currentUser->isAdmin()) {
-            $courseQuizIds = $course->quizzes()->where('is_published', true)->pluck('id');
-            if ($courseQuizIds->isNotEmpty()) {
-                $passedQuizzesCount = \App\Models\QuizAttempt::where('user_id', $certificate->user_id)
-                    ->whereIn('quiz_id', $courseQuizIds)
-                    ->where('status', 'submitted')
-                    ->where('passed', true)
-                    ->distinct('quiz_id')
-                    ->count('quiz_id');
-
-                if ($passedQuizzesCount < $courseQuizIds->count()) {
-                    return redirect()->route('learning.course', $course->slug ?? $course->id)
-                        ->with('error', 'Sertifikat belum dapat ditampilkan karena belum memenuhi syarat nilai kelulusan kuis.');
-                }
+            if (!$certificate->isEligibleForUser($currentUser)) {
+                return redirect()->route('learning.course', $course->slug ?? $course->id)
+                    ->with('error', 'Sertifikat belum dapat ditampilkan. Anda harus mengikuti kursus terlebih dahulu hingga selesai (100%) dan menyelesaikan kuis kelulusan.');
             }
         }
 
