@@ -124,25 +124,26 @@
         <div id="certificate-print-area"
             class="bg-white pt-24 pb-20 px-8 sm:pt-28 sm:pb-24 sm:px-14 md:pt-32 md:pb-24 md:px-16 shadow-2xl relative overflow-hidden text-center text-slate-900 print:shadow-none print:m-0 border border-slate-200/80">
             <!-- FRAME BINGKAI (NAVY & GOLD GEOMETRIC BORDER) -->
-            <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1024 723" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1024 723"
+                preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Top-Left Navy Corner Block (compact to avoid overlapping center logo) -->
                 <path d="M 46,49 L 320,49 L 320,71 L 71,71 L 71,320 L 46,320 Z" fill="#003579" />
-                
+
                 <!-- Bottom-Right Navy Corner Block (compact to avoid overlapping centered signature/NIP) -->
                 <path d="M 978,673 L 700,673 L 700,651 L 953,651 L 953,379 L 978,379 Z" fill="#003579" />
-                
+
                 <!-- Top-Left Outer Gold Bracket -->
                 <path d="M 220,31 L 31,31 L 31,240" stroke="#c59b27" stroke-width="3.5" stroke-linecap="square" />
-                
+
                 <!-- Bottom-Right Outer Gold Bracket -->
                 <path d="M 800,691 L 993,691 L 993,480" stroke="#c59b27" stroke-width="3.5" stroke-linecap="square" />
-                
+
                 <!-- Top-Left Inner Gold Accent Bracket -->
                 <path d="M 350,87 L 89,87 L 89,350" stroke="#c59b27" stroke-width="6.5" stroke-linecap="square" />
-                
+
                 <!-- Bottom-Right Inner Gold Accent Bracket -->
                 <path d="M 670,636 L 935,636 L 935,346" stroke="#c59b27" stroke-width="6.5" stroke-linecap="square" />
-                
+
                 <!-- Connecting Outer Gold Lines -->
                 <line x1="320" y1="62" x2="965" y2="62" stroke="#c59b27" stroke-width="3.5" />
                 <line x1="965" y1="62" x2="965" y2="379" stroke="#c59b27" stroke-width="3.5" />
@@ -151,8 +152,10 @@
             </svg>
 
             <!-- SIMBOL BULAT BUNGA (GOLD MEDAL SEAL BADGE WITH NAVY/GOLD RIBBONS) -->
-            <div class="absolute top-6 left-6 sm:top-9 sm:left-10 md:top-10 md:left-12 pointer-events-none z-20 w-16 sm:w-22 md:w-26 print:w-24 print:top-8 print:left-10 aspect-[140/170]">
-                <svg viewBox="0 0 140 170" class="w-full h-full drop-shadow-md" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div
+                class="absolute top-6 left-6 sm:top-9 sm:left-10 md:top-10 md:left-12 pointer-events-none z-20 w-16 sm:w-22 md:w-26 print:w-24 print:top-8 print:left-10 aspect-[140/170]">
+                <svg viewBox="0 0 140 170" class="w-full h-full drop-shadow-md" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <!-- Gold Medallion Gradient (Bevel Rim) -->
                         <linearGradient id="certGoldRim" x1="20%" y1="10%" x2="80%" y2="90%">
@@ -182,41 +185,45 @@
                     <!-- RIBBONS (Behind Medal) -->
                     <g id="certRibbons">
                         <!-- Outer Left Short Ribbon -->
-                        <polygon points="50,60 22,112 34,118 40,105 58,62" fill="#002758" stroke="#c59b27" stroke-width="1.8" stroke-linejoin="round" />
-                        
+                        <polygon points="50,60 22,112 34,118 40,105 58,62" fill="#002758" stroke="#c59b27"
+                            stroke-width="1.8" stroke-linejoin="round" />
+
                         <!-- Outer Right Short Ribbon -->
-                        <polygon points="90,60 118,112 106,118 100,105 82,62" fill="#002758" stroke="#c59b27" stroke-width="1.8" stroke-linejoin="round" />
+                        <polygon points="90,60 118,112 106,118 100,105 82,62" fill="#002758" stroke="#c59b27"
+                            stroke-width="1.8" stroke-linejoin="round" />
 
                         <!-- Main Left Ribbon Tail -->
-                        <polygon points="52,65 30,145 48,135 66,145 68,68" fill="#002d66" stroke="#c59b27" stroke-width="1.8" stroke-linejoin="round" />
+                        <polygon points="52,65 30,145 48,135 66,145 68,68" fill="#002d66" stroke="#c59b27"
+                            stroke-width="1.8" stroke-linejoin="round" />
 
                         <!-- Main Right Ribbon Tail -->
-                        <polygon points="88,65 74,68 76,145 94,135 112,145" fill="#002d66" stroke="#c59b27" stroke-width="1.8" stroke-linejoin="round" />
+                        <polygon points="88,65 74,68 76,145 94,135 112,145" fill="#002d66" stroke="#c59b27"
+                            stroke-width="1.8" stroke-linejoin="round" />
                     </g>
 
                     <!-- MEDAL CIRCLE (In Front) -->
                     <g id="certMedallion">
                         <!-- Outer Rim with Bevel Gradient -->
                         <circle cx="70" cy="58" r="46" fill="url(#certGoldRim)" stroke="#a1761b" stroke-width="1" />
-                        
+
                         <!-- Inner Groove Ring -->
                         <circle cx="70" cy="58" r="41" fill="none" stroke="url(#certInnerGroove)" stroke-width="1.5" />
-                        
+
                         <!-- Inner Circle Face -->
                         <circle cx="70" cy="58" r="38.5" fill="url(#certGoldFace)" />
-                        
+
                         <!-- Delicate Inner Decorative Rings -->
                         <circle cx="70" cy="58" r="32" fill="none" stroke="#d5ab39" stroke-width="1" stroke-opacity="0.8" />
-                        <circle cx="70" cy="58" r="30" fill="none" stroke="#eed173" stroke-width="0.75" stroke-opacity="0.9" />
+                        <circle cx="70" cy="58" r="30" fill="none" stroke="#eed173" stroke-width="0.75"
+                            stroke-opacity="0.9" />
                     </g>
                 </svg>
             </div>
 
             <!-- Watermark background seal -->
-            <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
-                <svg class="w-96 h-96" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
-                </svg>
+            <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none select-none">
+                <img src="{{ asset('storage/korpri.png') }}" alt="Logo KORPRI Indonesia"
+                    class="w-[440px] max-w-[70%] object-contain pointer-events-none select-none">
             </div>
 
             <div class="relative z-10 space-y-3.5 sm:space-y-4">
@@ -239,7 +246,7 @@
                     </div>
                 </div>
 
-                <p class="text-xs text-slate-600 italic">Diberikan dengan penuh kehormatan kepada:</p>
+                <p class="text-xs text-slate-600 italic">Diberikan kepada:</p>
 
                 <!-- Recipient Name -->
                 <div class="py-2">
@@ -247,15 +254,14 @@
                         class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight underline decoration-amber-500 decoration-2 underline-offset-8">
                         {{ $certificate->user->name }}
                     </div>
-                    <div class="text-xs text-slate-500 font-semibold mt-2">
-                        {{ $certificate->user->institution ?? 'Peserta Pelatihan Mandiri' }}
-                    </div>
+                    <!-- <div class="text-xs text-slate-500 font-semibold mt-2">
+                                {{ $certificate->user->institution ?? 'Peserta Pelatihan Mandiri' }}
+                            </div> -->
                 </div>
 
                 <!-- Body -->
                 <p class="text-xs sm:text-sm text-slate-700 max-w-2xl mx-auto leading-relaxed">
-                    Telah berhasil menyelesaikan seluruh rangkaian materi pelatihan mandiri, penugasan, dan evaluasi asesmen
-                    kompetensi pada kursus:
+                    Telah berhasil menyelesaikan seluruh rangkaian pelatihan mandiri dengan materi :
                 </p>
 
                 <div class="p-4 bg-[#4E9CE8]/10/70 border border-[#4E9CE8]/30 rounded-2xl max-w-xl mx-auto">
