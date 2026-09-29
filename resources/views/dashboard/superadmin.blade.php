@@ -19,7 +19,7 @@
                 <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Pembelajaran
                     Terdaftar</span>
                 <div class="text-2xl font-black text-slate-900">{{ $stats['total_courses'] }}</div>
-                <div class="text-[11px] text-emerald-600 font-semibold mt-1">Dalam Database Sistem</div>
+                <div class="text-[11px] text-[#4D52B4] font-semibold mt-1">Dalam Database Sistem</div>
             </div>
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                 <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Peserta yang
@@ -41,26 +41,26 @@
         <!-- Quick Shortcuts -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <a href="{{ route('superadmin.users.index') }}"
-                class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-emerald-500 shadow-xs transition-all flex items-center justify-between group">
+                class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-[#4E9CE8] shadow-xs transition-all flex items-center justify-between group">
                 <div class="flex items-center gap-3">
                     <div
-                        class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                        class="w-10 h-10 rounded-xl bg-[#4E9CE8]/20 text-[#4D52B4] flex items-center justify-center font-bold">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
                     </div>
                     <div>
-                        <h4 class="font-bold text-slate-900 text-sm group-hover:text-emerald-700">Kelola Pengguna & Peran
+                        <h4 class="font-bold text-slate-900 text-sm group-hover:text-[#4E9CE8]">Kelola Pengguna & Peran
                             (RBAC)</h4>
                         <p class="text-xs text-slate-500">Atur hak akses Superadmin, Admin, dan Peserta</p>
                     </div>
                 </div>
-                <span class="text-slate-400 group-hover:text-emerald-700 font-bold">&rarr;</span>
+                <span class="text-slate-400 group-hover:text-[#4E9CE8] font-bold">&rarr;</span>
             </a>
 
             <a href="{{ route('superadmin.activity-logs.index') }}"
-                class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-emerald-500 shadow-xs transition-all flex items-center justify-between group">
+                class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-[#4E9CE8] shadow-xs transition-all flex items-center justify-between group">
                 <div class="flex items-center gap-3">
                     <div
                         class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
@@ -88,7 +88,7 @@
                     <span class="text-xs text-slate-500">Mencatat user, event, entitas, IP, dan timestamp</span>
                 </div>
                 <a href="{{ route('superadmin.activity-logs.index') }}"
-                    class="text-xs font-semibold text-emerald-700 hover:underline">Semua Log &rarr;</a>
+                    class="text-xs font-semibold text-[#4D52B4] hover:underline">Semua Log &rarr;</a>
             </div>
 
             <div class="overflow-x-auto">

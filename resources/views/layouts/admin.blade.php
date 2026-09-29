@@ -46,16 +46,19 @@
         }
 
         .gradient-bengkalis {
-            background: linear-gradient(135deg, #064E3B 0%, #047857 50%, #0D9488 100%);
+            background: linear-gradient(135deg, #2F3375 0%, #4D52B4 50%, #4E9CE8 100%);
         }
     </style>
     @stack('styles')
 </head>
 
-<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col md:flex-row">
+<body class="bg-slate-100 text-slate-800 antialiased flex h-screen overflow-hidden">
+    <!-- Mobile Overlay -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden md:hidden transition-opacity opacity-0" onclick="toggleSidebar()"></div>
+
     <!-- Sidebar -->
-    <aside
-        class="w-full md:w-64 bg-slate-900 text-slate-300 flex-shrink-0 flex flex-col justify-between border-r border-slate-800">
+    <aside id="sidebar"
+        class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 flex flex-col justify-between border-r border-slate-800 transition-transform duration-300 -translate-x-full md:relative md:translate-x-0 overflow-y-auto">
         <div>
             <!-- Brand -->
             <div class="p-5 border-b border-slate-800 flex items-center gap-3">
@@ -75,7 +78,7 @@
                 </div>
 
                 <a href="{{ route('dashboard') }}"
-                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('dashboard') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('dashboard') ? 'bg-[#4D52B4] text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -85,7 +88,7 @@
 
                 @if(Auth::user()->isUser())
                     <a href="{{ route('my.courses') }}"
-                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ (request()->routeIs('my.courses*') || request()->routeIs('learning.*')) ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ (request()->routeIs('my.courses*') || request()->routeIs('learning.*')) ? 'bg-[#4D52B4] text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -94,7 +97,7 @@
                     </a>
 
                     <a href="{{ route('courses.index') }}"
-                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('courses.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('courses.*') ? 'bg-[#4D52B4] text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -103,7 +106,7 @@
                     </a>
 
                     <a href="{{ route('my.certificates') }}"
-                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('my.certificates*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('my.certificates*') ? 'bg-[#4D52B4] text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -112,7 +115,7 @@
                     </a>
 
                     <a href="{{ route('faqs.index') }}"
-                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('faqs.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('faqs.*') ? 'bg-[#4D52B4] text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -126,7 +129,7 @@
                         Konten</div>
 
                 <a href="{{ route('admin.courses.index') }}"
-                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.courses.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.courses.*') ? 'bg-[#4D52B4] text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -136,7 +139,7 @@
 
                 @if(Auth::user()->isSuperAdmin())
                     <a href="{{ route('admin.faqs.index') }}"
-                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ (request()->routeIs('admin.faqs.*') || request()->routeIs('admin.faq-categories.*')) ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ (request()->routeIs('admin.faqs.*') || request()->routeIs('admin.faq-categories.*')) ? 'bg-[#4D52B4] text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -147,7 +150,7 @@
 
                 @if(Auth::user()->isSuperAdmin())
                     <a href="{{ route('admin.certificates.index') }}"
-                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.certificates.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.certificates.*') ? 'bg-[#4D52B4] text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -159,7 +162,7 @@
 
                 @if(Auth::user()->isSuperAdmin())
                     <a href="{{ route('admin.issued-certificates.index') }}"
-                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.issued-certificates.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.issued-certificates.*') ? 'bg-[#4D52B4] text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -172,7 +175,7 @@
                     </div>
 
                     <a href="{{ route('superadmin.users.index') }}"
-                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('superadmin.users.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('superadmin.users.*') ? 'bg-[#4D52B4] text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -181,7 +184,7 @@
                     </a>
 
                     <a href="{{ route('superadmin.activity-logs.index') }}"
-                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('superadmin.activity-logs.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('superadmin.activity-logs.*') ? 'bg-[#4D52B4] text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -195,7 +198,7 @@
                 </div>
 
                 <a href="{{ route('profile.edit', Auth::id()) }}"
-                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('profile.*') ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('profile.*') ? 'bg-[#4D52B4] text-white font-semibold shadow-xs' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -224,20 +227,20 @@
                     <div class="relative shrink-0">
                         @if(Auth::user()->avatar)
                             <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}"
-                                class="w-8 h-8 rounded-full object-cover ring-2 ring-emerald-500/50 shadow-xs">
+                                class="w-8 h-8 rounded-full object-cover ring-2 ring-[#4E9CE8]/50 shadow-xs">
                         @else
                             <div
-                                class="w-8 h-8 rounded-full gradient-bengkalis text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/50 shadow-xs">
+                                class="w-8 h-8 rounded-full gradient-bengkalis text-white font-bold text-xs flex items-center justify-center ring-2 ring-[#4E9CE8]/50 shadow-xs">
                                 {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
                             </div>
                         @endif
                         <span
-                            class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-slate-900"
+                            class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-[#70D6C5] ring-2 ring-slate-900"
                             title="Online"></span>
                     </div>
                     <div class="truncate">
                         <div
-                            class="text-xs font-bold text-white truncate group-hover:text-emerald-300 transition-colors">
+                            class="text-xs font-bold text-white truncate group-hover:text-[#70D6C5] transition-colors">
                             {{ Auth::user()->name }}
                         </div>
                         <div class="text-[10px] text-slate-400 truncate">{{ Auth::user()->email }}</div>
@@ -258,19 +261,26 @@
     </aside>
 
     <!-- Main Content Area -->
-    <div class="flex-1 flex flex-col min-w-0">
+    <div class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
         <!-- Top Navbar -->
         <header
-            class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-30 shadow-xs">
-            <div class="flex items-center gap-2 text-sm text-slate-500">
-                <a href="{{ route('dashboard') }}" class="hover:text-emerald-700">Panel</a>
-                <span>/</span>
-                <span class="font-semibold text-slate-800">@yield('page_title', 'Dashboard')</span>
+            class="bg-white border-b border-slate-200 px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSidebar()" class="md:hidden text-slate-500 hover:text-slate-800 focus:outline-hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <div class="flex items-center gap-1.5 sm:gap-2 text-sm text-slate-500 max-w-[50%] sm:max-w-none">
+                    <a href="{{ route('dashboard') }}" class="hover:text-[#4D52B4] shrink-0">Panel</a>
+                    <span class="shrink-0">/</span>
+                    <span class="font-semibold text-slate-800 truncate">@yield('page_title', 'Dashboard')</span>
+                </div>
             </div>
 
             <div class="flex items-center gap-3">
                 <span
-                    class="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold {{ Auth::user()->isSuperAdmin() ? 'bg-amber-100 text-amber-800 border border-amber-300' : 'bg-emerald-100 text-emerald-800 border border-emerald-300' }}">
+                    class="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold {{ Auth::user()->isSuperAdmin() ? 'bg-amber-100 text-amber-800 border border-amber-300' : 'bg-[#4E9CE8]/15 text-[#4D52B4] border border-[#4E9CE8]/30' }}">
                     Role: {{ strtoupper(Auth::user()->role) }}
                 </span>
 
@@ -280,23 +290,23 @@
                     <div class="relative shrink-0">
                         @if(Auth::user()->avatar)
                             <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}"
-                                class="w-8 h-8 rounded-full object-cover ring-2 ring-emerald-500/50 group-hover:ring-emerald-400 transition-all shadow-xs">
+                                class="w-8 h-8 rounded-full object-cover ring-2 ring-[#4E9CE8]/50 group-hover:ring-[#4E9CE8] transition-all shadow-xs">
                         @else
                             <div
-                                class="w-8 h-8 rounded-full gradient-bengkalis text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/50 group-hover:ring-emerald-400 transition-all shadow-xs">
+                                class="w-8 h-8 rounded-full gradient-bengkalis text-white font-bold text-xs flex items-center justify-center ring-2 ring-[#4E9CE8]/50 group-hover:ring-[#4E9CE8] transition-all shadow-xs">
                                 {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
                             </div>
                         @endif
                         <span
-                            class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-slate-900"
+                            class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-[#70D6C5] ring-2 ring-slate-900"
                             title="Online"></span>
                     </div>
                     <div class="text-left hidden md:block max-w-[140px] truncate">
                         <div
-                            class="text-xs font-bold text-white truncate group-hover:text-emerald-300 transition-colors">
+                            class="text-xs font-bold text-white truncate group-hover:text-[#70D6C5] transition-colors">
                             {{ Auth::user()->name }}
                         </div>
-                        <div class="text-[10px] text-emerald-400 truncate">Edit Profil &rarr;</div>
+                        <div class="text-[10px] text-[#70D6C5] truncate">Edit Profil &rarr;</div>
                     </div>
                 </a>
 
@@ -338,8 +348,8 @@
             <noscript>
                 @if(session('success'))
                     <div
-                        class="flex items-center p-4 mb-4 text-emerald-800 rounded-xl bg-emerald-50 border border-emerald-200 shadow-xs">
-                        <svg class="flex-shrink-0 w-5 h-5 mr-3 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                        class="flex items-center p-4 mb-4 text-[#4D52B4] rounded-xl bg-[#4E9CE8]/15 border border-[#4E9CE8]/30 shadow-xs">
+                        <svg class="flex-shrink-0 w-5 h-5 mr-3 text-[#4E9CE8]" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                 clip-rule="evenodd"></path>
@@ -379,6 +389,24 @@
                     console.warn('PWA ServiceWorker registration failed:', err);
                 });
             });
+        }
+    </script>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (sidebar.classList.contains('-translate-x-full')) {
+                // Open
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+            } else {
+                // Close
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
         }
     </script>
 </body>

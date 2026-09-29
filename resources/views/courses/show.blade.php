@@ -5,9 +5,9 @@
 @section('content')
 <!-- Header Header Detail -->
 <div class="bg-slate-900 text-white py-12 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-900 opacity-95"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-[#4D52B4] via-slate-900 to-[#4D52B4] opacity-95"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center gap-2 text-xs font-semibold text-emerald-400 mb-4">
+        <div class="flex items-center gap-2 text-xs font-semibold text-[#4E9CE8] mb-4">
             <a href="{{ route('courses.index') }}" class="hover:underline">Katalog</a>
             <span>/</span>
             <span>{{ $course->category->name ?? 'Umum' }}</span>
@@ -37,22 +37,22 @@
             <!-- Enrollment Card -->
             <div class="lg:col-span-4 bg-white text-slate-800 p-6 rounded-2xl shadow-xl border border-slate-200">
                 <div class="text-center pb-4 border-b border-slate-100">
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">Akses Pembelajaran</span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#4D52B4]">Akses Pembelajaran</span>
                     <div class="text-2xl font-black text-slate-900 mt-1">100% GRATIS</div>
                     <div class="text-[11px] text-slate-500">Dibiayai APBD Kabupaten Bengkalis</div>
                 </div>
 
                 <div class="py-5 space-y-3 text-xs text-slate-600">
                     <div class="flex items-center gap-2">
-                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <svg class="w-4 h-4 text-[#4D52B4]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                         <span>Akses penuh materi modul & bahan ajar</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <svg class="w-4 h-4 text-[#4D52B4]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                         <span>Evaluasi mandiri kuis pemahaman</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <svg class="w-4 h-4 text-[#4D52B4]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                         <span>Sertifikat digital terverifikasi publik</span>
                     </div>
                 </div>
@@ -60,27 +60,27 @@
                 @auth
                     @if($isEnrolled)
                         <div class="space-y-3">
-                            <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-center">
-                                <span class="text-xs font-semibold text-emerald-800">Progres Anda:</span>
-                                <div class="text-lg font-black text-emerald-700">{{ $courseProgress->progress_percentage ?? 0 }}%</div>
-                                <div class="w-full bg-emerald-200 rounded-full h-2 mt-1.5 overflow-hidden">
-                                    <div class="bg-emerald-600 h-2 rounded-full" style="width: {{ $courseProgress->progress_percentage ?? 0 }}%"></div>
+                            <div class="bg-[#4E9CE8]/10 border border-[#4E9CE8]/30 p-3 rounded-xl text-center">
+                                <span class="text-xs font-semibold text-[#4D52B4]">Progres Anda:</span>
+                                <div class="text-lg font-black text-[#4D52B4]">{{ $courseProgress->progress_percentage ?? 0 }}%</div>
+                                <div class="w-full bg-[#4E9CE8]/30 rounded-full h-2 mt-1.5 overflow-hidden">
+                                    <div class="bg-[#70D6C5] h-2 rounded-full" style="width: {{ $courseProgress->progress_percentage ?? 0 }}%"></div>
                                 </div>
                             </div>
-                            <a href="{{ route('learning.course', $course->slug ?? $course->id) }}" class="block w-full py-3.5 text-center text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl shadow-md transition-all">
+                            <a href="{{ route('learning.course', $course->slug ?? $course->id) }}" class="block w-full py-3.5 text-center text-sm font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] rounded-xl shadow-md transition-all">
                                 Lanjutkan Belajar Sekarang &rarr;
                             </a>
                         </div>
                     @else
                         <form action="{{ route('courses.enroll', $course->id) }}" method="POST">
                             @csrf
-                            <button type="submit" class="w-full py-3.5 text-center text-sm font-bold text-white bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-800 hover:to-teal-800 rounded-xl shadow-lg transition-all">
+                            <button type="submit" class="w-full py-3.5 text-center text-sm font-bold text-white bg-gradient-to-r from-[#4D52B4] to-[#4E9CE8] hover:from-[#4E9CE8] hover:to-[#70D6C5] rounded-xl shadow-lg transition-all">
                                 Daftar Sekarang
                             </button>
                         </form>
                     @endif
                 @else
-                    <a href="{{ route('login') }}" class="block w-full py-3.5 text-center text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl shadow-md transition-all">
+                    <a href="{{ route('login') }}" class="block w-full py-3.5 text-center text-sm font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] rounded-xl shadow-md transition-all">
                         Masuk untuk Mendaftar
                     </a>
                 @endauth
@@ -101,7 +101,7 @@
                         <!-- Module Header -->
                         <div class="bg-slate-50 p-4 border-b border-slate-200 flex items-center justify-between">
                             <div class="flex items-center gap-3">
-                                <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xs">
+                                <span class="w-7 h-7 rounded-lg bg-[#4E9CE8]/20 text-[#4D52B4] flex items-center justify-center font-bold text-xs">
                                     {{ $index + 1 }}
                                 </span>
                                 <div>
@@ -124,7 +124,7 @@
                                             @elseif($lesson->lesson_type === 'quiz')
                                                 <svg class="w-4 h-4 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 10-1-1zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
                                             @else
-                                                <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"/></svg>
+                                                <svg class="w-4 h-4 text-[#4D52B4]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"/></svg>
                                             @endif
                                         </div>
                                         <div>
@@ -135,11 +135,11 @@
 
                                     <div>
                                         @if($lesson->is_preview)
-                                            <a href="{{ route('learning.lesson', [$course->id, $lesson->id]) }}" class="px-2.5 py-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg border border-emerald-200">
+                                            <a href="{{ route('learning.lesson', [$course->id, $lesson->id]) }}" class="px-2.5 py-1 text-[11px] font-bold text-[#4D52B4] bg-[#4E9CE8]/10 hover:bg-[#4E9CE8]/20 rounded-lg border border-[#4E9CE8]/30">
                                                 Pratinjau Gratis
                                             </a>
                                         @elseif($isEnrolled)
-                                            <a href="{{ route('learning.lesson', [$course->id, $lesson->id]) }}" class="text-xs text-emerald-700 font-semibold hover:underline">
+                                            <a href="{{ route('learning.lesson', [$course->id, $lesson->id]) }}" class="text-xs text-[#4D52B4] font-semibold hover:underline">
                                                 Buka Materi &rarr;
                                             </a>
                                         @else
@@ -182,7 +182,7 @@
                     </div> -->
                     <div class="flex justify-between py-1.5">
                         <!-- <span class="text-slate-400">Legalitas Sertifikat</span>
-                        <span class="font-bold text-emerald-700">Terdaftar & Sah</span> -->
+                        <span class="font-bold text-[#4D52B4]">Terdaftar & Sah</span> -->
                     </div>
                 </div>
             </div>

@@ -19,7 +19,7 @@
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                         </div>
                         <div>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">Sertifikat Sah</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-[#4D52B4] bg-[#4E9CE8]/10 px-2 py-0.5 rounded-full">Sertifikat Sah</span>
                             <h3 class="text-base font-bold text-slate-900 mt-1">{{ $cert->course->title }}</h3>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="flex items-center gap-2 pt-2 border-t border-slate-100">
-                    <a href="{{ route('certificates.show', $cert->id) }}" class="flex-1 py-2.5 text-center bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs transition-colors shadow-xs">
+                    <a href="{{ route('certificates.show', $cert->id) }}" class="flex-1 py-2.5 text-center bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold rounded-xl text-xs transition-colors shadow-xs">
                         Buka & Cetak Sertifikat
                     </a>
                     <a href="{{ route('certificates.verify', $cert->certificate_code) }}" target="_blank" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition-colors">

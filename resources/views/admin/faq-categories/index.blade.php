@@ -20,7 +20,7 @@
                     </svg>
                     <span>Daftar Pertanyaan</span>
                 </a>
-                <a href="{{ route('admin.faq-categories.create') }}" class="px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition-colors flex items-center gap-1.5">
+                <a href="{{ route('admin.faq-categories.create') }}" class="px-4 py-2.5 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-xs shadow-md transition-colors flex items-center gap-1.5">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
@@ -31,10 +31,10 @@
 
         <!-- Navigation Tabs -->
         <div class="flex border-b border-slate-200 text-xs font-bold pt-2 gap-4">
-            <a href="{{ route('admin.faqs.index') }}" class="pb-3 text-slate-500 hover:text-emerald-700 border-b-2 border-transparent transition-colors">
+            <a href="{{ route('admin.faqs.index') }}" class="pb-3 text-slate-500 hover:text-[#4D52B4] border-b-2 border-transparent transition-colors">
                 Daftar Pertanyaan
             </a>
-            <a href="{{ route('admin.faq-categories.index') }}" class="pb-3 text-emerald-700 border-b-2 border-emerald-600">
+            <a href="{{ route('admin.faq-categories.index') }}" class="pb-3 text-[#4D52B4] border-b-2 border-[#4E9CE8]">
                 Kategori Pertanyaan
             </a>
         </div>
@@ -44,7 +44,7 @@
     <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
         <form method="GET" action="{{ route('admin.faq-categories.index') }}" class="flex gap-3">
             <div class="relative flex-1">
-                <input type="text" name="q" value="{{ $search }}" placeholder="Cari nama atau deskripsi kategori..." class="w-full px-4 py-2 rounded-xl border border-slate-300 text-xs focus:border-emerald-600 focus:outline-hidden">
+                <input type="text" name="q" value="{{ $search }}" placeholder="Cari nama atau deskripsi kategori..." class="w-full px-4 py-2 rounded-xl border border-slate-300 text-xs focus:border-[#4E9CE8] focus:outline-hidden">
             </div>
             <button type="submit" class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-bold text-xs transition-colors shrink-0">
                 Cari
@@ -91,13 +91,13 @@
                                 @endif
                             </td>
                             <td class="px-5 py-4 text-center">
-                                <a href="{{ route('admin.faqs.index', ['category' => $category->name]) }}" class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 font-bold hover:bg-emerald-100 transition-colors inline-block" title="Lihat daftar pertanyaan di kategori ini">
+                                <a href="{{ route('admin.faqs.index', ['category' => $category->name]) }}" class="px-2.5 py-1 rounded-full bg-[#4E9CE8]/10 text-[#4D52B4] font-bold hover:bg-[#4E9CE8]/20 transition-colors inline-block" title="Lihat daftar pertanyaan di kategori ini">
                                     {{ $category->faqs_count }} Pertanyaan
                                 </a>
                             </td>
                             <td class="px-5 py-4 text-center">
                                 @if($category->is_active)
-                                    <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[10px]">
+                                    <span class="px-2.5 py-1 rounded-full bg-[#4E9CE8]/20 text-[#4D52B4] font-bold text-[10px]">
                                         Aktif
                                     </span>
                                 @else

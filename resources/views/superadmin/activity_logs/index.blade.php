@@ -13,7 +13,7 @@
     <!-- Filter Bar -->
     <form method="GET" action="{{ route('superadmin.activity-logs.index') }}" class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-wrap gap-4 items-center justify-between">
         <div class="flex-1 min-w-[200px]">
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari aksi, deskripsi, atau IP..." class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs focus:border-emerald-600 focus:outline-hidden">
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari aksi, deskripsi, atau IP..." class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs focus:border-[#4E9CE8] focus:outline-hidden">
         </div>
         <div>
             <select name="action" class="px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white" onchange="this.form.submit()">
@@ -65,7 +65,7 @@
                             </td>
                             <td class="py-3.5 px-4 text-right">
                                 @if($log->old_values || $log->new_values)
-                                    <button onclick="showDiffModal({{ json_encode($log->old_values) }}, {{ json_encode($log->new_values) }})" class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-bold text-[10px]">
+                                    <button onclick="showDiffModal({{ json_encode($log->old_values) }}, {{ json_encode($log->new_values) }})" class="px-2.5 py-1 rounded-lg bg-[#4E9CE8]/10 text-[#4D52B4] hover:bg-[#4E9CE8]/20 font-bold text-[10px]">
                                         Lihat JSON
                                     </button>
                                 @else
@@ -102,8 +102,8 @@
                 <pre id="jsonOld" class="p-3 rounded-xl bg-slate-100 text-slate-800 overflow-x-auto h-64 whitespace-pre-wrap"></pre>
             </div>
             <div>
-                <span class="font-bold text-emerald-700 block mb-1">Nilai Baru (New Values):</span>
-                <pre id="jsonNew" class="p-3 rounded-xl bg-emerald-50 text-emerald-900 overflow-x-auto h-64 whitespace-pre-wrap"></pre>
+                <span class="font-bold text-[#4D52B4] block mb-1">Nilai Baru (New Values):</span>
+                <pre id="jsonNew" class="p-3 rounded-xl bg-[#4E9CE8]/10 text-[#4D52B4] overflow-x-auto h-64 whitespace-pre-wrap"></pre>
             </div>
         </div>
     </div>

@@ -12,7 +12,7 @@
                 <div class="flex items-center gap-2 mb-1">
                     <span
                         class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider
-                        {{ $course->status === 'published' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800' }}">
+                        {{ $course->status === 'published' ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : 'bg-amber-100 text-amber-800' }}">
                         Status: {{ $course->status }}
                     </span>
                     <span class="text-xs text-slate-400">&bull; {{ $course->category->name ?? '-' }}</span>
@@ -31,7 +31,7 @@
                 <form action="{{ route('admin.courses.toggle-publish', $course->id) }}" method="POST">
                     @csrf
                     <button type="submit"
-                        class="px-5 py-2 rounded-xl text-xs font-bold text-white {{ $course->status === 'published' ? 'bg-amber-600 hover:bg-amber-700' : 'bg-emerald-700 hover:bg-emerald-800' }} shadow-xs transition-colors">
+                        class="px-5 py-2 rounded-xl text-xs font-bold text-white {{ $course->status === 'published' ? 'bg-amber-600 hover:bg-amber-700' : 'bg-[#4D52B4] hover:bg-[#4E9CE8]' }} shadow-xs transition-colors">
                         {{ $course->status === 'published' ? 'Batalkan Publikasi (Draft)' : 'Publikasikan Sekarang' }}
                     </button>
                 </form>
@@ -45,7 +45,7 @@
                 <div class="flex justify-between items-center">
                     <h3 class="text-base font-black text-slate-900">Struktur Kurikulum Pembelajaran</h3>
                     <button onclick="document.getElementById('modalAddModule').classList.remove('hidden')"
-                        class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold shadow-xs">
+                        class="px-4 py-2 bg-[#4D52B4] hover:bg-[#4E9CE8] text-white rounded-xl text-xs font-bold shadow-xs">
                         + Tambah Modul Baru
                     </button>
                 </div>
@@ -59,7 +59,7 @@
                                 class="bg-slate-50 p-5 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                                 <div class="flex items-center gap-3">
                                     <span
-                                        class="w-8 h-8 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                                        class="w-8 h-8 rounded-xl bg-[#4D52B4] text-white flex items-center justify-center font-bold text-xs shadow-xs">
                                         {{ $mIdx + 1 }}
                                     </span>
                                     <div>
@@ -70,7 +70,7 @@
 
                                 <div class="flex items-center gap-2">
                                     <button onclick="openAddLessonModal({{ $module->id }}, '{{ addslashes($module->title) }}')"
-                                        class="px-3 py-1.5 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 rounded-lg text-xs font-bold border border-emerald-200">
+                                        class="px-3 py-1.5 bg-[#4E9CE8]/10 text-[#4D52B4] hover:bg-[#4E9CE8]/20 rounded-lg text-xs font-bold border border-[#4E9CE8]/30">
                                         + Tambah Lesson
                                     </button>
                                     <form action="{{ route('admin.modules.destroy', $module->id) }}" method="POST"
@@ -102,7 +102,7 @@
                                                 <div class="font-bold text-xs text-slate-900 truncate">{{ $lesson->title }}</div>
                                                 <div class="flex items-center gap-2 mt-0.5 text-[10px] text-slate-400">
                                                     <span
-                                                        class="uppercase font-semibold text-emerald-700">{{ $lesson->lesson_type }}</span>
+                                                        class="uppercase font-semibold text-[#4D52B4]">{{ $lesson->lesson_type }}</span>
                                                     <span>&bull;</span>
                                                     <span>{{ $lesson->duration > 0 ? round($lesson->duration / 60) . ' menit' : 'Fleksibel' }}</span>
                                                     @if($lesson->is_preview)
@@ -124,7 +124,7 @@
                                                     'content' => $lesson->content,
                                                     'video_url' => $lesson->contents->firstWhere('type', 'video')?->url ?? '',
                                                 ]) }})"
-                                                class="p-1 text-slate-400 hover:text-emerald-700 rounded-lg hover:bg-slate-100 transition-colors"
+                                                class="p-1 text-slate-400 hover:text-[#4D52B4] rounded-lg hover:bg-slate-100 transition-colors"
                                                 title="Edit Lesson">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -146,7 +146,7 @@
                                     </div>
                                 @empty
                                     <div class="p-6 text-center text-xs text-slate-400">
-                                        Belum ada lesson pada modul ini. Klik tombol <span class="font-semibold text-emerald-700">+
+                                        Belum ada lesson pada modul ini. Klik tombol <span class="font-semibold text-[#4D52B4]">+
                                             Tambah Lesson</span> di atas.
                                     </div>
                                 @endforelse
@@ -165,7 +165,7 @@
                             <p class="text-xs text-slate-500 mt-1 mb-4">Tambahkan modul pertama untuk mulai mengunggah materi
                                 pelajaran.</p>
                             <button onclick="document.getElementById('modalAddModule').classList.remove('hidden')"
-                                class="px-5 py-2.5 bg-emerald-700 text-white rounded-xl text-xs font-bold hover:bg-emerald-800">
+                                class="px-5 py-2.5 bg-[#4D52B4] text-white rounded-xl text-xs font-bold hover:bg-emerald-800">
                                 + Tambah Modul Pertama
                             </button>
                         </div>
@@ -223,7 +223,7 @@
                                         </form>
                                         <button
                                             onclick="openAddQuestionModal({{ $quiz->id }}, '{{ addslashes($quiz->title) }}')"
-                                            class="px-2.5 py-1 bg-emerald-700 hover:bg-emerald-800 text-white rounded-md text-[10px] font-bold">
+                                            class="px-2.5 py-1 bg-[#4D52B4] hover:bg-[#4E9CE8] text-white rounded-md text-[10px] font-bold">
                                             + Soal
                                         </button>
                                     </div>
@@ -291,18 +291,18 @@
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Judul Modul *</label>
                     <input type="text" name="title" required placeholder="Contoh: Modul 1 - Pengenalan Dasar"
-                        class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                        class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Deskripsi Singkat</label>
                     <textarea name="description" rows="2"
-                        class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden"></textarea>
+                        class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden"></textarea>
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
                     <button type="button" onclick="document.getElementById('modalAddModule').classList.add('hidden')"
                         class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-100">Batal</button>
                     <button type="submit"
-                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800">Simpan
+                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8]">Simpan
                         Modul</button>
                 </div>
             </form>
@@ -314,13 +314,13 @@
         class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
             <h3 class="text-base font-bold text-slate-900">Tambah Lesson Baru</h3>
-            <p id="lessonModuleTitle" class="text-xs text-emerald-700 font-semibold"></p>
+            <p id="lessonModuleTitle" class="text-xs text-[#4D52B4] font-semibold"></p>
             <form id="formAddLesson" action="" method="POST" enctype="multipart/form-data" class="space-y-3">
                 @csrf
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Judul Pelajaran / Materi *</label>
                     <input type="text" name="title" required
-                        class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                        class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
@@ -369,7 +369,7 @@
                     <button type="button" onclick="document.getElementById('modalAddLesson').classList.add('hidden')"
                         class="px-4 py-2 text-xs font-bold text-slate-500">Batal</button>
                     <button type="submit"
-                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800">Simpan
+                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8]">Simpan
                         Lesson</button>
                 </div>
             </form>
@@ -387,7 +387,7 @@
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Judul Pelajaran / Materi *</label>
                     <input type="text" name="title" id="editLessonTitle" required
-                        class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                        class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
@@ -435,7 +435,7 @@
                     <button type="button" onclick="document.getElementById('modalEditLesson').classList.add('hidden')"
                         class="px-4 py-2 text-xs font-bold text-slate-500">Batal</button>
                     <button type="submit"
-                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800">Simpan Perubahan</button>
+                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8]">Simpan Perubahan</button>
                 </div>
             </form>
         </div>
@@ -601,7 +601,7 @@
                     <button type="button" onclick="document.getElementById('modalAddQuestion').classList.add('hidden')"
                         class="px-4 py-2 text-xs font-bold text-slate-500">Batal</button>
                     <button type="submit"
-                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800">Simpan
+                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8]">Simpan
                         Pertanyaan</button>
                 </div>
             </form>

@@ -21,7 +21,7 @@
                 <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                     Nama Lengkap beserta Gelar <span class="text-red-500">*</span>
                 </label>
-                <input type="text" name="name" id="name" value="{{ old('name') }}" required placeholder="Contoh: AGUS SOFYAN, S.STP.,MPA" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                <input type="text" name="name" id="name" value="{{ old('name') }}" required placeholder="Contoh: AGUS SOFYAN, S.STP.,MPA" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                 @error('name')
                     <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                 @enderror
@@ -32,7 +32,7 @@
                 <label for="nip" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                     NIP <span class="text-red-500">*</span>
                 </label>
-                <input type="text" name="nip" id="nip" value="{{ old('nip') }}" required placeholder="Contoh: 197908161998021001" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden font-mono">
+                <input type="text" name="nip" id="nip" value="{{ old('nip') }}" required placeholder="Contoh: 197908161998021001" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden font-mono">
                 @error('nip')
                     <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                 @enderror
@@ -44,7 +44,7 @@
                     <label for="jabatan" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                         Jabatan
                     </label>
-                    <input type="text" name="jabatan" id="jabatan" value="{{ old('jabatan', 'Kepala Dinas Komunikasi, Informatika dan Statistik') }}" placeholder="Contoh: Kepala Dinas Komunikasi, Informatika dan Statistik" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                    <input type="text" name="jabatan" id="jabatan" value="{{ old('jabatan', 'Kepala Dinas Komunikasi, Informatika dan Statistik') }}" placeholder="Contoh: Kepala Dinas Komunikasi, Informatika dan Statistik" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                     @error('jabatan')
                         <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                     @enderror
@@ -55,7 +55,7 @@
                     <label for="instansi" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                         Instansi / Daerah
                     </label>
-                    <input type="text" name="instansi" id="instansi" value="{{ old('instansi', 'Kabupaten Bengkalis') }}" placeholder="Contoh: Kabupaten Bengkalis" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                    <input type="text" name="instansi" id="instansi" value="{{ old('instansi', 'Kabupaten Bengkalis') }}" placeholder="Contoh: Kabupaten Bengkalis" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                     @error('instansi')
                         <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                     @enderror
@@ -69,7 +69,7 @@
                 </label>
                 <p class="text-xs text-slate-500 mb-2">Unggah file gambar transparan (PNG direkomendasikan) berisi stempel dan tanda tangan.</p>
                 
-                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-2xl hover:border-emerald-500 transition-colors bg-slate-50/50">
+                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-2xl hover:border-[#4E9CE8] transition-colors bg-slate-50/50">
                     <div class="space-y-2 text-center">
                         <div id="preview-container" class="hidden mb-3">
                             <img id="image-preview" src="#" alt="Pratinjau TTD" class="mx-auto h-24 w-auto object-contain border border-slate-200 rounded-lg p-1 bg-white shadow-xs">
@@ -78,7 +78,7 @@
                             <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         <div class="flex text-xs text-slate-600 justify-center">
-                            <label for="signature_image" class="relative cursor-pointer bg-white rounded-md font-bold text-emerald-700 hover:text-emerald-800 focus-within:outline-hidden px-2 py-1 border border-slate-200 shadow-2xs">
+                            <label for="signature_image" class="relative cursor-pointer bg-white rounded-md font-bold text-[#4D52B4] hover:text-[#4E9CE8] focus-within:outline-hidden px-2 py-1 border border-slate-200 shadow-2xs">
                                 <span>Pilih Berkas Gambar</span>
                                 <input id="signature_image" name="signature_image" type="file" accept="image/png,image/jpeg,image/webp" class="sr-only" onchange="previewImage(this)">
                             </label>
@@ -94,7 +94,7 @@
             <!-- Active Checkbox -->
             <div class="pt-2">
                 <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" name="is_active" value="1" {{ old('is_active', '1') ? 'checked' : '' }} class="w-4 h-4 rounded text-emerald-700 focus:ring-emerald-500 border-slate-300">
+                    <input type="checkbox" name="is_active" value="1" {{ old('is_active', '1') ? 'checked' : '' }} class="w-4 h-4 rounded text-[#4D52B4] focus:ring-[#4E9CE8] border-slate-300">
                     <div>
                         <span class="text-sm font-bold text-slate-800">Jadikan Penandatangan Aktif</span>
                         <p class="text-xs text-slate-500">Jika dicentang, penandatangan ini otomatis digunakan pada semua sertifikat kelulusan yang dicetak/dilihat.</p>
@@ -107,7 +107,7 @@
                 <a href="{{ route('admin.certificates.index') }}" class="px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs transition-colors">
                     Batal
                 </a>
-                <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition-colors">
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-xs shadow-md transition-colors">
                     Simpan Penandatangan
                 </button>
             </div>

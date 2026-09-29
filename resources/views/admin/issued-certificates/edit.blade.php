@@ -13,7 +13,7 @@
                 <h2 class="text-lg font-black text-slate-900">Ubah Nomor Sertifikat</h2>
                 <p class="text-xs text-slate-500 mt-0.5">Perbarui nomor registrasi sertifikat resmi untuk peserta pelatihan.</p>
             </div>
-            <a href="{{ route('certificates.show', $certificate->id) }}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
+            <a href="{{ route('certificates.show', $certificate->id) }}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#4D52B4] hover:text-[#4E9CE8] bg-[#4E9CE8]/10 px-3 py-1.5 rounded-lg border border-[#4E9CE8]/30">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                 <span>Lihat Sertifikat Asli</span>
             </a>
@@ -33,7 +33,7 @@
             </div>
             <div>
                 <span class="text-slate-400 block font-medium">Kode Unik Verifikasi:</span>
-                <span class="font-mono font-bold text-emerald-800 text-xs block mt-0.5">{{ $certificate->certificate_code }}</span>
+                <span class="font-mono font-bold text-[#4D52B4] text-xs block mt-0.5">{{ $certificate->certificate_code }}</span>
             </div>
             <div>
                 <span class="text-slate-400 block font-medium">Tanggal Diterbitkan Saat Ini:</span>
@@ -56,7 +56,7 @@
                        value="{{ old('certificate_number', $certificate->certificate_number) }}" 
                        required 
                        placeholder="Contoh: CERT/BKS/2026/09/00001" 
-                       class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden font-mono tracking-wider font-bold text-slate-900">
+                       class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden font-mono tracking-wider font-bold text-slate-900">
                 <p class="text-[11px] text-slate-400 mt-1">Nomor ini tampil langsung di bagian atas lembar sertifikat resmi (di bawah judul SERTIFIKAT KELULUSAN).</p>
                 @error('certificate_number')
                     <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
@@ -72,7 +72,7 @@
                        name="issued_at" 
                        id="issued_at" 
                        value="{{ old('issued_at', $certificate->issued_at ? $certificate->issued_at->format('Y-m-d') : '') }}" 
-                       class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden font-mono">
+                       class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden font-mono">
                 <p class="text-[11px] text-slate-400 mt-1">Tanggal ini tertera pada tanda tangan pejabat: "Bengkalis, [Tanggal]".</p>
                 @error('issued_at')
                     <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
@@ -84,7 +84,7 @@
                 <a href="{{ route('admin.issued-certificates.index') }}" class="px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs transition-colors">
                     Batal
                 </a>
-                <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition-colors">
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-xs shadow-md transition-colors">
                     Simpan Nomor Sertifikat
                 </button>
             </div>

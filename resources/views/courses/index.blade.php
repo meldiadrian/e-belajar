@@ -13,17 +13,17 @@
                 </div>
                 @if(Auth::user()->isUser())
                     <a href="{{ route('my.courses') }}"
-                        class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold hover:bg-emerald-800 shadow-xs">
+                        class="px-4 py-2 bg-[#4D52B4] text-white rounded-xl text-xs font-bold hover:bg-[#4E9CE8] shadow-xs">
                         &larr; Pembelajaran Saya
                     </a>
                 @endif
             </div>
     @else
-        <div class="bg-emerald-950 text-white py-12 relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-r from-emerald-900 to-slate-900 opacity-95"></div>
+        <div class="bg-slate-900 text-white py-12 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#4D52B4] to-slate-900 opacity-95"></div>
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Katalog Pembelajaran Digital</h1>
-                <p class="text-sm sm:text-base text-emerald-200 mt-2 max-w-2xl">
+                <p class="text-sm sm:text-base text-[#4E9CE8] mt-2 max-w-2xl">
                     Pilih pembelajaran peningkatan kompetensi mandiri sesuai kebutuhan Anda. Semua pembelajaran diselenggarakan
                     secara
                     daring dan bersertifikat resmi.
@@ -44,7 +44,7 @@
                     <div class="relative">
                         <input type="text" name="search" id="search" value="{{ request('search') }}"
                             placeholder="Ketik judul Pelatihan atau materi..."
-                            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden">
+                            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden">
                         <svg class="w-5 h-5 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -58,7 +58,7 @@
                     <label for="category"
                         class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Kategori</label>
                     <select name="category" id="category"
-                        class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-emerald-600 focus:outline-hidden bg-white">
+                        class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-[#4E9CE8] focus:outline-hidden bg-white">
                         <option value="">Semua Kategori</option>
                         @foreach($categories as $cat)
                             <option value="{{ $cat->slug }}" {{ request('category') === $cat->slug ? 'selected' : '' }}>
@@ -88,7 +88,7 @@
                             class="px-3 py-1.5 text-xs font-semibold text-red-600 hover:text-red-800">Reset Filter</a>
                     @endif
                     <button type="submit"
-                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs">
+                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] shadow-xs">
                         Terapkan Filter
                     </button>
                 </div>
@@ -103,7 +103,7 @@
                     <div>
                         <!-- Thumbnail -->
                         <div
-                            class="relative h-48 bg-gradient-to-br from-emerald-800 to-slate-900 flex items-center justify-center text-white overflow-hidden">
+                            class="relative h-48 bg-gradient-to-br from-[#4D52B4] to-slate-900 flex items-center justify-center text-white overflow-hidden">
                             @if($course->thumbnail)
                                 <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}"
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
@@ -116,7 +116,7 @@
                                         </svg>
                                     </div>
                                     <span
-                                        class="text-xs font-semibold text-emerald-300 uppercase tracking-wider">{{ $course->category->name ?? 'E-Belajar' }}</span>
+                                        class="text-xs font-semibold text-[#70D6C5] uppercase tracking-wider">{{ $course->category->name ?? 'E-Belajar' }}</span>
                                 </div>
                             @endif
 
@@ -136,10 +136,10 @@
                         </div>
 
                         <div class="p-6">
-                            <div class="text-xs font-semibold text-emerald-700 mb-1">{{ $course->category->name ?? 'Umum' }}
+                            <div class="text-xs font-semibold text-[#4D52B4] mb-1">{{ $course->category->name ?? 'Umum' }}
                             </div>
                             <h3
-                                class="text-base font-bold text-slate-900 leading-snug group-hover:text-emerald-700 transition-colors line-clamp-2">
+                                class="text-base font-bold text-slate-900 leading-snug group-hover:text-[#4D52B4] transition-colors line-clamp-2">
                                 <a href="{{ route('courses.show', $course->slug ?? $course->id) }}">{{ $course->title }}</a>
                             </h3>
                             <p class="text-xs text-slate-500 mt-2 line-clamp-2">{{ Str::limit($course->description, 110) }}</p>
@@ -154,7 +154,7 @@
                         </div>
 
                         <a href="{{ route('courses.show', $course->slug ?? $course->id) }}"
-                            class="block w-full py-2.5 text-center text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-all shadow-xs">
+                            class="block w-full py-2.5 text-center text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] rounded-xl transition-all shadow-xs">
                             Lihat Silabus & Daftar &rarr;
                         </a>
                     </div>
@@ -171,7 +171,7 @@
                     <h3 class="text-base font-bold text-slate-800 mb-1">Pelatihan Tidak Ditemukan</h3>
                     <p class="text-xs text-slate-500 mb-4">Coba sesuaikan kata kunci atau atur ulang filter pencarian Anda.</p>
                     <a href="{{ route('courses.index') }}"
-                        class="px-4 py-2 text-xs font-bold text-emerald-700 bg-emerald-50 rounded-lg hover:bg-emerald-100">Reset
+                        class="px-4 py-2 text-xs font-bold text-[#4D52B4] bg-[#4E9CE8]/10 rounded-lg hover:bg-[#4E9CE8]/20">Reset
                         Semua Filter</a>
                 </div>
             @endforelse

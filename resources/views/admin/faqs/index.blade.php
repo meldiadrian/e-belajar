@@ -20,13 +20,13 @@
                     </svg>
                     <span>Lihat Publik</span>
                 </a>
-                <a href="{{ route('admin.faq-categories.index') }}" class="px-4 py-2.5 rounded-xl border border-emerald-600 text-emerald-800 bg-emerald-50 hover:bg-emerald-100 font-bold text-xs transition-colors flex items-center gap-1.5">
-                    <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="{{ route('admin.faq-categories.index') }}" class="px-4 py-2.5 rounded-xl border border-[#4E9CE8] text-[#4D52B4] bg-[#4E9CE8]/10 hover:bg-[#4E9CE8]/20 font-bold text-xs transition-colors flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-[#4D52B4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                     </svg>
                     <span>Kelola Kategori</span>
                 </a>
-                <a href="{{ route('admin.faqs.create') }}" class="px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition-colors flex items-center gap-1.5">
+                <a href="{{ route('admin.faqs.create') }}" class="px-4 py-2.5 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-xs shadow-md transition-colors flex items-center gap-1.5">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
@@ -37,10 +37,10 @@
 
         <!-- Navigation Tabs -->
         <div class="flex border-b border-slate-200 text-xs font-bold pt-2 gap-4">
-            <a href="{{ route('admin.faqs.index') }}" class="pb-3 text-emerald-700 border-b-2 border-emerald-600">
+            <a href="{{ route('admin.faqs.index') }}" class="pb-3 text-[#4D52B4] border-b-2 border-[#4E9CE8]">
                 Daftar Pertanyaan
             </a>
-            <a href="{{ route('admin.faq-categories.index') }}" class="pb-3 text-slate-500 hover:text-emerald-700 border-b-2 border-transparent transition-colors">
+            <a href="{{ route('admin.faq-categories.index') }}" class="pb-3 text-slate-500 hover:text-[#4D52B4] border-b-2 border-transparent transition-colors">
                 Kategori Pertanyaan
             </a>
         </div>
@@ -50,10 +50,10 @@
     <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
         <form method="GET" action="{{ route('admin.faqs.index') }}" class="flex flex-col sm:flex-row gap-3">
             <div class="relative flex-1">
-                <input type="text" name="q" value="{{ $search }}" placeholder="Cari pertanyaan atau jawaban..." class="w-full px-4 py-2 rounded-xl border border-slate-300 text-xs focus:border-emerald-600 focus:outline-hidden">
+                <input type="text" name="q" value="{{ $search }}" placeholder="Cari pertanyaan atau jawaban..." class="w-full px-4 py-2 rounded-xl border border-slate-300 text-xs focus:border-[#4E9CE8] focus:outline-hidden">
             </div>
             @if($categories->count() > 0)
-                <select name="category" class="px-3 py-2 rounded-xl border border-slate-300 text-xs focus:border-emerald-600 focus:outline-hidden">
+                <select name="category" class="px-3 py-2 rounded-xl border border-slate-300 text-xs focus:border-[#4E9CE8] focus:outline-hidden">
                     <option value="">-- Semua Kategori --</option>
                     @foreach($categories as $cat)
                         <option value="{{ $cat }}" {{ $category === $cat ? 'selected' : '' }}>{{ $cat }}</option>
@@ -107,7 +107,7 @@
                             </td>
                             <td class="px-5 py-4 text-center">
                                 @if($faq->is_published)
-                                    <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[10px]">
+                                    <span class="px-2.5 py-1 rounded-full bg-[#4E9CE8]/20 text-[#4D52B4] font-bold text-[10px]">
                                         Aktif
                                     </span>
                                 @else

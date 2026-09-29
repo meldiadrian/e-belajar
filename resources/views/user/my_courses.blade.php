@@ -12,7 +12,7 @@
                     Anda</p>
             </div>
             <a href="{{ route('courses.index') }}"
-                class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold hover:bg-emerald-800 shadow-xs">
+                class="px-4 py-2 bg-[#4D52B4] text-white rounded-xl text-xs font-bold hover:bg-[#4E9CE8] shadow-xs">
                 + Tambah Pembelajaran Lainnya
             </a>
         </div>
@@ -24,18 +24,18 @@
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-2">
                             <span
-                                class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+                                class="text-[10px] font-bold uppercase tracking-wider text-[#4D52B4] bg-[#4E9CE8]/20 px-2 py-0.5 rounded-full">
                                 {{ $enrollment->course->category->name ?? 'Program' }}
                             </span>
                             <span
-                                class="text-xs font-semibold px-2 py-0.5 rounded-full {{ $enrollment->status === 'completed' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800' }}">
+                                class="text-xs font-semibold px-2 py-0.5 rounded-full {{ $enrollment->status === 'completed' ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : 'bg-amber-100 text-amber-800' }}">
                                 {{ $enrollment->status === 'completed' ? 'Selesai' : 'Aktif' }}
                             </span>
                         </div>
 
                         <h3 class="text-base font-bold text-slate-900 mt-2 line-clamp-2">
                             <a href="{{ route('learning.course', $enrollment->course->slug ?? $enrollment->course->id) }}"
-                                class="hover:text-emerald-700">
+                                class="hover:text-[#4E9CE8]">
                                 {{ $enrollment->course->title }}
                             </a>
                         </h3>
@@ -46,7 +46,7 @@
                                 <span>{{ $enrollment->progress->progress_percentage ?? 0 }}%</span>
                             </div>
                             <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-                                <div class="bg-emerald-600 h-2.5 rounded-full"
+                                <div class="bg-[#70D6C5] h-2.5 rounded-full"
                                     style="width: {{ $enrollment->progress->progress_percentage ?? 0 }}%"></div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
 
                     <div class="p-6 pt-0 border-t border-slate-100 mt-4">
                         <a href="{{ route('learning.course', $enrollment->course->slug ?? $enrollment->course->id) }}"
-                            class="block w-full py-2.5 text-center text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-colors shadow-xs">
+                            class="block w-full py-2.5 text-center text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] rounded-xl transition-colors shadow-xs">
                             {{ ($enrollment->progress->progress_percentage ?? 0) >= 100 ? 'Buka Kembali Materi' : 'Lanjutkan Belajar' }}
                             &rarr;
                         </a>
@@ -64,7 +64,7 @@
                 <div class="col-span-3 bg-white p-12 rounded-2xl border border-slate-200 text-center">
                     <p class="text-slate-400 text-sm mb-4">Anda belum mendaftar pada pembelajaran apapun.</p>
                     <a href="{{ route('courses.index') }}"
-                        class="px-5 py-2.5 bg-emerald-700 text-white rounded-xl text-xs font-bold hover:bg-emerald-800 shadow-md">
+                        class="px-5 py-2.5 bg-[#4D52B4] text-white rounded-xl text-xs font-bold hover:bg-[#4E9CE8] shadow-md">
                         Lihat Semua Pembelajaran
                     </a>
                 </div>
