@@ -48,6 +48,15 @@
         .gradient-bengkalis {
             background: linear-gradient(135deg, #2F3375 0%, #4D52B4 50%, #4E9CE8 100%);
         }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
     @stack('styles')
 </head>
@@ -60,7 +69,7 @@
 
     <!-- Sidebar -->
     <aside id="sidebar"
-        class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 flex flex-col justify-between border-r border-slate-800 transition-transform duration-300 -translate-x-full md:relative md:translate-x-0 overflow-y-auto">
+        class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 flex flex-col justify-between border-r border-slate-800 transition-transform duration-300 -translate-x-full md:relative md:translate-x-0 overflow-y-auto no-scrollbar">
         <div>
             <!-- Brand -->
             <div class="p-5 border-b border-slate-800 flex items-center gap-3">
