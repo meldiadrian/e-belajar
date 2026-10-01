@@ -79,8 +79,9 @@
                     <div class="hidden md:flex items-center space-x-1 ml-8">
                         <a href="{{ route('home') }}"
                             class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('home') ? 'text-[#4D52B4] bg-[#4E9CE8]/15 font-semibold' : 'text-slate-600 hover:text-[#4E9CE8] hover:bg-slate-100' }}">Beranda</a>
-                        <a href="{{ route('courses.index') }}"
-                            class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('courses.*') ? 'text-[#4D52B4] bg-[#4E9CE8]/15 font-semibold' : 'text-slate-600 hover:text-[#4E9CE8] hover:bg-slate-100' }}">Katalog Pelatihan</a>
+                        <a href="{{ route('login') }}"
+                            class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('courses.*') ? 'text-[#4D52B4] bg-[#4E9CE8]/15 font-semibold' : 'text-slate-600 hover:text-[#4E9CE8] hover:bg-slate-100' }}">Katalog
+                            Pelatihan</a>
                         <a href="{{ route('faqs.index') }}"
                             class="px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('faqs.*') ? 'text-[#4D52B4] bg-[#4E9CE8]/15 font-semibold' : 'text-slate-600 hover:text-[#4E9CE8] hover:bg-slate-100' }}">Pertanyaan
                             Umum</a>
@@ -113,17 +114,17 @@
                                 class="flex items-center gap-2.5 group hover:opacity-90 transition-all">
                                 <!-- <div class="text-right hidden sm:block"> -->
                                 <!-- <div
-                                                class="text-xs font-bold text-slate-800 flex items-center justify-end gap-1 group-hover:text-[#4E9CE8] transition-colors">
-                                                <span>{{ Auth::user()->name }}</span>
-                                                <svg class="w-3 h-3 text-slate-400 group-hover:text-[#4E9CE8] transition-colors"
-                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                                </svg>
-                                            </div>
-                                            <div class="text-[10px] font-medium text-[#4D52B4] uppercase">
-                                                {{ Auth::user()->institution ?? Auth::user()->role }}
-                                            </div> -->
+                                                                                        class="text-xs font-bold text-slate-800 flex items-center justify-end gap-1 group-hover:text-[#4E9CE8] transition-colors">
+                                                                                        <span>{{ Auth::user()->name }}</span>
+                                                                                        <svg class="w-3 h-3 text-slate-400 group-hover:text-[#4E9CE8] transition-colors"
+                                                                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                                                        </svg>
+                                                                                    </div>
+                                                                                    <div class="text-[10px] font-medium text-[#4D52B4] uppercase">
+                                                                                        {{ Auth::user()->institution ?? Auth::user()->role }}
+                                                                                    </div> -->
                                 <!-- </div> -->
 
                                 <!-- Foto Profil / Avatar -->
@@ -145,10 +146,11 @@
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
 
-                                <button type="submit" title="Keluar dari akun" class="group inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5
-                                                           text-xs font-semibold text-slate-500
-                                                           transition-all duration-200
-                                                           hover:bg-red-50 hover:text-red-600">
+                                <button type="submit" title="Keluar dari akun"
+                                    class="group inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5
+                                                                                                   text-xs font-semibold text-slate-500
+                                                                                                   transition-all duration-200
+                                                                                                   hover:bg-red-50 hover:text-red-600">
 
                                     <svg class="h-4 w-4 transition-colors duration-200" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24" aria-hidden="true">
@@ -238,15 +240,15 @@
                 <div>
                     <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Tautan Cepat</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="{{ route('courses.index') }}"
-                                class="hover:text-[#70D6C5] transition-colors">Lihat Katalog</a></li>
+                        <li><a href="{{ route('login') }}" class="hover:text-[#70D6C5] transition-colors">Lihat
+                                Katalog</a></li>
 
                         <li><a href="{{ route('faqs.index') }}"
                                 class="hover:text-[#70D6C5] transition-colors">Pertanyaan Umum</a></li>
                         <li><a href="{{ route('login') }}" class="hover:text-[#70D6C5] transition-colors">Portal
                                 Masuk</a></li>
-                        <li><a href="{{ route('register') }}"
-                                class="hover:text-[#70D6C5] transition-colors">Pendaftaran Akun Baru</a></li>
+                        <li><a href="{{ route('register') }}" class="hover:text-[#70D6C5] transition-colors">Pendaftaran
+                                Akun Baru</a></li>
                     </ul>
                 </div>
 
