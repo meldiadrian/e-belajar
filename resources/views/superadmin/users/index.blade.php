@@ -67,7 +67,7 @@
                             <th class="py-3.5 px-4">Pengguna</th>
                             <th class="py-3.5 px-4">Instansi & Kontak</th>
                             <th class="py-3.5 px-4">Peran (Role)</th>
-                            <th class="py-3.5 px-4">Status Akun</th>
+                            <th class="py-3.5 px-4">Status & 2FA</th>
                             <th class="py-3.5 px-4">Statistik</th>
                             <th class="py-3.5 px-4 text-right">Aksi</th>
                         </tr>
@@ -103,22 +103,38 @@
                                         </form>
                                     @endif
                                 </td>
-                                <td class="py-3.5 px-4">
-                                    @if($user->trashed())
-                                        <span
-                                            class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-amber-100 text-amber-800">
-                                            Terhapus
-                                        </span>
-                                    @else
-                                        <form action="{{ route('superadmin.users.toggle-active', $user->id) }}" method="POST"
-                                            class="inline">
-                                            @csrf
-                                            <button type="submit"
-                                                class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase {{ $user->is_active ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : 'bg-red-100 text-red-800' }}">
-                                                {{ $user->is_active ? 'Aktif' : 'Nonaktif' }}
-                                            </button>
-                                        </form>
-                                    @endif
+                                <td class="py-3.5 px-4 space-y-1">
+                                    <div>
+                                        @if($user->trashed())
+                                            <span
+                                                class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-amber-100 text-amber-800">
+                                                Terhapus
+                                            </span>
+                                        @else
+                                            <form action="{{ route('superadmin.users.toggle-active', $user->id) }}" method="POST"
+                                                class="inline">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase {{ $user->is_active ? 'bg-[#4E9CE8]/20 text-[#4D52B4]' : 'bg-red-100 text-red-800' }}">
+                                                    {{ $user->is_active ? 'Aktif' : 'Nonaktif' }}
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        @if($user->hasTwoFactorEnabled())
+                                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200" title="2FA Google Authenticator Aktif">
+                                                <svg class="w-2.5 h-2.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                                </svg>
+                                                <span>2FA Aktif</span>
+                                            </span>
+                                        @else
+                                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-500">
+                                                2FA Nonaktif
+                                            </span>
+                                        @endif
+                                    </div>
                                 </td>
                                 <td class="py-3.5 px-4 text-slate-700">
                                     <div>{{ $user->enrollments_count }} Kursus Diikuti</div>
@@ -150,20 +166,36 @@
                                             </form>
                                         </div>
                                     @else
-                                        @if(Auth::id() !== $user->id)
-                                            <form action="{{ route('superadmin.users.destroy', $user->id) }}" method="POST"
-                                                class="inline" onsubmit="return confirm('Hapus pengguna ini?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-slate-400 hover:text-red-600 p-1"
-                                                    title="Hapus Pengguna">
-                                                    <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                    </svg>
-                                                </button>
-                                            </form>
-                                        @endif
+                                        <div class="flex items-center justify-end gap-1">
+                                            @if($user->hasTwoFactorEnabled())
+                                                <form action="{{ route('superadmin.users.reset-2fa', $user->id) }}" method="POST"
+                                                    class="inline"
+                                                    onsubmit="return confirm('Reset Google Authenticator (2FA) untuk {{ $user->name }}? Pengguna akan dapat login tanpa kode OTP sampai mengaktifkannya kembali.')">
+                                                    @csrf
+                                                    <button type="submit" class="text-slate-400 hover:text-amber-600 p-1 transition-colors"
+                                                        title="Reset 2FA Pengguna">
+                                                        <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                            @if(Auth::id() !== $user->id)
+                                                <form action="{{ route('superadmin.users.destroy', $user->id) }}" method="POST"
+                                                    class="inline" onsubmit="return confirm('Hapus pengguna ini?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-slate-400 hover:text-red-600 p-1 transition-colors"
+                                                        title="Hapus Pengguna">
+                                                        <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </div>
                                     @endif
                                 </td>
                             </tr>

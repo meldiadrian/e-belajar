@@ -161,6 +161,193 @@
             </div>
         </form>
     </div>
+
+    <!-- Google Authenticator (2FA) Security Card -->
+    <div id="two-factor-section" class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-6 sm:p-8 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl {{ $user->hasTwoFactorEnabled() ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600' }} flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-base font-bold text-slate-900">Autentikasi Dua Faktor (Google Authenticator)</h2>
+                    <p class="text-xs text-slate-500">Perlindungan ganda akun dengan kode sandi satu kali (TOTP)</p>
+                </div>
+            </div>
+
+            <div>
+                @if($user->hasTwoFactorEnabled())
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span>2FA Aktif & Terlindungi</span>
+                    </span>
+                @else
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        <span>2FA Belum Aktif</span>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="p-6 sm:p-8 space-y-6">
+            @if($user->hasTwoFactorEnabled())
+                <!-- 2FA Active Details -->
+                <div class="p-4 sm:p-5 bg-emerald-50/60 border border-emerald-200 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <div class="text-xs sm:text-sm font-bold text-emerald-950 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Akun Anda telah diamankan dengan Google Authenticator</span>
+                        </div>
+                        <p class="text-xs text-emerald-800 leading-relaxed">
+                            Setiap kali Anda masuk ke portal E-Belajar, sistem akan meminta 6-digit kode OTP dari aplikasi authenticator di ponsel Anda.
+                        </p>
+                        @if($user->two_factor_confirmed_at)
+                            <div class="text-[11px] text-emerald-700/80 pt-1 font-mono">
+                                Diaktifkan pada: {{ $user->two_factor_confirmed_at->format('d M Y, H:i') }} WIB
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Disable Button -->
+                    <button type="button" onclick="document.getElementById('modalDisable2FA').classList.remove('hidden')"
+                        class="px-4 py-2.5 bg-white hover:bg-red-50 text-red-600 border border-red-200 hover:border-red-300 font-bold text-xs rounded-xl shadow-xs transition-colors shrink-0 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                        <span>Nonaktifkan 2FA</span>
+                    </button>
+                </div>
+
+                <!-- Modal Confirm Disable 2FA -->
+                <div id="modalDisable2FA" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+                    <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <h3 class="text-base font-bold text-slate-900">Konfirmasi Nonaktifkan 2FA</h3>
+                            <button type="button" onclick="document.getElementById('modalDisable2FA').classList.add('hidden')"
+                                class="text-slate-400 hover:text-slate-700 text-lg font-bold">&times;</button>
+                        </div>
+                        <p class="text-xs text-slate-600">
+                            Menonaktifkan 2FA akan mengurangi tingkat keamanan akun Anda. Masukkan kata sandi saat ini untuk melanjutkan:
+                        </p>
+                        <form action="{{ route('profile.2fa.disable', $user->id) }}" method="POST" class="space-y-4">
+                            @csrf
+                            <div>
+                                <label for="current_password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Kata Sandi Saat Ini</label>
+                                <input type="password" name="current_password" id="current_password" required placeholder="Masukkan kata sandi akun"
+                                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-red-500 focus:outline-hidden">
+                                @error('current_password')
+                                    <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="flex justify-end gap-2 pt-2 border-t border-slate-100">
+                                <button type="button" onclick="document.getElementById('modalDisable2FA').classList.add('hidden')"
+                                    class="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-700">Batal</button>
+                                <button type="submit" class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-red-600 hover:bg-red-700 shadow-md">
+                                    Ya, Nonaktifkan 2FA
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            @else
+                <!-- 2FA Inactive / Setup Section -->
+                <div class="space-y-4">
+                    <div class="p-4 bg-amber-50/70 border border-amber-200 rounded-2xl text-xs text-amber-900 leading-relaxed flex items-start gap-3">
+                        <svg class="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <div>
+                            <span class="font-bold">Direkomendasikan untuk hak akses {{ ucfirst($user->role) }}:</span>
+                            Aktifkan Google Authenticator untuk mencegah akses tidak sah ke panel e-Belajar meskipun kata sandi Anda diketahui pihak lain.
+                        </div>
+                    </div>
+
+                    <div class="p-4 sm:p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-5">
+                        <div class="flex flex-col sm:flex-row items-center gap-6">
+                            <!-- QR Code -->
+                            <div class="shrink-0 bg-white p-3 rounded-2xl border border-slate-200 shadow-xs flex flex-col items-center">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data={{ rawurlencode($qrCodeUri ?? '') }}"
+                                    alt="QR Code Google Authenticator" class="w-32 h-32 object-contain">
+                                <span class="text-[10px] text-slate-400 mt-1.5 font-mono">Pindai dengan Aplikasi</span>
+                            </div>
+
+                            <!-- Secret Key Details -->
+                            <div class="flex-1 w-full space-y-3">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Langkah 1: Pindai Kode QR</h4>
+                                    <p class="text-xs text-slate-500 mt-0.5">
+                                        Buka aplikasi <span class="font-semibold text-slate-700">Google Authenticator</span> atau <span class="font-semibold text-slate-700">Microsoft Authenticator</span> di HP Anda, pilih tambah akun, lalu pindai kode QR di samping.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider block">Atau Gunakan Kunci Penyiapan Manual (Secret Key):</span>
+                                    <div class="flex items-center gap-2 mt-1">
+                                        <code class="px-3 py-1.5 bg-white rounded-xl text-slate-800 text-xs font-mono font-bold tracking-wider border border-slate-300 select-all shadow-2xs">
+                                            {{ $formattedSecret ?? $secret ?? '' }}
+                                        </code>
+                                        <button type="button" onclick="copy2FASecret('{{ $secret ?? '' }}')" id="btn-copy-2fa"
+                                            class="px-2.5 py-1.5 text-xs font-semibold text-[#4D52B4] hover:text-white bg-[#4D52B4]/10 hover:bg-[#4D52B4] rounded-xl transition-colors flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                            </svg>
+                                            <span id="copy-2fa-text">Salin</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                @if(!empty($qrCodeUri))
+                                    <div>
+                                        <a href="{{ $qrCodeUri }}" class="inline-flex items-center gap-1 text-xs font-semibold text-[#4D52B4] hover:text-[#4E9CE8] hover:underline">
+                                            <span>Buka langsung di aplikasi HP</span>
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Verification Step Form -->
+                        <form action="{{ route('profile.2fa.enable', $user->id) }}" method="POST" class="pt-4 border-t border-slate-200 space-y-4">
+                            @csrf
+                            <input type="hidden" name="two_factor_secret" value="{{ $secret ?? '' }}">
+
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">Langkah 2: Masukkan Kode Verifikasi OTP</h4>
+                                <p class="text-xs text-slate-500 mb-2">
+                                    Ketik 6 digit angka yang tampil di aplikasi authenticator untuk memastikan sinkronisasi berhasil:
+                                </p>
+                                <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                                    <div class="relative w-full sm:w-64">
+                                        <input type="text" name="two_factor_code" id="profile_two_factor_code" required maxlength="6" inputmode="numeric"
+                                            autocomplete="one-time-code" placeholder="Contoh: 123456"
+                                            class="w-full px-4 py-2.5 rounded-xl border {{ $errors->has('two_factor_code') ? 'border-red-500 bg-red-50/40 ring-1 ring-red-400' : 'border-slate-300 bg-white' }} text-sm font-semibold tracking-widest text-slate-900 focus:border-[#4E9CE8] focus:outline-hidden">
+                                    </div>
+                                    <button type="submit"
+                                        class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#4D52B4] hover:bg-[#4E9CE8] text-white font-bold text-xs shadow-md transition-colors flex items-center justify-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <span>Verifikasi & Aktifkan 2FA</span>
+                                    </button>
+                                </div>
+                                @error('two_factor_code')
+                                    <span class="text-xs text-red-600 mt-1 block font-medium">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
 </div>
 
 <script>
@@ -181,6 +368,22 @@ function previewAvatar(input) {
         };
         reader.readAsDataURL(file);
     }
+}
+
+function copy2FASecret(secret) {
+    if (!secret) return;
+    navigator.clipboard.writeText(secret).then(() => {
+        const copyText = document.getElementById('copy-2fa-text');
+        if (copyText) {
+            const original = copyText.innerText;
+            copyText.innerText = 'Tersalin! ✓';
+            setTimeout(() => {
+                copyText.innerText = original;
+            }, 2000);
+        }
+    }).catch(err => {
+        console.error('Gagal menyalin:', err);
+    });
 }
 </script>
 @endsection

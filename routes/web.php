@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function () {
     // Profile Management (Edit based on user id)
     Route::get('/profile/{id}', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/{id}', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/{id}/2fa/enable', [\App\Http\Controllers\ProfileController::class, 'enableTwoFactor'])->name('profile.2fa.enable');
+    Route::post('/profile/{id}/2fa/disable', [\App\Http\Controllers\ProfileController::class, 'disableTwoFactor'])->name('profile.2fa.disable');
 
     // Admin & Superadmin - Course Management & Builder
     Route::middleware('role:admin,superadmin')->prefix('admin')->name('admin.')->group(function () {
@@ -117,6 +119,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
         Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
         Route::post('/users/{user}/toggle-active', [UserController::class, 'toggleActive'])->name('users.toggle-active');
+        Route::post('/users/{id}/reset-2fa', [UserController::class, 'resetTwoFactor'])->name('users.reset-2fa');
         Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
         Route::post('/users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
         Route::delete('/users/{id}/force-delete', [UserController::class, 'forceDelete'])->name('users.force-delete');

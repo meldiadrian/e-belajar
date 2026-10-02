@@ -185,4 +185,22 @@ class UserController extends Controller
 
         return back()->with('success', "Pengguna {$userName} berhasil dihapus permanen.");
     }
+
+    public function resetTwoFactor($id)
+    {
+        $user = User::withTrashed()->findOrFail($id);
+
+        $user->update([
+            'two_factor_secret' => null,
+            'two_factor_confirmed_at' => null,
+        ]);
+
+        ActivityLogService::log(
+            action: '2fa_reset_by_superadmin',
+            entity: $user,
+            description: "Superadmin mereset Google Authenticator (2FA) untuk pengguna {$user->name} ({$user->role})."
+        );
+
+        return back()->with('success', "Google Authenticator (2FA) untuk pengguna {$user->name} berhasil direset.");
+    }
 }

@@ -149,7 +149,7 @@ class AuthController extends Controller
             'password' => ['required', 'string'],
         ];
 
-        if ((!app()->runningUnitTests() && !app()->environment('testing')) || $request->has('captcha')) {
+        if ($request->has('captcha')) {
             $rules['captcha'] = [
                 'required',
                 'string',

@@ -5,6 +5,29 @@
 
 @section('content')
     <div class="space-y-8">
+        @if(!Auth::user()->hasTwoFactorEnabled())
+            <div class="p-4 sm:p-5 bg-gradient-to-r from-amber-50 to-orange-50/50 border border-amber-200/90 rounded-3xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-700 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="text-xs sm:text-sm font-bold text-slate-900">Perhatian Keamanan: Autentikasi 2FA Belum Aktif</h4>
+                        <p class="text-xs text-slate-600 mt-0.5">Sebagai Admin Kursus, Anda sangat disarankan untuk mengaktifkan Google Authenticator guna mengamankan akses pengelolaan materi & nilai.</p>
+                    </div>
+                </div>
+                <a href="{{ route('profile.edit', Auth::id()) }}#two-factor-section"
+                    class="px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs rounded-xl shadow-xs transition-colors shrink-0 flex items-center gap-1.5">
+                    <span>Aktifkan 2FA</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        @endif
+
         <!-- Stat Cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">

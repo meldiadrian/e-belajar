@@ -4,6 +4,14 @@
 
 @push('styles')
     <style>
+        body {
+            background-image: url("{{ asset('images/auth-bg.jpg') }}") !important;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
         footer {
             display: none !important;
         }
