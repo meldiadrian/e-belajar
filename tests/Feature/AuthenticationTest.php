@@ -247,5 +247,131 @@ class AuthenticationTest extends TestCase
         $this->post('/logout');
         $this->get('/login')->assertStatus(200);
     }
+
+    public function test_register_page_displays_google_authenticator_qr_and_secret(): void
+    {
+        $response = $this->get('/register');
+        $response->assertStatus(200);
+        $response->assertSee('Aktivasi Google Authenticator');
+        $response->assertSee('Kunci Penyiapan Manual');
+        $response->assertSee('two_factor_code');
+        $response->assertSee('two_factor_secret');
+    }
+
+    public function test_user_cannot_register_with_invalid_authenticator_code(): void
+    {
+        $service = new \App\Services\GoogleAuthenticatorService();
+        $secret = $service->generateSecretKey();
+
+        $response = $this->post('/register', [
+            'name' => 'Peserta Uji',
+            'email' => 'peserta@bengkalis.go.id',
+            'nip' => '199301012020011003',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'two_factor_secret' => $secret,
+            'two_factor_code' => '000000',
+        ]);
+
+        $response->assertSessionHasErrors('two_factor_code');
+        $this->assertGuest();
+        $this->assertDatabaseMissing('users', ['email' => 'peserta@bengkalis.go.id']);
+    }
+
+    public function test_user_can_register_with_valid_authenticator_code(): void
+    {
+        $service = new \App\Services\GoogleAuthenticatorService();
+        $secret = $service->generateSecretKey();
+        $timeSlice = (int) floor(time() / 30);
+        $code = $service->calculateCode($secret, $timeSlice);
+
+        $response = $this->post('/register', [
+            'name' => 'Peserta Uji Valid',
+            'email' => 'peserta.valid@bengkalis.go.id',
+            'nip' => '199301012020011004',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'two_factor_secret' => $secret,
+            'two_factor_code' => $code,
+        ]);
+
+        $response->assertRedirect('/dashboard');
+        $this->assertAuthenticated();
+
+        $user = User::where('email', 'peserta.valid@bengkalis.go.id')->first();
+        $this->assertNotNull($user);
+        $this->assertTrue($user->hasTwoFactorEnabled());
+        $this->assertEquals($secret, $user->two_factor_secret);
+        $this->assertNotNull($user->two_factor_confirmed_at);
+    }
+
+    public function test_user_with_2fa_requires_authenticator_code_to_login(): void
+    {
+        $service = new \App\Services\GoogleAuthenticatorService();
+        $secret = $service->generateSecretKey();
+
+        User::factory()->create([
+            'nip' => '198901012015011009',
+            'password' => Hash::make('password123'),
+            'two_factor_secret' => $secret,
+            'two_factor_confirmed_at' => now(),
+        ]);
+
+        $response = $this->post('/login', [
+            'nip' => '198901012015011009',
+            'password' => 'password123',
+            'two_factor_code' => '',
+        ]);
+
+        $response->assertSessionHasErrors('two_factor_code');
+        $this->assertGuest();
+    }
+
+    public function test_user_with_2fa_cannot_login_with_invalid_authenticator_code(): void
+    {
+        $service = new \App\Services\GoogleAuthenticatorService();
+        $secret = $service->generateSecretKey();
+
+        User::factory()->create([
+            'nip' => '198901012015011008',
+            'password' => Hash::make('password123'),
+            'two_factor_secret' => $secret,
+            'two_factor_confirmed_at' => now(),
+        ]);
+
+        $response = $this->post('/login', [
+            'nip' => '198901012015011008',
+            'password' => 'password123',
+            'two_factor_code' => '999999',
+        ]);
+
+        $response->assertSessionHasErrors('two_factor_code');
+        $this->assertGuest();
+    }
+
+    public function test_user_with_2fa_can_login_with_valid_authenticator_code(): void
+    {
+        $service = new \App\Services\GoogleAuthenticatorService();
+        $secret = $service->generateSecretKey();
+        $timeSlice = (int) floor(time() / 30);
+        $code = $service->calculateCode($secret, $timeSlice);
+
+        $user = User::factory()->create([
+            'nip' => '198901012015011007',
+            'password' => Hash::make('password123'),
+            'two_factor_secret' => $secret,
+            'two_factor_confirmed_at' => now(),
+        ]);
+
+        $response = $this->post('/login', [
+            'nip' => '198901012015011007',
+            'password' => 'password123',
+            'two_factor_code' => $code,
+        ]);
+
+        $response->assertRedirect('/dashboard');
+        $this->assertAuthenticatedAs($user);
+    }
 }
+
 

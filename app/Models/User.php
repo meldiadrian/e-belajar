@@ -30,6 +30,8 @@ class User extends Authenticatable
         'phone',
         'institution',
         'is_active',
+        'two_factor_secret',
+        'two_factor_confirmed_at',
         'email_verified_at',
         'last_login_at',
     ];
@@ -42,6 +44,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_secret',
     ];
 
     /**
@@ -54,9 +57,15 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'last_login_at' => 'datetime',
+            'two_factor_confirmed_at' => 'datetime',
             'password' => 'hashed',
             'is_active' => 'boolean',
         ];
+    }
+
+    public function hasTwoFactorEnabled(): bool
+    {
+        return !empty($this->two_factor_secret) && !is_null($this->two_factor_confirmed_at);
     }
 
     public function isSuperAdmin(): bool

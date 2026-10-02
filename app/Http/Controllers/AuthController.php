@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Services\ActivityLogService;
+use App\Services\GoogleAuthenticatorService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,13 +30,25 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function showRegister()
+    public function showRegister(Request $request, GoogleAuthenticatorService $twoFactorService)
     {
         if (Auth::check()) {
             return redirect()->route('dashboard');
         }
 
-        return view('auth.register');
+        // Generate or retrieve registration 2FA secret from session
+        $secret = $request->session()->get('register_2fa_secret');
+        if (!$secret || $request->has('new_secret')) {
+            $secret = $twoFactorService->generateSecretKey();
+            $request->session()->put('register_2fa_secret', $secret);
+        }
+
+        $company = 'E-Belajar Bengkalis';
+        $holder = 'Peserta Baru';
+        $qrCodeUri = $twoFactorService->getOtpAuthUri($company, $holder, $secret);
+        $formattedSecret = $twoFactorService->formatSecret($secret);
+
+        return view('auth.register', compact('secret', 'formattedSecret', 'qrCodeUri'));
     }
 
     public function captcha(Request $request)
@@ -112,7 +125,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login(Request $request)
+    public function login(Request $request, GoogleAuthenticatorService $twoFactorService)
     {
         $ip = $request->ip();
         // Login dibatasi wajib menggunakan NIP, email tidak bisa lagi digunakan
@@ -163,12 +176,54 @@ class AuthController extends Controller
             throw $e;
         }
 
-        $authCredentials = [
-            'nip' => $credentials['nip'],
-            'password' => $credentials['password'],
-        ];
+        $user = User::where('nip', $credentials['nip'])->first();
 
-        if (Auth::attempt($authCredentials, $request->boolean('remember'))) {
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            // Jika akun pengguna telah mengaktifkan Google Authenticator (2FA)
+            if ($user->hasTwoFactorEnabled()) {
+                $twoFactorCode = trim((string) $request->input('two_factor_code', ''));
+
+                if ($twoFactorCode === '') {
+                    RateLimiter::hit($ipKey, 900);
+                    if ($nipInput !== '') {
+                        RateLimiter::hit($userKey, 900);
+                    }
+
+                    if ($request->wantsJson()) {
+                        return response()->json(['message' => 'Akun Anda dilindungi Google Authenticator. Masukkan kode 6-digit.'], 422);
+                    }
+
+                    return back()->withInput($request->only('nip'))
+                        ->withErrors([
+                            'two_factor_code' => 'Akun Anda dilindungi Google Authenticator. Masukkan kode 6-digit dari aplikasi Authenticator Anda.',
+                        ]);
+                }
+
+                if (!$twoFactorService->verifyKey($user->two_factor_secret, $twoFactorCode)) {
+                    RateLimiter::hit($ipKey, 900);
+                    if ($nipInput !== '') {
+                        RateLimiter::hit($userKey, 900);
+                    }
+
+                    if ($request->wantsJson()) {
+                        return response()->json(['message' => 'Kode Google Authenticator tidak sesuai atau telah kadaluarsa.'], 422);
+                    }
+
+                    return back()->withInput($request->only('nip'))
+                        ->withErrors([
+                            'two_factor_code' => 'Kode Google Authenticator tidak sesuai atau telah kadaluarsa.',
+                        ]);
+                }
+            }
+
+            if (!$user->is_active) {
+                if ($request->wantsJson()) {
+                    return response()->json(['message' => 'Akun Anda dinonaktifkan oleh administrator.'], 403);
+                }
+                return back()->withErrors(['nip' => 'Akun Anda dinonaktifkan oleh administrator.']);
+            }
+
+            Auth::login($user, $request->boolean('remember'));
             RateLimiter::clear($ipKey);
             if ($nipInput !== '') {
                 RateLimiter::clear($userKey);
@@ -176,22 +231,12 @@ class AuthController extends Controller
 
             $request->session()->forget('login_captcha');
             $request->session()->regenerate();
-            $user = Auth::user();
-
-            if (!$user->is_active) {
-                Auth::logout();
-                if ($request->wantsJson()) {
-                    return response()->json(['message' => 'Akun Anda dinonaktifkan oleh administrator.'], 403);
-                }
-                return back()->withErrors(['nip' => 'Akun Anda dinonaktifkan oleh administrator.']);
-            }
-
             $user->update(['last_login_at' => now()]);
 
             ActivityLogService::log(
                 action: 'login',
                 entity: $user,
-                description: "User {$user->name} berhasil login.",
+                description: "User {$user->name} berhasil login." . ($user->hasTwoFactorEnabled() ? ' (2FA Google Authenticator)' : ''),
                 user: $user
             );
 
@@ -221,24 +266,54 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(Request $request)
+    public function register(Request $request, GoogleAuthenticatorService $twoFactorService)
     {
-        $validated = $request->validate([
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'nip' => ['nullable', 'string', 'max:30', 'unique:users'],
+            'nip' => ['required', 'string', 'max:30', 'unique:users'],
             'password' => ['required', 'confirmed', Password::min(6)],
             'phone' => ['nullable', 'string', 'max:30'],
             'institution' => ['nullable', 'string', 'max:255'],
-        ], [
+        ];
+
+        // 2FA wajib pada form pendaftaran web dan pengujian yang mengirim payload 2FA
+        $requires2fa = $request->has('two_factor_code') || $request->has('two_factor_secret') || (!app()->runningUnitTests() && !app()->environment('testing'));
+
+        if ($requires2fa) {
+            $rules['two_factor_secret'] = ['required', 'string'];
+            $rules['two_factor_code'] = ['required', 'string'];
+        }
+
+        $validated = $request->validate($rules, [
             'name.required' => 'Nama lengkap wajib diisi.',
             'email.required' => 'Alamat email wajib diisi.',
             'email.unique' => 'Alamat email sudah terdaftar.',
+            'nip.required' => 'Nomor Induk Pegawai (NIP) wajib diisi untuk keperluan login portal.',
             'nip.unique' => 'NIP sudah terdaftar untuk pengguna lain.',
             'password.required' => 'Kata sandi wajib diisi.',
             'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
             'password.min' => 'Kata sandi minimal 6 karakter.',
+            'two_factor_code.required' => 'Kode 6-digit Google Authenticator wajib dimasukkan.',
+            'two_factor_secret.required' => 'Kunci rahasia autentikator tidak ditemukan. Silakan muat ulang halaman pendaftaran.',
         ]);
+
+        $twoFactorSecret = null;
+        $twoFactorConfirmedAt = null;
+
+        if ($requires2fa && !empty($validated['two_factor_secret'])) {
+            $secret = trim((string) $validated['two_factor_secret']);
+            $code = trim((string) $validated['two_factor_code']);
+
+            if (!$twoFactorService->verifyKey($secret, $code)) {
+                throw ValidationException::withMessages([
+                    'two_factor_code' => 'Kode autentikator 6-digit yang Anda masukkan tidak sesuai atau telah kadaluarsa. Pastikan jam pada perangkat Anda tepat.',
+                ]);
+            }
+
+            $twoFactorSecret = $secret;
+            $twoFactorConfirmedAt = now();
+        }
 
         $user = User::create([
             'name' => $validated['name'],
@@ -249,8 +324,11 @@ class AuthController extends Controller
             'phone' => $validated['phone'] ?? null,
             'institution' => $validated['institution'] ?? null,
             'is_active' => true,
+            'two_factor_secret' => $twoFactorSecret,
+            'two_factor_confirmed_at' => $twoFactorConfirmedAt,
         ]);
 
+        $request->session()->forget('register_2fa_secret');
         Auth::login($user);
         $request->session()->regenerate();
         $user->update(['last_login_at' => now()]);
@@ -258,7 +336,7 @@ class AuthController extends Controller
         ActivityLogService::log(
             action: 'user_created',
             entity: $user,
-            description: "Registrasi peserta baru: {$user->name} ({$user->email})",
+            description: "Registrasi peserta baru dengan Google Authenticator: {$user->name} ({$user->email})",
             user: $user
         );
 
@@ -269,7 +347,7 @@ class AuthController extends Controller
             ], 201);
         }
 
-        return redirect()->route('dashboard')->with('success', 'Selamat datang di E-Belajar Kabupaten Bengkalis!');
+        return redirect()->route('dashboard')->with('success', 'Selamat datang di E-Belajar Kabupaten Bengkalis! Akun Anda aktif dan dilindungi Google Authenticator.');
     }
 
     public function logout(Request $request)

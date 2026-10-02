@@ -119,42 +119,42 @@
 
                     <!-- DTS / INAgov Integrated Search Component -->
                     <!-- <div
-                                                                                                            class="bg-slate-900/80 p-2 sm:p-2.5 rounded-2xl border border-slate-700/80 shadow-2xl backdrop-blur-md max-w-xl"> -->
+                                                                                                                    class="bg-slate-900/80 p-2 sm:p-2.5 rounded-2xl border border-slate-700/80 shadow-2xl backdrop-blur-md max-w-xl"> -->
                     <!-- <form action="{{ route('courses.index') }}" method="GET" class="flex flex-col sm:flex-row gap-2">
-                                                                                                                        <div class="relative flex-1">
-                                                                                                                            <input type="text" name="search"
-                                                                                                                                placeholder="Cari kursus ASN, SPBE, keuangan, manajerial..."
-                                                                                                                                class="w-full px-4 py-3 pl-10 rounded-xl bg-slate-950/70 border border-slate-700 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 text-white placeholder-slate-400 text-xs sm:text-sm font-medium transition-all">
-                                                                                                                            <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" fill="none"
-                                                                                                                                stroke="currentColor" viewBox="0 0 24 24">
-                                                                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                                                                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                                                                                                            </svg>
-                                                                                                                        </div>
-                                                                                                                        <button type="submit"
-                                                                                                                            class="px-5 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-[#4E9CE8] to-[#4D52B4] hover:from-[#70D6C5] hover:to-[#4E9CE8] shadow-md shadow-[#4D52B4]/30 text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
-                                                                                                                            <span>Cari Modul</span>
-                                                                                                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                                                                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                                                                                            </svg>
-                                                                                                                        </button>
-                                                                                                                    </form> -->
+                                                                                                                                <div class="relative flex-1">
+                                                                                                                                    <input type="text" name="search"
+                                                                                                                                        placeholder="Cari kursus ASN, SPBE, keuangan, manajerial..."
+                                                                                                                                        class="w-full px-4 py-3 pl-10 rounded-xl bg-slate-950/70 border border-slate-700 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 text-white placeholder-slate-400 text-xs sm:text-sm font-medium transition-all">
+                                                                                                                                    <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" fill="none"
+                                                                                                                                        stroke="currentColor" viewBox="0 0 24 24">
+                                                                                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                                                                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                                                                                                                    </svg>
+                                                                                                                                </div>
+                                                                                                                                <button type="submit"
+                                                                                                                                    class="px-5 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-[#4E9CE8] to-[#4D52B4] hover:from-[#70D6C5] hover:to-[#4E9CE8] shadow-md shadow-[#4D52B4]/30 text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
+                                                                                                                                    <span>Cari Modul</span>
+                                                                                                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                                                                                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                                                                                                    </svg>
+                                                                                                                                </button>
+                                                                                                                            </form> -->
 
                     <!-- Quick Category Pills -->
                     <!-- <div class="flex flex-wrap items-center gap-1.5 pt-2.5 px-1 text-[11px] text-slate-400">
-                                                                                                                    <span class="font-semibold text-slate-400">Topik Populer:</span>
-                                                                                                                    <a href="{{ route('courses.index', ['search' => 'SPBE']) }}"
-                                                                                                                        class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-emerald-900/60 hover:text-emerald-300 transition-colors">SPBE</a>
-                                                                                                                    <a href="{{ route('courses.index', ['search' => 'Keuangan']) }}"
-                                                                                                                        class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-emerald-900/60 hover:text-emerald-300 transition-colors">Keuangan
-                                                                                                                        Daerah</a>
-                                                                                                                    <a href="{{ route('courses.index', ['search' => 'Administrasi']) }}"
-                                                                                                                        class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-emerald-900/60 hover:text-emerald-300 transition-colors">Administrasi</a>
-                                                                                                                    <a href="{{ route('courses.index') }}"
-                                                                                                                        class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-emerald-900/60 hover:text-emerald-300 transition-colors">Semua
-                                                                                                                        Modul &rarr;</a>
-                                                                                                                </div> -->
+                                                                                                                            <span class="font-semibold text-slate-400">Topik Populer:</span>
+                                                                                                                            <a href="{{ route('courses.index', ['search' => 'SPBE']) }}"
+                                                                                                                                class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-emerald-900/60 hover:text-emerald-300 transition-colors">SPBE</a>
+                                                                                                                            <a href="{{ route('courses.index', ['search' => 'Keuangan']) }}"
+                                                                                                                                class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-emerald-900/60 hover:text-emerald-300 transition-colors">Keuangan
+                                                                                                                                Daerah</a>
+                                                                                                                            <a href="{{ route('courses.index', ['search' => 'Administrasi']) }}"
+                                                                                                                                class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-emerald-900/60 hover:text-emerald-300 transition-colors">Administrasi</a>
+                                                                                                                            <a href="{{ route('courses.index') }}"
+                                                                                                                                class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-emerald-900/60 hover:text-emerald-300 transition-colors">Semua
+                                                                                                                                Modul &rarr;</a>
+                                                                                                                        </div> -->
                     <!-- </div> -->
 
                     <!-- Action Buttons -->
@@ -211,9 +211,9 @@
                                 </div>
                             </div>
                             <!-- <span
-                                                                                                                                class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                                                                                                                                20 JP / Tahun
-                                                                                                                            </span> -->
+                                                                                                                                        class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                                                                                                                        20 JP / Tahun
+                                                                                                                                    </span> -->
                         </div>
 
                         <!-- 20 JP Target Indicator Card -->
@@ -271,7 +271,7 @@
                                     class="w-5 h-5 rounded-md bg-amber-500/20 text-amber-400 flex items-center justify-center flex-shrink-0 font-bold text-[11px]">
                                     ✓
                                 </div>
-                                <span class="text-slate-200">E-Sertifikat Sah dengan QR Code Verifikasi BKPPD</span>
+                                <span class="text-slate-200">E-Sertifikat Sah dari BKPPD</span>
                             </div>
                         </div>
 
@@ -440,149 +440,149 @@
     <!-- ==================== KATALOG KURSUS UNGGULAN ASN (FEATURED COURSES) ==================== -->
     <!-- <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20"> -->
     <!-- <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10">
-                                                                            <div>
-                                                                                <div
-                                                                                    class="inline-flex items-center gap-2 text-xs font-bold text-[#4D52B4] bg-[#4E9CE8]/15 border border-[#4E9CE8]/30 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
-                                                                                    <span>Program Pelatihan Prioritas</span>
-                                                                                </div>
-                                                                                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                                                                                    Modul Kompetensi Terpopuler ASN
-                                                                                </h2>
-                                                                                <p class="text-sm text-slate-600 mt-1">
-                                                                                    Disusun bersama narasumber ahli untuk menjawab tantangan tata kelola pemerintahan era digital
-                                                                                </p>
-                                                                            </div>
-                                                                            <a href="{{ route('courses.index') }}"
-                                                                                class="text-sm font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5 transition-colors group">
-                                                                                <span>Telusuri Semua Kursus</span>
-                                                                                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor"
-                                                                                    viewBox="0 0 24 24">
-                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                                                </svg>
-                                                                            </a>
-                                                                        </div> -->
+                                                                                    <div>
+                                                                                        <div
+                                                                                            class="inline-flex items-center gap-2 text-xs font-bold text-[#4D52B4] bg-[#4E9CE8]/15 border border-[#4E9CE8]/30 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                                                                                            <span>Program Pelatihan Prioritas</span>
+                                                                                        </div>
+                                                                                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                                                                                            Modul Kompetensi Terpopuler ASN
+                                                                                        </h2>
+                                                                                        <p class="text-sm text-slate-600 mt-1">
+                                                                                            Disusun bersama narasumber ahli untuk menjawab tantangan tata kelola pemerintahan era digital
+                                                                                        </p>
+                                                                                    </div>
+                                                                                    <a href="{{ route('courses.index') }}"
+                                                                                        class="text-sm font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5 transition-colors group">
+                                                                                        <span>Telusuri Semua Kursus</span>
+                                                                                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor"
+                                                                                            viewBox="0 0 24 24">
+                                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                                                        </svg>
+                                                                                    </a>
+                                                                                </div> -->
 
     <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                                                                        @forelse($featuredCourses as $course)
-                                                                            <div
-                                                                                class="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl card-hover-lift overflow-hidden flex flex-col group transition-all"> -->
+                                                                                @forelse($featuredCourses as $course)
+                                                                                    <div
+                                                                                        class="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl card-hover-lift overflow-hidden flex flex-col group transition-all"> -->
     <!-- Thumbnail Header -->
     <!-- <div
-                                                                                    class="relative h-48 bg-gradient-to-br from-emerald-950 via-slate-900 to-teal-950 flex items-center justify-center text-white overflow-hidden">
-                                                                                    @if($course->thumbnail)
-                                                                                        <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}"
-                                                                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                                                                    @else
-                                                                                        <div class="text-center p-6">
-                                                                                            <div
-                                                                                                class="w-14 h-14 mx-auto mb-2 rounded-2xl bg-white/10 flex items-center justify-center text-amber-400 backdrop-blur-xs group-hover:scale-110 transition-transform">
-                                                                                                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                                                                                                    <path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
-                                                                                                </svg>
-                                                                                            </div>
-                                                                                            <span class="text-xs font-semibold text-emerald-300 uppercase tracking-wider">
-                                                                                                {{ $course->category->name ?? 'Kompetensi ASN' }}
-                                                                                            </span>
-                                                                                        </div>
-                                                                                    @endif -->
+                                                                                            class="relative h-48 bg-gradient-to-br from-emerald-950 via-slate-900 to-teal-950 flex items-center justify-center text-white overflow-hidden">
+                                                                                            @if($course->thumbnail)
+                                                                                                <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}"
+                                                                                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                                                                            @else
+                                                                                                <div class="text-center p-6">
+                                                                                                    <div
+                                                                                                        class="w-14 h-14 mx-auto mb-2 rounded-2xl bg-white/10 flex items-center justify-center text-amber-400 backdrop-blur-xs group-hover:scale-110 transition-transform">
+                                                                                                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                                                                                                            <path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
+                                                                                                        </svg>
+                                                                                                    </div>
+                                                                                                    <span class="text-xs font-semibold text-emerald-300 uppercase tracking-wider">
+                                                                                                        {{ $course->category->name ?? 'Kompetensi ASN' }}
+                                                                                                    </span>
+                                                                                                </div>
+                                                                                            @endif -->
 
     <!-- Category Pill (Top-Left) -->
     <!-- <div
-                                                                                        class="absolute top-3 left-3 bg-slate-900/85 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-bold text-emerald-300 border border-emerald-500/30">
-                                                                                        {{ $course->category->name ?? 'Umum' }}
-                                                                                    </div> -->
+                                                                                                class="absolute top-3 left-3 bg-slate-900/85 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-bold text-emerald-300 border border-emerald-500/30">
+                                                                                                {{ $course->category->name ?? 'Umum' }}
+                                                                                            </div> -->
 
     <!-- 20 JP / Certificate Seal (Top-Right) -->
     <!-- @if($course->certificate_enabled)
-                                                                                        <div
-                                                                                            class="absolute top-3 right-3 bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-bold text-amber-400 flex items-center gap-1 border border-amber-400/40 shadow-sm">
-                                                                                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                                                                                <path fill-rule="evenodd"
-                                                                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                                                                    clip-rule="evenodd" />
-                                                                                            </svg>
-                                                                                            <span>Sertifikat Diakui</span>f
-                                                                                        </div>
-                                                                                    @endif
-                                                                                </div> -->
+                                                                                                <div
+                                                                                                    class="absolute top-3 right-3 bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-bold text-amber-400 flex items-center gap-1 border border-amber-400/40 shadow-sm">
+                                                                                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                                                                                        <path fill-rule="evenodd"
+                                                                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                                                                            clip-rule="evenodd" />
+                                                                                                    </svg>
+                                                                                                    <span>Sertifikat Diakui</span>f
+                                                                                                </div>
+                                                                                            @endif
+                                                                                        </div> -->
 
     <!-- Body Content -->
     <!-- <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                                                                                    <div>
-                                                                                        <div class="flex items-center gap-2 mb-2">
-                                                                                            <span class="text-[11px] font-bold text-[#4D52B4] bg-[#4E9CE8]/15 px-2 py-0.5 rounded">
-                                                                                                Government Transformation
-                                                                                            </span>
-                                                                                        </div>
-                                                                                        <h3
-                                                                                            class="text-base sm:text-lg font-bold text-slate-900 leading-snug group-hover:text-[#4E9CE8] transition-colors line-clamp-2">
-                                                                                            <a href="{{ route('courses.show', $course->slug ?? $course->id) }}">
-                                                                                                {{ $course->title }}
-                                                                                            </a>
-                                                                                        </h3>
-                                                                                        <p class="text-xs sm:text-sm text-slate-500 mt-2 line-clamp-2 leading-relaxed">
-                                                                                            {{ Str::limit($course->description, 110) }}
-                                                                                        </p>
-                                                                                    </div> -->
+                                                                                            <div>
+                                                                                                <div class="flex items-center gap-2 mb-2">
+                                                                                                    <span class="text-[11px] font-bold text-[#4D52B4] bg-[#4E9CE8]/15 px-2 py-0.5 rounded">
+                                                                                                        Government Transformation
+                                                                                                    </span>
+                                                                                                </div>
+                                                                                                <h3
+                                                                                                    class="text-base sm:text-lg font-bold text-slate-900 leading-snug group-hover:text-[#4E9CE8] transition-colors line-clamp-2">
+                                                                                                    <a href="{{ route('courses.show', $course->slug ?? $course->id) }}">
+                                                                                                        {{ $course->title }}
+                                                                                                    </a>
+                                                                                                </h3>
+                                                                                                <p class="text-xs sm:text-sm text-slate-500 mt-2 line-clamp-2 leading-relaxed">
+                                                                                                    {{ Str::limit($course->description, 110) }}
+                                                                                                </p>
+                                                                                            </div> -->
 
     <!-- Metadata Row (JP, Lessons, Enrolled) -->
     <!-- <div class="space-y-3 pt-3 border-t border-slate-100">
-                                                                                        <div class="flex items-center justify-between text-xs text-slate-500">
-                                                                                            <div class="flex items-center gap-1.5" title="Estimasi Durasi Belajar">
-                                                                                                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                                                                </svg>
-                                                                                                <span
-                                                                                                    class="font-semibold text-slate-700">{{ $course->duration > 0 ? $course->duration . ' Menit' : 'Fleksibel Mandiri' }}</span>
-                                                                                            </div>
-                                                                                            <div class="flex items-center gap-1.5" title="Materi Pembelajaran">
-                                                                                                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                                                                                                </svg>
-                                                                                                <span>{{ $course->lessons_count }} Modul</span>
-                                                                                            </div>
-                                                                                            <div class="flex items-center gap-1.5" title="Partisipan ASN">
-                                                                                                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                                                                                </svg>
-                                                                                                <span>{{ $course->enrollments_count }} ASN</span>
-                                                                                            </div>
-                                                                                        </div> -->
+                                                                                                <div class="flex items-center justify-between text-xs text-slate-500">
+                                                                                                    <div class="flex items-center gap-1.5" title="Estimasi Durasi Belajar">
+                                                                                                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                                                        </svg>
+                                                                                                        <span
+                                                                                                            class="font-semibold text-slate-700">{{ $course->duration > 0 ? $course->duration . ' Menit' : 'Fleksibel Mandiri' }}</span>
+                                                                                                    </div>
+                                                                                                    <div class="flex items-center gap-1.5" title="Materi Pembelajaran">
+                                                                                                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                                                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                                                                                        </svg>
+                                                                                                        <span>{{ $course->lessons_count }} Modul</span>
+                                                                                                    </div>
+                                                                                                    <div class="flex items-center gap-1.5" title="Partisipan ASN">
+                                                                                                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                                                                        </svg>
+                                                                                                        <span>{{ $course->enrollments_count }} ASN</span>
+                                                                                                    </div>
+                                                                                                </div> -->
 
     <!-- Button Action -->
     <!-- @auth
-                                                                                            <a href="{{ route('courses.show', $course->slug ?? $course->id) }}"
-                                                                                                class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-white bg-[#4D52B4] hover:bg-[#4E9CE8] shadow-md shadow-[#4D52B4]/30 transition-all flex items-center justify-center gap-1.5 group-hover:bg-[#4E9CE8]">
-                                                                                                <span>Mulai Belajar &rarr;</span>
-                                                                                            </a>
-                                                                                        @else
-                                                                                            <a href="{{ route('courses.show', $course->slug ?? $course->id) }}"
-                                                                                                class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-[#4D52B4] bg-[#4E9CE8]/15 hover:bg-[#4D52B4] hover:text-white transition-all flex items-center justify-center gap-1.5 group-hover:bg-[#4D52B4] group-hover:text-white">
-                                                                                                <span>Lihat Detail Modul &rarr;</span>
-                                                                                            </a>
-                                                                                        @endauth
+                                                                                                    <a href="{{ route('courses.show', $course->slug ?? $course->id) }}"
+                                                                                                        class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-white bg-[#4D52B4] hover:bg-[#4E9CE8] shadow-md shadow-[#4D52B4]/30 transition-all flex items-center justify-center gap-1.5 group-hover:bg-[#4E9CE8]">
+                                                                                                        <span>Mulai Belajar &rarr;</span>
+                                                                                                    </a>
+                                                                                                @else
+                                                                                                    <a href="{{ route('courses.show', $course->slug ?? $course->id) }}"
+                                                                                                        class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-[#4D52B4] bg-[#4E9CE8]/15 hover:bg-[#4D52B4] hover:text-white transition-all flex items-center justify-center gap-1.5 group-hover:bg-[#4D52B4] group-hover:text-white">
+                                                                                                        <span>Lihat Detail Modul &rarr;</span>
+                                                                                                    </a>
+                                                                                                @endauth
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
-                                                                                </div>
+                                                                                @empty
+                                                                                    <div class="col-span-full bg-white rounded-2xl p-12 text-center border border-slate-200">
+                                                                                        <div
+                                                                                            class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-[#4E9CE8]/15 text-[#4D52B4] flex items-center justify-center">
+                                                                                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                                                                            </svg>
+                                                                                        </div>
+                                                                                        <h3 class="text-base font-bold text-slate-800">Modul Pelatihan Sedang Disiapkan</h3>
+                                                                                        <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">Kurikulum baru sedang dalam proses kurasi dan
+                                                                                            akreditasi oleh Diskominfotik Kabupaten Bengkalis.</p>
+                                                                                    </div>
+                                                                                @endforelse
                                                                             </div>
-                                                                        @empty
-                                                                            <div class="col-span-full bg-white rounded-2xl p-12 text-center border border-slate-200">
-                                                                                <div
-                                                                                    class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-[#4E9CE8]/15 text-[#4D52B4] flex items-center justify-center">
-                                                                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                                                                    </svg>
-                                                                                </div>
-                                                                                <h3 class="text-base font-bold text-slate-800">Modul Pelatihan Sedang Disiapkan</h3>
-                                                                                <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">Kurikulum baru sedang dalam proses kurasi dan
-                                                                                    akreditasi oleh Diskominfotik Kabupaten Bengkalis.</p>
-                                                                            </div>
-                                                                        @endforelse
-                                                                    </div>
-                                                                </section> -->
+                                                                        </section> -->
 
     <!-- ==================== KEUNGGULAN / VALUE PROPOSITION ASN ==================== -->
     <section class="bg-white border-t border-slate-200/80 py-16 sm:py-20">
