@@ -21,20 +21,51 @@
         font-size: 0.875rem !important;
         padding: 0.625rem 1.5rem !important;
     }
+    /* Kustomisasi khusus Toast agar lebih premium */
+    div.swal2-toast {
+        border-radius: 0.75rem !important;
+        padding: 1rem !important;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+        border: 1px solid #e2e8f0 !important;
+    }
+    div.swal2-toast .swal2-title {
+        font-size: 0.95rem !important;
+        margin-left: 0.5rem !important;
+    }
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const bengkalisGreen = '#047857';
+        const primaryColor = '#4D52B4'; // Biru-Tosca Utama
+
+        // Helper Global SweetAlert2 (Toast) di pojok kanan atas
+        window.Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+            background: '#ffffff',
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
+
+        // ==========================================
+        // FLash Message Handling (Muncul Otomatis)
+        // ==========================================
 
         @if(session('success'))
-            Swal.fire({
+            window.Toast.fire({
                 icon: 'success',
-                title: 'Berhasil!',
-                text: {!! json_encode(session('success')) !!},
-                confirmButtonColor: bengkalisGreen,
-                confirmButtonText: 'OK',
-                timer: 3500,
-                timerProgressBar: true
+                title: {!! json_encode(session('success')) !!}
+            });
+        @endif
+
+        @if(session('info') || session('status'))
+            window.Toast.fire({
+                icon: 'info',
+                title: {!! json_encode(session('info') ?? session('status')) !!}
             });
         @endif
 
@@ -43,7 +74,7 @@
                 icon: 'error',
                 title: 'Terjadi Kesalahan!',
                 text: {!! json_encode(session('error')) !!},
-                confirmButtonColor: bengkalisGreen,
+                confirmButtonColor: primaryColor,
                 confirmButtonText: 'Tutup'
             });
         @endif
@@ -53,95 +84,52 @@
                 icon: 'warning',
                 title: 'Peringatan!',
                 text: {!! json_encode(session('warning')) !!},
-                confirmButtonColor: bengkalisGreen,
+                confirmButtonColor: primaryColor,
                 confirmButtonText: 'Mengerti'
             });
         @endif
 
-        @if(session('info'))
-            Swal.fire({
-                icon: 'info',
-                title: 'Informasi',
-                text: {!! json_encode(session('info')) !!},
-                confirmButtonColor: bengkalisGreen,
-                confirmButtonText: 'OK',
-                timer: 4000,
-                timerProgressBar: true
-            });
-        @endif
-
-        @if(session('status'))
-            Swal.fire({
-                icon: 'info',
-                title: 'Status',
-                text: {!! json_encode(session('status')) !!},
-                confirmButtonColor: bengkalisGreen,
-                confirmButtonText: 'OK',
-                timer: 3500,
-                timerProgressBar: true
-            });
-        @endif
+        // ==========================================
+        // Helper Functions (Bisa dipanggil manual)
+        // ==========================================
+        
+        window.notify = {
+            success: function(message, title = 'Berhasil!') {
+                return window.Toast.fire({
+                    icon: 'success',
+                    title: message
+                });
+            },
+            error: function(message, title = 'Terjadi Kesalahan!') {
+                return Swal.fire({
+                    icon: 'error',
+                    title: title,
+                    text: message,
+                    confirmButtonColor: primaryColor,
+                    confirmButtonText: 'Tutup'
+                });
+            },
+            warning: function(message, title = 'Peringatan!') {
+                return Swal.fire({
+                    icon: 'warning',
+                    title: title,
+                    text: message,
+                    confirmButtonColor: primaryColor,
+                    confirmButtonText: 'Mengerti'
+                });
+            },
+            info: function(message, title = 'Informasi') {
+                return window.Toast.fire({
+                    icon: 'info',
+                    title: message
+                });
+            },
+            toast: function(icon, title) {
+                return window.Toast.fire({
+                    icon: icon,
+                    title: title
+                });
+            }
+        };
     });
-
-    // Helper Global SweetAlert2 untuk dipanggil dari script halaman mana saja
-    window.Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3500,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-        }
-    });
-
-    window.notify = {
-        success: function(message, title = 'Berhasil!') {
-            return Swal.fire({
-                icon: 'success',
-                title: title,
-                text: message,
-                confirmButtonColor: '#047857',
-                confirmButtonText: 'OK',
-                timer: 3500,
-                timerProgressBar: true
-            });
-        },
-        error: function(message, title = 'Terjadi Kesalahan!') {
-            return Swal.fire({
-                icon: 'error',
-                title: title,
-                text: message,
-                confirmButtonColor: '#047857',
-                confirmButtonText: 'Tutup'
-            });
-        },
-        warning: function(message, title = 'Peringatan!') {
-            return Swal.fire({
-                icon: 'warning',
-                title: title,
-                text: message,
-                confirmButtonColor: '#047857',
-                confirmButtonText: 'Mengerti'
-            });
-        },
-        info: function(message, title = 'Informasi') {
-            return Swal.fire({
-                icon: 'info',
-                title: title,
-                text: message,
-                confirmButtonColor: '#047857',
-                confirmButtonText: 'OK',
-                timer: 4000,
-                timerProgressBar: true
-            });
-        },
-        toast: function(icon, title) {
-            return window.Toast.fire({
-                icon: icon,
-                title: title
-            });
-        }
-    };
 </script>

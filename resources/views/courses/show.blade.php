@@ -67,20 +67,20 @@
                                     <div class="bg-[#70D6C5] h-2 rounded-full" style="width: {{ $courseProgress->progress_percentage ?? 0 }}%"></div>
                                 </div>
                             </div>
-                            <a href="{{ route('learning.course', $course->slug ?? $course->id) }}" class="block w-full py-3.5 text-center text-sm font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] rounded-xl shadow-md transition-all">
+                            <a href="{{ route('learning.course', $course->slug ?? $course->id) }}" class="block w-full py-3.5 text-center text-sm font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                                 Lanjutkan Belajar Sekarang &rarr;
                             </a>
                         </div>
                     @else
                         <form action="{{ route('courses.enroll', $course->id) }}" method="POST">
                             @csrf
-                            <button type="submit" class="w-full py-3.5 text-center text-sm font-bold text-white bg-gradient-to-r from-[#4D52B4] to-[#4E9CE8] hover:from-[#4E9CE8] hover:to-[#70D6C5] rounded-xl shadow-lg transition-all">
+                            <button type="submit" class="w-full py-3.5 text-center text-sm font-bold text-white bg-gradient-to-r from-[#4D52B4] to-[#4E9CE8] hover:from-[#4E9CE8] hover:to-[#70D6C5] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                                 Daftar Sekarang
                             </button>
                         </form>
                     @endif
                 @else
-                    <a href="{{ route('login') }}" class="block w-full py-3.5 text-center text-sm font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] rounded-xl shadow-md transition-all">
+                    <a href="{{ route('login') }}" class="block w-full py-3.5 text-center text-sm font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         Masuk untuk Mendaftar
                     </a>
                 @endauth

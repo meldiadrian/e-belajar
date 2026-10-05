@@ -57,6 +57,26 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #4E9CE8;
+        }
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 transparent;
+        }
     </style>
     @stack('styles')
 </head>
@@ -274,7 +294,7 @@
     <div class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
         <!-- Top Navbar -->
         <header
-            class="bg-white border-b border-slate-200 px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+            class="bg-white/80 backdrop-blur-md border-b border-slate-200/50 px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-30 shadow-xs transition-all duration-300">
             <div class="flex items-center gap-3">
                 <button onclick="toggleSidebar()"
                     class="md:hidden text-slate-500 hover:text-slate-800 focus:outline-hidden">
@@ -419,6 +439,8 @@
             }
         }
     </script>
+    
+    @include('partials.nprogress')
 </body>
 
 </html>

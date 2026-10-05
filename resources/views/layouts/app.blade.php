@@ -47,6 +47,26 @@
         .gradient-bengkalis {
             background: linear-gradient(135deg, #064E3B 0%, #047857 50%, #0D9488 100%);
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #4E9CE8;
+        }
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 transparent;
+        }
     </style>
     @stack('styles')
 </head>
@@ -59,7 +79,7 @@
     </div> -->
 
     <!-- Main Navigation Bar -->
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-200/50 sticky top-0 z-40 shadow-xs transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <!-- Brand & Logo -->
@@ -272,6 +292,7 @@
     </footer>
 
     @include('partials.sweetalert')
+    @include('partials.nprogress')
     @stack('scripts')
 </body>
 

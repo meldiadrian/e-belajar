@@ -88,7 +88,7 @@
                             class="px-3 py-1.5 text-xs font-semibold text-red-600 hover:text-red-800">Reset Filter</a>
                     @endif
                     <button type="submit"
-                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] shadow-xs">
+                        class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#4D52B4] hover:bg-[#4E9CE8] shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
                         Terapkan Filter
                     </button>
                 </div>
@@ -99,7 +99,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             @forelse($courses as $course)
                 <div
-                    class="bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-xl transition-all overflow-hidden flex flex-col justify-between group">
+                    class="bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between group">
                     <div>
                         <!-- Thumbnail -->
                         <div
