@@ -21,5 +21,4 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
-# Abaikan seluruh file seeder Laravel
-/database/seeders/*
+!/database/seeders/FaqSeeder.php
