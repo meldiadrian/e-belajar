@@ -81,7 +81,7 @@ class FirewallMiddleware
      */
     protected array $blockedExtensions = [
         // PHP scripts and variants
-        'php', 'php3', 'php4', 'php5', 'php7', 'php8', 'phtml', 'phar', 'phps', 'pht', 'inc',
+        'php', 'php2', 'php3', 'php4', 'php5', 'php6', 'php7', 'php8', 'phtml', 'phar', 'phps', 'pht', 'pgif', 'inc', 'hphp', 'ctp',
         // Shell scripts & OS commands
         'sh', 'bash', 'zsh', 'csh', 'ksh', 'bat', 'cmd', 'ps1', 'psm1', 'psd1',
         'vbs', 'vbe', 'wsf', 'wsc',
@@ -89,13 +89,13 @@ class FirewallMiddleware
         'py', 'pyc', 'pyw', 'rb', 'pl', 'cgi',
         // Active server pages & Java server scripts
         'asp', 'aspx', 'axd', 'asmx', 'ashx', 'cer', 'asa', 'asax',
-        'jsp', 'jspx', 'jsw', 'jsv', 'jspf',
-        // Binaries / Executables
-        'exe', 'dll', 'com', 'scr', 'msi', 'bin', 'elf',
+        'jsp', 'jspx', 'jsw', 'jsv', 'jspf', 'war', 'jar',
+        // Binaries / Executables / Installers
+        'exe', 'dll', 'com', 'scr', 'msi', 'bin', 'elf', 'iso', 'img', 'deb', 'rpm', 'apk',
         // Client scripts & markup capable of script execution (Stored XSS)
-        'js', 'mjs', 'htm', 'html', 'shtml', 'shtm', 'xhtml', 'svg', 'xml',
+        'js', 'mjs', 'htm', 'html', 'shtml', 'shtm', 'xhtml', 'svg', 'svgz', 'xml',
         // Server configuration & sensitive system files
-        'htaccess', 'htpasswd', 'ini', 'conf', 'config', 'env',
+        'htaccess', 'htpasswd', 'ini', 'conf', 'config', 'env', 'web.config',
     ];
 
     /**
@@ -241,9 +241,15 @@ class FirewallMiddleware
         $clientOriginalName = $file->getClientOriginalName();
         $normalizedName = strtolower($clientOriginalName);
 
-        // 1. Check for null byte injection or directory traversal in filename
-        if (str_contains($clientOriginalName, "\0") || str_contains($clientOriginalName, '%00') ||
-            str_contains($clientOriginalName, '../') || str_contains($clientOriginalName, '..\\')) {
+        // 1. Check for null byte injection, directory traversal, Windows ADS, or trailing dot/space in filename
+        if (str_contains($clientOriginalName, "\0") ||
+            str_contains($clientOriginalName, '%00') ||
+            str_contains($clientOriginalName, '../') ||
+            str_contains($clientOriginalName, '..\\') ||
+            str_contains(strtolower($clientOriginalName), '%2e%2e') ||
+            str_contains($clientOriginalName, '::$DATA') ||
+            str_ends_with($clientOriginalName, '.') ||
+            str_ends_with($clientOriginalName, ' ')) {
             return true;
         }
 
@@ -283,13 +289,20 @@ class FirewallMiddleware
         if ($realPath && file_exists($realPath) && is_readable($realPath)) {
             $content = @file_get_contents($realPath, false, null, 0, 8192);
             if ($content !== false && $content !== '') {
-                // Check PHP tags: <?php, <?=, <script language="php"
-                if (preg_match('/<\?(?:php|=)/i', $content) || stripos($content, '<script language="php"') !== false) {
+                // Check PHP tags: <?php, <?=, short tag followed by whitespace/newline, <script language="php", and ASP tags <%
+                if (preg_match('/<\?(?:php|=|\s)/i', $content) ||
+                    stripos($content, '<script language="php"') !== false ||
+                    str_contains($content, '<%')) {
                     return true;
                 }
 
                 // Check for Unix shebang executable scripts
                 if (str_starts_with($content, '#!/bin/') || str_starts_with($content, '#!/usr/bin/')) {
+                    return true;
+                }
+
+                // Check for binary executable headers (Windows MZ or Linux ELF)
+                if (str_starts_with($content, "\x7FELF") || str_starts_with($content, "MZ")) {
                     return true;
                 }
             }
