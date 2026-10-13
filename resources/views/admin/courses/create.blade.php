@@ -8,7 +8,7 @@
         <div class="border-b border-slate-100 pb-4">
             <h2 class="text-xl font-black text-slate-900">Form Pembuatan Pembelajaran Baru</h2>
             <!-- <p class="text-xs text-slate-500 mt-0.5">Setelah membuat informasi dasar kursus, Anda akan diarahkan ke Course
-                                    Builder untuk menyusun modul & materi.</p> -->
+                                        Builder untuk menyusun modul & materi.</p> -->
         </div>
 
         <form action="{{ route('admin.courses.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
@@ -77,7 +77,8 @@
             <div>
                 <label for="thumbnail" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Gambar
                     Thumbnail (Opsional)</label>
-                <input type="file" name="thumbnail" id="thumbnail" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                <input type="file" name="thumbnail" id="thumbnail"
+                    accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
                     class="w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#4E9CE8]/10 file:text-[#4D52B4] hover:file:bg-[#4E9CE8]/20">
             </div>
 
@@ -85,7 +86,8 @@
                 <label class="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" name="certificate_enabled" value="1" checked
                         class="w-4 h-4 text-[#4D52B4] rounded-sm focus:ring-[#4E9CE8]">
-                    <span class="text-xs font-bold text-slate-800">Terbitkan Sertifikat Resmi Otomatis Setelah Kursus 100%
+                    <span class="text-xs font-bold text-slate-800">Terbitkan Sertifikat Resmi Otomatis Setelah Pelatihan
+                        100%
                         Selesai</span>
                 </label>
             </div>

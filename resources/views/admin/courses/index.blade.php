@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Kursus')
+@section('title', 'Manajemen Pembelajaran')
 @section('page_title', 'Kelola Pembelajaran')
 
 @section('content')
@@ -22,7 +22,7 @@
                 <table class="w-full text-left text-xs text-slate-600">
                     <thead class="bg-slate-50 text-slate-500 uppercase tracking-wider border-b border-slate-100 font-bold">
                         <tr>
-                            <th class="py-3.5 px-4">Kursus</th>
+                            <th class="py-3.5 px-4">Pelatihan</th>
                             <th class="py-3.5 px-4">Kategori</th>
                             <th class="py-3.5 px-4">Struktur</th>
                             <th class="py-3.5 px-4">Status</th>
@@ -73,7 +73,7 @@
 
                                     <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST"
                                         class="inline"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus kursus ini?')">
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus Pelatihan ini?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-slate-400 hover:text-red-600 p-1">
@@ -87,8 +87,8 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="py-8 text-center text-slate-400">Belum ada kursus yang dibuat. Silakan
-                                    tambahkan Pembelajaran pertama Anda.</td>
+                                <td colspan="6" class="py-8 text-center text-slate-400">Belum ada pelatihan yang dibuat. Silakan
+                                    tambahkan Pelatihan pertama Anda.</td>
                             </tr>
                         @endforelse
                     </tbody>
